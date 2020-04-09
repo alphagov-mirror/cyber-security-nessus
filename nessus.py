@@ -69,23 +69,17 @@ def process_csv(csv_text):
     request size limit
     """
     output = io.StringIO()
-    csv_list = csv_text.split("\n")
-    reader = csv.reader(csv_list)
-    writer = csv.writer(output)
-    for row in reader:
-        if len(row) > 0:
-            row.pop()
-            writer.writerow(row)
-    print(output.getvalue())
+    writer = csv.writer(output, quotechar='"', quoting=csv.QUOTE_ALL)
+    with io.StringIO(csv_text) as f: # Need to use StringIO because csv.reader expects a file object
+        reader = csv.reader(f)
+        for row in reader:
+            writer.writerow(row[:-1])
+    # print(output.getvalue())
     return output.getvalue()
 
 
-def main():
+def main(event, context):
     token = prepare_export()
     csv_text = token_download(token)
     reduced_csv = process_csv(csv_text)
     send_to_cloudwatch(reduced_csv)
-
-
-if __name__ == "__main__":
-    main()
