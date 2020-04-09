@@ -3,18 +3,21 @@ import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Dict, List
+from functools import lru_cache
 
 import boto3
-from mypy_boto3 import logs
-from mypy_boto3_logs.type_defs import ClientPutLogEventsResponseTypeDef
+
+# from mypy_boto3 import logs
+# from mypy_boto3_logs.type_defs import ClientPutLogEventsResponseTypeDef
 
 
-class LogEventResponseReal(ClientPutLogEventsResponseTypeDef):
-    ResponseMetadata: dict
+# class LogEventResponseReal(ClientPutLogEventsResponseTypeDef):
+#     ResponseMetadata: dict
 
 
 @lru_cache(maxsize=None)
-def logs_client() -> logs.CloudWatchLogsClient:
+# def logs_client() -> logs.CloudWatchLogsClient:
+def logs_client():
     return boto3.client("logs")
 
 
@@ -36,7 +39,9 @@ def log_stream_name() -> LogStream:
     """
     timestamp_seconds = datetime.now().replace(tzinfo=timezone.utc).timestamp()
     timestamp_ms = int(timestamp_seconds * 1000)
-    name = f"{timestamp_ms}-nessus-scan"
+    timestamp = datetime.fromtimestamp(timestamp_seconds)
+    human_readable_timestamp = timestamp.strftime("%Y-%m-%d/%H-%M-%S")
+    name = f"{human_readable_timestamp}-nessus-scan"
     return LogStream(name, timestamp_ms)
 
 
@@ -58,15 +63,14 @@ class CloudWatchLogResult:
     payload: str
 
 
-def send_logs_to_cloudwatch() -> Dict[str, CloudWatchLogResult]:
+def send_logs_to_cloudwatch(csv_text: str) -> Dict[str, CloudWatchLogResult]:
     """Send logs to Cloudwatch, creating a new logstream for those events"""
-    data_to_send = "data from before"
 
-    group_name = "will be hardcoded"
+    group_name = "/gds/nessus-data"
     stream = create_log_stream(group_name)
 
     logs_client().put_log_events(
         logGroupName=group_name,
         logStreamName=stream.name,
-        logEvents=[{"timestamp": stream.timestamp_ms, "message": data_to_send}],
+        logEvents=[{"timestamp": stream.timestamp_ms, "message": csv_text}],
     )
