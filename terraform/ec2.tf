@@ -1,15 +1,3 @@
-provider "aws" {
-  region = "eu-west-2"
-}
-
-terraform {
-  backend "s3" {
-    bucket = "cyber-security-nessus-state-bucket-01"
-    key    = "nessus.tfstate"
-    region = "eu-west-2"
-  }
-}
-
 locals {
 # The office-ips below are set to the GDS office egress ips, this local var is used to whitelist inbound ssh connections
   office-ips = [
