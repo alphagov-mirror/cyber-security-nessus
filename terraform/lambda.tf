@@ -10,12 +10,12 @@ resource "aws_lambda_function" "nessus_lambda" {
   timeout          = "900"
   memory_size      = 2048
 
-  # environment {
-  #   variables = {
-  #     FLASK_ENV  = "${var.Environment}"
-  #     GITHUB_ORG = "${var.github_org}"
-  #   }
-  # }
+  environment {
+    variables = {
+      nessus_username  = "${data.aws_ssm_parameter.nessus_username}"
+      nessus_password  = "${data.aws_ssm_parameter.nessus_password}"
+    }
+  }
 
   tags = {
     Service = "${var.Service}"
@@ -44,4 +44,16 @@ resource "aws_lambda_permission" "nessus_lambda_allow_cloudwatch" {
     function_name = "${aws_lambda_function.nessus_lambda.function_name}"
     principal = "events.amazonaws.com"
     source_arn = "${aws_cloudwatch_event_rule.nessus_lambda_24_hours.arn}"
+}
+
+data "aws_ssm_parameter" "nessus_username" {
+  name  = "nessus_username"
+  arn   = "arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/username"
+  type  = "SecureString"
+}
+
+data "aws_ssm_parameter" "nessus_password" {
+  name  = "nessus_password"
+  arn   = "arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/password"
+  type  = "SecureString"
 }
