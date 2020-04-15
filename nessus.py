@@ -14,7 +14,6 @@ nessus_username = os.environ["nessus_username"]
 nessus_password = os.environ["nessus_password"]
 
 base_url = f"https://{nessus_ip}:8834"
-custom_headers = {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
 filters = {
     "filter.0.filter": "severity",
     "filter.0.quality": "neq",
@@ -26,7 +25,30 @@ filters = {
 }
 
 
-def prepare_export(id=5):
+def create_custom_headers():
+    if access_key:
+        return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
+    else:
+        # get token
+        session_url = "/session"
+        params = {
+            "username": nessus_username,
+            "password": nessus_password
+        }
+        response = requests.post(base_url + session_url, data=params, verify=False)
+        response_token = json.loads(response.text)
+        headers = {"X-Cookie": f"token={response_token['token']}"}
+
+        # get api keys
+        keys_url = "/session/keys"
+        keys_response = requests.put(base_url + keys_url, headers=headers, verify=False)
+        keys = json.loads(keys_response.text)
+        new_access_key = keys['accessKey']
+        new_secret_key = keys['secretKey']
+
+        return {"X-ApiKeys": f"accessKey={new_access_key}; secretKey={new_secret_key}"}
+
+def prepare_export(custom_headers, id=18):
     url = f"/scans/{id}/export"
     payload = {
         "format": "csv",
@@ -55,7 +77,8 @@ def prepare_export(id=5):
     return response_dict
 
 
-def token_download(export_token):
+def token_download(export_token, custom_headers):
+    print(export_token)
     url = f"/tokens/{export_token['token']}/download"
     response = requests.get(base_url + url, headers=custom_headers, verify=False)
     return response.text
@@ -80,27 +103,13 @@ def process_csv(csv_text):
     return output.getvalue()
 
 
-def login():
-    if access_key:
-        token = prepare_export()
-        csv_text = token_download(token)
-        reduced_csv = process_csv(csv_text)
-        send_to_cloudwatch(reduced_csv)
-    else:
-        # get token
-        session_url = f"session"
-        params = {
-            "username": nessus_username,
-            "password": nessus_password
-        }
-        response = requests.post( base_url + session_url, data=params)
-        response_token = json.loads(response.text)
-        headers = {"X-Cookie": f"token={response_token}"}
-
-        # get_access_key
-        user_id = 1 # ???
-        access_key_url = f"/users/{user_id}/keys"
-        keys_reponse = requests.put(base_url + access_key_url)
-
 def main(event, context):
-    login()
+    custom_headers = create_custom_headers()
+    token = prepare_export(custom_headers)
+    csv_text = token_download(token, custom_headers)
+    reduced_csv = process_csv(csv_text)
+    # send_to_cloudwatch(reduced_csv)login
+
+
+if __name__ == "__main__":
+    main(None, None)
