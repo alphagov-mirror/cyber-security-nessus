@@ -123,9 +123,17 @@ resource "aws_security_group" "nessus-sg" {
   }
 }
 
+resource "aws_ebs_volume" "nessus_volume" {
+  availability_zone = "eu-west-2a"
+  size              = 30
+
+  tags = {
+    Name = "Nessus volume"
+  }
+}
+
 resource "aws_instance" "nessus_instance" {
   ami           = data.aws_ami.cyber-security-nessus-ami.id
-  volume_size   = 30
   instance_type = "t3a.xlarge"
   key_name      = "nessus_sp"
   user_data     = data.template_file.nessus_userdata.rendered
@@ -135,6 +143,11 @@ resource "aws_instance" "nessus_instance" {
   vpc_security_group_ids = [
     aws_security_group.nessus-sg.id,
   ]
+
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = 30
+  }
 
   tags = {
     Name      = "Nessus Scanning Instance"

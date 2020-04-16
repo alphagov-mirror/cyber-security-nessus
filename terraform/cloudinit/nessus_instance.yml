@@ -8,13 +8,13 @@ bootcmd:
     cat>/usr/local/bin/nessus-cloudinit.sh<<EOF
     set -euo pipefail
 
-    echo "Starting Bootstrapping"
+    echo "Starting Bootstrapping $(date)"
     yum update -y
     yum install expect -y
-    sudo service nessusd stop
-    sudo /opt/nessus/sbin/nessuscli fetch --register ${serial}
-    sudo service nessusd start
-    sudo /usr/local/bin/nessus-cloudinit.sh /opt/nessus/sbin/nessuscli ${username} ${password} y
+    service nessusd stop
+    /opt/nessus/sbin/nessuscli fetch --register ${serial} || /opt/nessus/sbin/nessuscli fetch --code-in-use
+    service nessusd start
+    /usr/local/bin/nessus-user.expect
     echo "Bootstrapping Complete"
     exit 0
 
@@ -25,14 +25,11 @@ bootcmd:
 
     set timeout -1
 
-
-    set nessuscli_path [lindex $argv 0];
-    set username [lindex $argv 1];
-    set password [lindex $argv 2];
-    set is_admin [lindex $argv 3];
+    set username ${username};
+    set password ${password};
 
     # update with path to nessuscli
-    spawn $nessuscli_path adduser $username
+    spawn /opt/nessus/sbin/nessuscli adduser $username
 
     expect "Login password:"
     send -- "$password\n"
@@ -41,7 +38,7 @@ bootcmd:
     send -- "$password\n"
 
     expect "Do you want this user to be a Nessus"
-    send -- "$is_admin\n"
+    send -- "y\n"
 
 
     expect "the user can have an empty rules set"
