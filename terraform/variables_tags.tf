@@ -1,25 +1,29 @@
 variable "Service" {
   description = "Service Name"
-  type        = "string"
+  type        = string
+  default     = "Nessus"
 }
 
 variable "SvcOwner" {
   description = "Service Owner"
-  type        = "string"
+  type        = string
+  default     = "cyber security"
 }
 
 variable "Environment" {
-  description = "Service Owner"
-  type        = "string"
+  description = "Service Environment"
+  type        = string
+  default     = "prod"
 }
 
 variable "DeployedUsing" {
   description = "Deployed Using"
-  type        = "string"
+  type        = string
   default     = "Terraform"
 }
 
 variable "SvcCodeURL" {
   description = "Service Code URL"
-  type        = "string"
+  type        = string
+  default     = "tbd"
 }

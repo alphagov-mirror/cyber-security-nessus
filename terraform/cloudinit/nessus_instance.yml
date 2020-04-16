@@ -3,17 +3,57 @@ hostname: ${hostname}
 manage_etc_hosts: true
 package_upgrade: true
 locale: en_GB.UTF-8
-users:
-  - name: nessie
-    gecos: Loch nessies user
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: users, admin
-    ssh_import_id: None
-    lock_passwd: true
 bootcmd:
   - |
     cat>/usr/local/bin/nessus-cloudinit.sh<<EOF
-${bootstrap-tools}
+    set -euo pipefail
+
+    echo "Starting Bootstrapping"
+    yum update -y
+    yum install expect -y
+    sudo service nessusd stop
+    sudo /opt/nessus/sbin/nessuscli fetch --register ${serial}
+    sudo service nessusd start
+    sudo /usr/local/bin/nessus-cloudinit.sh /opt/nessus/sbin/nessuscli ${username} ${password} y
+    echo "Bootstrapping Complete"
+    exit 0
+
     EOF
-  - 'chmod 0755 /usr/local/bin/pentest-cloudinit.sh'
+  - |
+    cat>/usr/local/bin/nessus-user.sh<<EOF
+    #!/usr/bin/expect -f
+
+    set timeout -1
+
+
+    set nessuscli_path [lindex $argv 0];
+    set username [lindex $argv 1];
+    set password [lindex $argv 2];
+    set is_admin [lindex $argv 3];
+
+    # update with path to nessuscli
+    spawn $nessuscli_path adduser $username
+
+    expect "Login password:"
+    send -- "$password\n"
+
+    expect "(again)"
+    send -- "$password\n"
+
+    expect "Do you want this user to be a Nessus"
+    send -- "$is_admin\n"
+
+
+    expect "the user can have an empty rules set"
+    send -- "\n"
+
+
+    expect "Is that ok"
+    send -- "y\n"
+
+    expect "User added"
+
+    EOF
+  - 'chmod 0755 /usr/local/bin/nessus-cloudinit.sh'
   - '/usr/local/bin/nessus-cloudinit.sh >> /var/log/nessus-cloudinit.log 2>&1'
+  - 'chmod 0755 /usr/local/bin/nessus-user.sh'

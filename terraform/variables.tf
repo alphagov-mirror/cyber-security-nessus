@@ -1,5 +1,5 @@
 variable "lambda_zip_location" {
-  default  =  "../nessus_lambda.zip"
+  default = "../nessus_lambda.zip"
 }
 
 variable "runtime" {
@@ -8,12 +8,12 @@ variable "runtime" {
 }
 
 variable "region" {
-  type = "string"
+  type    = string
   default = "eu-west-2"
 }
 
 variable "aws_account_id" {
-  default  = "676218256630"
+  default = "676218256630"
 }
 
 variable "nessus_lambda_functionname" {
@@ -21,13 +21,14 @@ variable "nessus_lambda_functionname" {
 }
 
 variable "nessus_lambda_handler" {
-  default  = "nessus_scanner.main"
+  default = "nessus_scanner.main"
 }
 
 variable "dependabot_lambda_memory" {
-  default  = 2048
+  default = 2048
 }
 
 variable "dependabot_lambda_timeout" {
-  default  = 900
+  default = 900
 }
+

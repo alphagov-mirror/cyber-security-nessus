@@ -1,5 +1,5 @@
 locals {
-# The office-ips below are set to the GDS office egress ips, this local var is used to whitelist inbound ssh connections
+  # The office-ips below are set to the GDS office egress ips, this local var is used to whitelist inbound ssh connections
   office-ips = [
     "85.133.67.244/32",
     "213.86.153.212/32",
@@ -21,7 +21,7 @@ resource "aws_vpc" "cyber-security-nessus" {
 }
 
 resource "aws_internet_gateway" "cyber-security-nessus-igw" {
-  vpc_id = "${aws_vpc.cyber-security-nessus.id}"
+  vpc_id = aws_vpc.cyber-security-nessus.id
 
   tags = {
     Name      = "Cyber Security Nessus Internet Gateway"
@@ -30,8 +30,8 @@ resource "aws_internet_gateway" "cyber-security-nessus-igw" {
 }
 
 resource "aws_subnet" "cyber-security-nessus-subnet" {
-  vpc_id     = "${aws_vpc.cyber-security-nessus.id}"
-  cidr_block = "10.1.1.0/24"
+  vpc_id                  = aws_vpc.cyber-security-nessus.id
+  cidr_block              = "10.1.1.0/24"
   availability_zone       = "eu-west-2a"
   map_public_ip_on_launch = true
 
@@ -42,11 +42,11 @@ resource "aws_subnet" "cyber-security-nessus-subnet" {
 }
 
 resource "aws_route_table" "cyber-security-nessus-route-table" {
-  vpc_id = "${aws_vpc.cyber-security-nessus.id}"
+  vpc_id = aws_vpc.cyber-security-nessus.id
 
   route {
-    cidr_block        = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.cyber-security-nessus-igw.id}"
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.cyber-security-nessus-igw.id
   }
 
   tags = {
@@ -56,8 +56,8 @@ resource "aws_route_table" "cyber-security-nessus-route-table" {
 }
 
 resource "aws_route_table_association" "cyber-security-nessus-association" {
-  subnet_id      = "${aws_subnet.cyber-security-nessus-subnet.id}"
-  route_table_id = "${aws_route_table.cyber-security-nessus-route-table.id}"
+  subnet_id      = aws_subnet.cyber-security-nessus-subnet.id
+  route_table_id = aws_route_table.cyber-security-nessus-route-table.id
 }
 
 data "aws_ami" "cyber-security-nessus-ami" {
@@ -81,18 +81,20 @@ data "aws_ami" "cyber-security-nessus-ami" {
 }
 
 data "template_file" "nessus_userdata" {
-  template = "${file("cloudinit/nessus_instance.yaml")}"
+  template = file("cloudinit/nessus_instance.yml")
 
   vars = {
     hostname        = "nessus-01"
-    bootstrap-tools = "${file("cloudinit/bootstrap-tools.sh.tpl")}"
+    username        = data.aws_ssm_parameter.nessus_username.value
+    password        = data.aws_ssm_parameter.nessus_password.value
+    serial          = data.aws_ssm_parameter.nessus_licence.value
   }
 }
 
 resource "aws_security_group" "nessus-sg" {
   name        = "nessus-sg"
   description = "Nessus Instance Security Group"
-  vpc_id      = "${aws_vpc.cyber-security-nessus.id}"
+  vpc_id      = aws_vpc.cyber-security-nessus.id
 
   ingress {
     from_port   = 22
@@ -109,9 +111,9 @@ resource "aws_security_group" "nessus-sg" {
   }
 
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = -1
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -121,20 +123,17 @@ resource "aws_security_group" "nessus-sg" {
   }
 }
 
-resource "aws_key_pair" "nessus_sp" {
-  key_name    = "nessus_sp"
-  public_key  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCBbC41tcH/FBmZTsdWQsODQohdRMuV1eKR2UkXRMCch70oCAVgTJ5+E3kVj+osqpo2e3eoODKaNqj56I0ZE1a/uQDQ+7YS8K7TbYpj57BNKfKH/9qPToXdu3xdLNKpKbfhwhZO6mHvIUU9hxjrheVNheNbiiL4i9cRTk/2DhlAZ5g9DNQhFjnPG+AJppUIeB9hMozJolR0I9prXpO/ySrcSWNEqJLUI9M5wyKD5qvrDb/1tauGQXNdAogSYod4Tnvm6VCx5PEZwlg6i6dutkFM/0EF6igi6zsQ+JRYLF7cHMCVTKqNccbfjKca7QXc9JYIQw3mjHXGWMH3OCC2gf8H nessus_sp"
-}
-
 resource "aws_instance" "nessus_instance" {
-  ami           = "${data.aws_ami.cyber-security-nessus-ami.id}"
+  ami           = data.aws_ami.cyber-security-nessus-ami.id
+  volume_size   = 30
   instance_type = "t3a.xlarge"
-  user_data     = "${data.template_file.nessus_userdata.rendered}"
+  key_name      = "nessus_sp"
+  user_data     = data.template_file.nessus_userdata.rendered
   monitoring    = "true"
-  subnet_id     = "${aws_subnet.cyber-security-nessus-subnet.id}"
+  subnet_id     = aws_subnet.cyber-security-nessus-subnet.id
 
   vpc_security_group_ids = [
-    "${aws_security_group.nessus-sg.id}",
+    aws_security_group.nessus-sg.id,
   ]
 
   tags = {

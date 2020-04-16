@@ -3,12 +3,13 @@ import os
 import json
 import csv
 import io
+import boto3
 
 from cloudwatch import send_logs_to_cloudwatch
 
 
-access_key = os.getenv("access_key")
-secret_key = os.getenv("secret_key")
+access_key = os.getenv("access_key", get_keys_from_ssm('access'))
+secret_key = os.getenv("secret_key", get_keys_from_ssm('secret'))
 nessus_ip = os.environ["nessus_ip"]
 nessus_username = os.environ["nessus_username"]
 nessus_password = os.environ["nessus_password"]
@@ -24,6 +25,11 @@ filters = {
     "filter.search_type": "and",
 }
 
+
+def get_keys_from_ssm(key):
+    ssm_client = boto3.client("ssm")
+    response = ssm_client.get_parameter(Name=f"/nessus/{key}_key", WithDecryption=True)
+    return response["Parameter"]["Value"]
 
 def create_custom_headers():
     if access_key:
