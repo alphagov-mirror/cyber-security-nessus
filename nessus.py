@@ -9,9 +9,9 @@ from cloudwatch import send_logs_to_cloudwatch
 
 access_key = os.getenv("access_key")
 secret_key = os.getenv("secret_key")
-nessus_ip = os.environ["nessus_ip"]
-nessus_username = os.environ["nessus_username"]
-nessus_password = os.environ["nessus_password"]
+nessus_ip = os.getenv("nessus_ip")
+nessus_username = os.getenv("nessus_username")
+nessus_password = os.getenv("nessus_password")
 
 base_url = f"https://{nessus_ip}:8834"
 filters = {
@@ -31,10 +31,7 @@ def create_custom_headers():
     else:
         # get token
         session_url = "/session"
-        params = {
-            "username": nessus_username,
-            "password": nessus_password
-        }
+        params = {"username": nessus_username, "password": nessus_password}
         response = requests.post(base_url + session_url, data=params, verify=False)
         response_token = json.loads(response.text)
         headers = {"X-Cookie": f"token={response_token['token']}"}
@@ -43,10 +40,11 @@ def create_custom_headers():
         keys_url = "/session/keys"
         keys_response = requests.put(base_url + keys_url, headers=headers, verify=False)
         keys = json.loads(keys_response.text)
-        new_access_key = keys['accessKey']
-        new_secret_key = keys['secretKey']
+        new_access_key = keys["accessKey"]
+        new_secret_key = keys["secretKey"]
 
         return {"X-ApiKeys": f"accessKey={new_access_key}; secretKey={new_secret_key}"}
+
 
 def prepare_export(custom_headers, id=18):
     url = f"/scans/{id}/export"
@@ -90,25 +88,20 @@ def send_to_cloudwatch(csv_text):
 
 def process_csv(csv_text):
     """
-    Remove some columns of the response to get the CSV file within the CloudWatch
-    request size limit
+    Send the CSV - 1 row at a time - to cloud watch. This will create a new event for each row in Splunk.
     """
-    output = io.StringIO()
-    writer = csv.writer(output, quotechar='"', quoting=csv.QUOTE_ALL)
-    with io.StringIO(csv_text) as f: # Need to use StringIO because csv.reader expects a file object
+    #  Need to use StringIO because csv.reader expects a file object
+    with io.StringIO(csv_text) as f:
         reader = csv.reader(f)
         for row in reader:
-            writer.writerow(row[:-1])
-    # print(output.getvalue())
-    return output.getvalue()
+            send_to_cloudwatch(row)
 
 
 def main(event, context):
     custom_headers = create_custom_headers()
     token = prepare_export(custom_headers)
     csv_text = token_download(token, custom_headers)
-    reduced_csv = process_csv(csv_text)
-    # send_to_cloudwatch(reduced_csv)login
+    process_csv(csv_text)
 
 
 if __name__ == "__main__":
