@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:${region}:${account_id}:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParametersByPath"
+            ],
+            "Resource": [
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/access_key",
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/secret_key"
+            ]
+        }
+    ]
+}
