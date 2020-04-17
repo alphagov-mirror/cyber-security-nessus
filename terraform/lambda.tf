@@ -13,8 +13,6 @@ resource "aws_lambda_function" "nessus_lambda" {
       nessus_username = data.aws_ssm_parameter.nessus_username.value
       nessus_password = data.aws_ssm_parameter.nessus_password.value
     }
-    # nessus_access_key  = "${data.aws_ssm_parameter.nessus_access_key}"
-    # nessus_secret_key  = "${data.aws_ssm_parameter.nessus_secret_key}"
   }
 
   tags = {
