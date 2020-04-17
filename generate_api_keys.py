@@ -27,11 +27,8 @@ params = {
     "username": nessus_username,
     "password": nessus_password
 }
-print(nessus_username)
-print(nessus_password)
 response = requests.post(base_url + session_url, data=params, verify=False)
 response_token = json.loads(response.text)
-print(f"response_token: {response_token}")
 headers = {"X-Cookie": f"token={response_token['token']}"}
 
 keys_url = "/session/keys"
