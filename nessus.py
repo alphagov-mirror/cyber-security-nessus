@@ -8,13 +8,6 @@ import boto3
 from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
 
 
-access_key = os.getenv("access_key", get_keys_from_ssm("access"))
-secret_key = os.getenv("secret_key", get_keys_from_ssm("secret"))
-nessus_ip = os.getenv("nessus_ip")
-
-base_url = f"https://{nessus_ip}:8834"
-
-
 def get_keys_from_ssm(key):
     ssm_client = boto3.client("ssm")
     response = ssm_client.get_parameter(Name=f"/nessus/{key}_key", WithDecryption=True)
@@ -22,13 +15,15 @@ def get_keys_from_ssm(key):
 
 
 def create_custom_headers():
+    access_key = os.getenv("access_key", get_keys_from_ssm("access"))
+    secret_key = os.getenv("secret_key", get_keys_from_ssm("secret"))
     if access_key:
         return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
     else:
         print("ERROR: Failed to get API keys from SSM.")
 
 
-def prepare_export(custom_headers, id=18):
+def prepare_export(custom_headers, base_url, id=18):
     url = f"/scans/{id}/export"
     payload = {"format": "csv"}
     response = requests.post(
@@ -38,7 +33,7 @@ def prepare_export(custom_headers, id=18):
     return response_dict
 
 
-def token_download(export_token, custom_headers):
+def token_download(export_token, base_url, custom_headers):
     url = f"/tokens/{export_token['token']}/download"
     response = requests.get(base_url + url, headers=custom_headers, verify=False)
     return response.text
@@ -56,9 +51,11 @@ def process_csv(csv_text):
 
 
 def main(event, context):
+    nessus_ip = os.getenv("nessus_ip")
+    base_url = f"https://{nessus_ip}:8834"
     custom_headers = create_custom_headers()
-    token = prepare_export(custom_headers)
-    csv_text = token_download(token, custom_headers)
+    token = prepare_export(custom_headers, base_url)
+    csv_text = token_download(token, base_url, custom_headers)
     process_csv(csv_text)
 
 
