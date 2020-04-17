@@ -5,7 +5,7 @@ import csv
 import io
 import boto3
 
-from cloudwatch import send_logs_to_cloudwatch
+from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
 
 
 access_key = os.getenv("access_key", get_keys_from_ssm("access"))
@@ -44,10 +44,6 @@ def token_download(export_token, custom_headers):
     url = f"/tokens/{export_token['token']}/download"
     response = requests.get(base_url + url, headers=custom_headers, verify=False)
     return response.text
-
-
-def send_to_cloudwatch(csv_text):
-    send_logs_to_cloudwatch(csv_text)
 
 
 def process_csv(csv_text):
