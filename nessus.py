@@ -11,8 +11,6 @@ from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
 access_key = os.getenv("access_key", get_keys_from_ssm("access"))
 secret_key = os.getenv("secret_key", get_keys_from_ssm("secret"))
 nessus_ip = os.getenv("nessus_ip")
-nessus_username = os.getenv("nessus_username")
-nessus_password = os.getenv("nessus_password")
 
 base_url = f"https://{nessus_ip}:8834"
 
