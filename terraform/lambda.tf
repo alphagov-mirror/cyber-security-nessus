@@ -1,5 +1,3 @@
-# Lambda
-
 resource "aws_lambda_function" "nessus_lambda" {
   filename         = var.lambda_zip_location
   source_code_hash = filebase64sha256(var.lambda_zip_location)
