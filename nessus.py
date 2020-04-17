@@ -10,9 +10,9 @@ from cloudwatch import send_logs_to_cloudwatch
 
 access_key = os.getenv("access_key", get_keys_from_ssm('access'))
 secret_key = os.getenv("secret_key", get_keys_from_ssm('secret'))
-nessus_ip = os.environ["nessus_ip"]
-nessus_username = os.environ["nessus_username"]
-nessus_password = os.environ["nessus_password"]
+nessus_ip = os.getenv("nessus_ip")
+nessus_username = os.getenv("nessus_username")
+nessus_password = os.getenv("nessus_password")
 
 base_url = f"https://{nessus_ip}:8834"
 filters = {
@@ -82,7 +82,6 @@ def prepare_export(custom_headers, id=18):
 
 
 def token_download(export_token, custom_headers):
-    print(export_token)
     url = f"/tokens/{export_token['token']}/download"
     response = requests.get(base_url + url, headers=custom_headers, verify=False)
     return response.text
