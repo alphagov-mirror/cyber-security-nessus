@@ -14,7 +14,8 @@
                 "ssm:GetParametersByPath"
             ],
             "Resource": [
-                "arn:aws:ssm:${region}:${account_id}:parameter/nessus_login"
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/access_key",
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/secret_key"
             ]
         }
     ]
