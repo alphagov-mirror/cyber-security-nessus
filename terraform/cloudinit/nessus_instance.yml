@@ -14,7 +14,7 @@ bootcmd:
     service nessusd stop
     /opt/nessus/sbin/nessuscli fetch --register ${serial} || /opt/nessus/sbin/nessuscli fetch --code-in-use
     service nessusd start
-    /usr/local/bin/nessus-user.expect
+    /usr/local/bin/nessus-user.sh
     echo "Bootstrapping Complete"
     exit 0
 
