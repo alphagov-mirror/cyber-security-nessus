@@ -1,0 +1,50 @@
+---
+resources:
+  - name: cyber-security-nessus-git
+    icon: github-circle
+    type: git
+    source:
+      uri: https://github.com/alphagov/cyber-security-nessus.git
+      branch: master
+
+jobs:
+  - name: nessus_deploy
+    serial: true
+    plan:
+      - get: cyber-security-nessus-git
+        trigger: true
+      - task: terraform_deploy
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: /bin/bash
+            args:
+              - -c
+              - |
+                pip install pipenv
+
+                cd cyber-security-nessus-git
+                pipenv --python 3.7
+                pipenv install
+
+                make zip
+                source /usr/local/bin/sts-assume-role.sh 'arn:aws:iam::676218256630:role/nessus-role-concourse' 'eu-west-2'
+                cd terraform
+                export TF_LOG=DEBUG
+                terraform init
+                terraform plan
+                terraform apply --auto-approve
+                cd ..
+                pipenv shell
+                python generate_api_keys.py
+        # on_failure:
+        #   <<: *health_status_notify_for_prod
+        #   params:
+        #     message: "Failed to set SSH config"
+        #     health: unhealthy
