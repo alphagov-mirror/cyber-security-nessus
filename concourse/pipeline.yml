@@ -27,21 +27,12 @@ jobs:
             args:
               - -c
               - |
-                pip install pipenv
-
-                cd cyber-security-nessus-git
-                pipenv --python 3.7
-                pipenv install
-
                 make zip
                 source /usr/local/bin/sts-assume-role.sh 'arn:aws:iam::676218256630:role/nessus_role' 'eu-west-2'
                 cd terraform
-                export TF_LOG=DEBUG
                 terraform init
                 terraform plan
                 terraform apply --auto-approve
-                cd ..
-                pipenv run python generate_api_keys.py
         # on_failure:
         #   <<: *health_status_notify_for_prod
         #   params:
