@@ -11,11 +11,15 @@
             "Action": [
                 "ssm:GetParameter",
                 "ssm:GetParameters",
-                "ssm:GetParametersByPath"
+                "ssm:GetParametersByPath",
+                "ssm:PutParameter"
             ],
             "Resource": [
                 "arn:aws:ssm:${region}:${account_id}:parameter/nessus/access_key",
-                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/secret_key"
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/secret_key",
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/nessus_username",
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/nessus_password",
+                "arn:aws:ssm:${region}:${account_id}:parameter/nessus/nessus_url"
             ]
         }
     ]
