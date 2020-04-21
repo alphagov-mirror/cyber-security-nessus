@@ -13,7 +13,7 @@
             ],
             "Resource": [
               "arn:aws:logs:${region}:${account_id}:*",
-              "arn:aws:ec2:${region}:${account_id}:*"
+              "arn:aws:ec2:${region}:${account_id}:network-interface/*"
             ]
         },
         {
