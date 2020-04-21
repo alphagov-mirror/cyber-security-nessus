@@ -6,18 +6,17 @@ import io
 import boto3
 
 from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
-from generate_api_keys import get_params
 
 
-def get_params_from_ssm(param):
+def get_keys_from_ssm(key):
     ssm_client = boto3.client("ssm")
-    response = ssm_client.get_parameter(Name=f"/nessus/{param}", WithDecryption=True)
+    response = ssm_client.get_parameter(Name=f"/nessus/{key}_key", WithDecryption=True)
     return response["Parameter"]["Value"]
 
 
 def create_custom_headers():
-    access_key = os.getenv("access_key", get_keys_from_ssm("access_key"))
-    secret_key = os.getenv("secret_key", get_keys_from_ssm("secret_key"))
+    access_key = os.getenv("access_key", get_keys_from_ssm("access"))
+    secret_key = os.getenv("secret_key", get_keys_from_ssm("secret"))
     if access_key:
         return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
     else:
@@ -27,32 +26,11 @@ def create_custom_headers():
 def prepare_export(custom_headers, base_url, id=18):
     url = f"/scans/{id}/export"
     payload = {"format": "csv"}
-    try:
-        response = requests.post(
-            base_url + url, headers=custom_headers, data=payload, verify=False
-        )
-        response_dict = json.loads(response.text)
-        return response_dict
-    except requests.HTTPError as e:
-        if e.code == 403:
-            print(
-                f"AccessDenied: {e.code}. API keys are incorrect, generating new keys."
-            )
-            get_params()
-            main()
-        else:
-            print(f"Error making connection. {e.code}: {e.text}")
-    except requests.ConnectionError as e:
-        if e.code == 408:
-            print(
-                f"Connection Timeout: {e.code}. The URL may have changed, retrieving new IP."
-            )
-            get_params()
-            main()
-        else:
-            print(
-                f"Connection timed out {e.code}: {e.text}, check nessus is running at {base_url}."
-            )
+    response = requests.post(
+        base_url + url, headers=custom_headers, data=payload, verify=False
+    )
+    response_dict = json.loads(response.text)
+    return response_dict
 
 
 def token_download(export_token, base_url, custom_headers):
@@ -73,7 +51,8 @@ def process_csv(csv_text):
 
 
 def main(event, context):
-    base_url = os.getenv("base_url", get_param_from_ssm("base_url"))
+    nessus_ip = os.getenv("nessus_ip")
+    base_url = f"https://{nessus_ip}:8834"
     custom_headers = create_custom_headers()
     token = prepare_export(custom_headers, base_url)
     csv_text = token_download(token, base_url, custom_headers)

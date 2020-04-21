@@ -10,9 +10,8 @@ resource "aws_lambda_function" "nessus_lambda" {
 
   environment {
     variables = {
-      access_key = data.aws_ssm_parameter.access_key.value
-      secret_key = data.aws_ssm_parameter.secret_key.value
-      nessus_url = data.aws_ssm_parameter.base_url.value
+      nessus_username = data.aws_ssm_parameter.nessus_username.value
+      nessus_password = data.aws_ssm_parameter.nessus_password.value
     }
   }
 
