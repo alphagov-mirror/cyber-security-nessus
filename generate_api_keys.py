@@ -130,6 +130,7 @@ def main():
         elif status["status"] == "loading":
             loading = True
             print(f"Nessus is still loading.\n Progess: {status['progress']}")
+            time.sleep(300)
 
 
 if __name__ == "__main__":
