@@ -9,11 +9,13 @@
               "logs:PutLogEvents",
               "ec2:CreateNetworkInterface",
               "ec2:DescribeNetworkInterfaces",
-              "ec2:DeleteNetworkInterface"
+              "ec2:DeleteNetworkInterface",
+              "lambda:UpdateFunctionConfiguration"
             ],
             "Resource": [
               "arn:aws:logs:${region}:${account_id}:*",
-              "arn:aws:ec2:${region}:${account_id}:network-interface/*"
+              "arn:aws:ec2:${region}:${account_id}:network-interface/*",
+              "arn:aws:lambda:${region}:${account_id}:function:nessus_scanner"
             ]
         },
         {
