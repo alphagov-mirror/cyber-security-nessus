@@ -52,5 +52,5 @@ bootcmd:
 
     EOF
   - 'chmod 0755 /usr/local/bin/nessus-cloudinit.sh'
-  - '/usr/local/bin/nessus-cloudinit.sh >> /var/log/nessus-cloudinit.log 2>&1'
   - 'chmod 0755 /usr/local/bin/nessus-user.sh'
+  - '/usr/local/bin/nessus-cloudinit.sh >> /var/log/nessus-cloudinit.log 2>&1'
