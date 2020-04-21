@@ -15,7 +15,18 @@ nessus_password_response = ssm_client.get_parameter(
 )
 nessus_password = nessus_password_response["Parameter"]["Value"]
 
-nessus_ip = ec2_client.describe_instances(
+nessus_public_ip = ec2_client.describe_instances(
+    Filters=[
+        {
+            "Name": "tag:Name",
+            "Values": ["Nessus Scanning Instance"],
+            "Name": "instance-state-name",
+            "Values": ["running"],
+        }
+    ]
+)["Reservations"][0]["Instances"][0]["PublicIpAddress"]
+
+nessus_private_ip = ec2_client.describe_instances(
     Filters=[
         {
             "Name": "tag:Name",
@@ -26,7 +37,8 @@ nessus_ip = ec2_client.describe_instances(
     ]
 )["Reservations"][0]["Instances"][0]["PrivateIpAddress"]
 
-base_url = f"https://{nessus_ip}:8834"
+base_url = f"https://{nessus_public_ip}:8834"
+private_base_url = f"https://{nessus_private_ip}:8834"
 
 session_url = "/session"
 params = {"username": nessus_username, "password": nessus_password}
@@ -55,6 +67,6 @@ put_secret_key = ssm_client.put_parameter(
 put_base_url = ssm_client.put_parameter(
     Name="/nessus/base_url",
     Description="Base url for the Nessus instance",
-    Value=secret_key,
+    Value=private_base_url,
     Type="SecureString",
 )
