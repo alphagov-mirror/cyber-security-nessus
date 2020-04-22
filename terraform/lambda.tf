@@ -13,13 +13,6 @@ resource "aws_lambda_function" "nessus_lambda" {
     security_group_ids = [aws_security_group.nessus-sg.id]
   }
 
-  environment {
-    variables = {
-      nessus_username = data.aws_ssm_parameter.nessus_username.value
-      nessus_password = data.aws_ssm_parameter.nessus_password.value
-    }
-  }
-
   tags = {
     Service       = var.Service
     Environment   = var.Environment

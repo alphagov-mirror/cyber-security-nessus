@@ -26,6 +26,25 @@
         {
             "Effect": "Allow",
             "Action": [
+              "lambda:GetFunction",
+              "lambda:ListVersionsByFunction",
+              "lambda:GetFunctionConfiguration",
+              "lambda:InvokeAsync",
+              "lambda:UpdateFunctionCode",
+              "lambda:CreateFunction",
+              "lambda:UpdateFunctionConfiguration",
+              "lambda:TagResource",
+              "lambda:GetPolicy",
+              "lambda:RemovePermission",
+              "lambda:DeleteFunction"
+            ],
+            "Resource": [
+              "arn:aws:lambda:${region}:${account_id}:function:nessus*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
                 "ssm:GetParameter",
                 "ssm:GetParameters",
                 "ssm:GetParametersByPath"

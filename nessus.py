@@ -1,5 +1,4 @@
 import requests
-import os
 import json
 import csv
 import io
@@ -15,8 +14,8 @@ def get_param_from_ssm(param):
 
 
 def create_custom_headers():
-    access_key = os.getenv("access_key", get_param_from_ssm("access_key"))
-    secret_key = os.getenv("secret_key", get_param_from_ssm("secret_key"))
+    access_key = get_param_from_ssm("access_key")
+    secret_key = get_param_from_ssm("secret_key")
     if access_key:
         return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
     else:
@@ -51,7 +50,7 @@ def process_csv(csv_text):
 
 
 def main(event, context):
-    base_url = os.getenv("base_url", get_param_from_ssm("base_url"))
+    base_url = get_param_from_ssm("base_url")
     custom_headers = create_custom_headers()
     token = prepare_export(custom_headers, base_url)
     csv_text = token_download(token, base_url, custom_headers)
