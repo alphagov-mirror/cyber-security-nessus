@@ -39,7 +39,7 @@
               "lambda:DeleteFunction"
             ],
             "Resource": [
-              "arn:aws:lambda:${region}:${account_id}:function:nessus*"
+              "arn:aws:lambda:${region}:${account_id}:function:*"
             ]
         },
         {
