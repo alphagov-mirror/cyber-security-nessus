@@ -23,32 +23,6 @@
               "*"
             ]
         },
-        {
-            "Effect": "Allow",
-            "Action": [
-              "lambda:GetFunction",
-              "lambda:ListVersionsByFunction",
-              "lambda:GetFunctionConfiguration",
-              "lambda:InvokeAsync",
-              "lambda:UpdateFunctionCode",
-              "lambda:CreateFunction",
-              "lambda:UpdateFunctionConfiguration",
-              "lambda:TagResource",
-              "lambda:GetPolicy",
-              "lambda:RemovePermission"
-            ],
-            "Resource": [
-              "arn:aws:lambda:${region}:${account_id}:function:*"
-            ]
-        },
-        {
-           "Sid": "PermissionToPassARole",
-           "Effect": "Allow",
-           "Action": [
-               "iam:PassRole"
-           ],
-           "Resource": "arn:aws:iam::${account_id}:role/nessus_role"
-       },
        {
             "Effect": "Allow",
             "Action": [
