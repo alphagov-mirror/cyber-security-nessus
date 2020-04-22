@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "nessus_lambda" {
   filename             = var.lambda_zip_location
   source_code_hash     = filebase64sha256(var.lambda_zip_location)
-  function_name        = "nessus"
+  function_name        = "nessus_scanner"
   role                 = aws_iam_role.nessus_lambda_exec_role.arn
-  handler              = "nessus.main"
+  handler              = "nessus_scanner.main"
   runtime              = var.runtime
   timeout              = "900"
   memory_size          = 2048
