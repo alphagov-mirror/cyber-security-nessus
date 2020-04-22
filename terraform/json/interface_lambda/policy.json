@@ -38,10 +38,18 @@
               "lambda:RemovePermission"
             ],
             "Resource": [
-              "*"
+              "arn:aws:lambda:${region}:${account_id}:function:*"
             ]
         },
         {
+           "Sid": "PermissionToPassARole",
+           "Effect": "Allow",
+           "Action": [
+               "iam:PassRole"
+           ],
+           "Resource": "arn:aws:iam::${account_id}:role/nessus_role"
+       },
+       {
             "Effect": "Allow",
             "Action": [
                 "ssm:GetParameter",
