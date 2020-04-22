@@ -35,11 +35,10 @@
               "lambda:UpdateFunctionConfiguration",
               "lambda:TagResource",
               "lambda:GetPolicy",
-              "lambda:RemovePermission",
-              "lambda:DeleteFunction"
+              "lambda:RemovePermission"
             ],
             "Resource": [
-              "arn:aws:lambda:${region}:${account_id}:function:*"
+              "*"
             ]
         },
         {
