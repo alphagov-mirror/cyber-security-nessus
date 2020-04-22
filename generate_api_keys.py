@@ -103,23 +103,13 @@ def put_base_url(private_base_url):
     )
 
 
-import time
-
-timeout = time.time() + 60 * 5  # 5 minutes from now
-while True:
-    test = 0
-    if test == 5 or time.time() > timeout:
-        break
-    test = test - 1
-
-
 def main():
     server_status_url = "/server/status"
     response = requests.get(get_public_url() + server_status_url, verify=False)
     status = json.loads(response.text)
     # {"code":503,"progress":69,"status":"loading"}
     loading = True
-    timeout = time.time() + 60 * 30
+    timeout = time.time() + 60 * 60
     while loading:
         if status["status"] == "ready":
             loading = False
