@@ -42,9 +42,20 @@ def get_status_checks():
         ]
     )
 
-    status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]
-    system = nessus_status_checks["InstanceStatuses"][0]["SystemStatus"]
-    print(f"Status: {status}\nSystem: {system}")
+    status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Status"]
+    reachability = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["details"][0]["Status"]
+
+    if status != "ok":
+        print(f"EC2 is not ready. Status: {status}")
+        return False
+
+    if reachability != "passed":
+        print(f"EC2 is not reachable. Status: {reachability}")
+        return False
+
+    return True
+
+
 
 
 def get_public_url():
@@ -138,19 +149,21 @@ def get_nessus_status():
 
 
 def main():
-    get_status_checks()
-    loading = True
     timeout = time.time() + 60 * 60
-    while loading:
-        status = get_nessus_status()
+
+    while True:
+        if get_status_checks():
+            status = get_nessus_status()
+        else:
+            time.sleep(300)
+
         if status["status"] == "ready":
-            loading = False
             get_token()
+            break
         elif time.time() > timeout:
             print("Timed out, check nessus is installed correctly.")
             break
         elif status["status"] != "ready":
-            loading = True
             print(f"Nessus is still loading.\n Progess: {status['progress']}")
             time.sleep(300)
 
