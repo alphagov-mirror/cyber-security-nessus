@@ -103,14 +103,21 @@ def put_base_url(private_base_url):
     )
 
 
+def get_nessus_status():
+    try:
+        server_status_url = "/server/status"
+        response = requests.get(get_public_url() + server_status_url, verify=False)
+        status = json.loads(response.text)
+        return status
+    except ConnectionError:
+        return {"status": "loading", "progress": "0"}
+
+
 def main():
-    server_status_url = "/server/status"
-    response = requests.get(get_public_url() + server_status_url, verify=False)
-    status = json.loads(response.text)
-    # {"code":503,"progress":69,"status":"loading"}
     loading = True
     timeout = time.time() + 60 * 60
     while loading:
+        status = get_nessus_status()
         if status["status"] == "ready":
             loading = False
             get_token()
