@@ -110,6 +110,7 @@ def get_nessus_status():
         status = json.loads(response.text)
         return status
     except ConnectionError:
+        print("connection error")
         return {"status": "loading", "progress": "0"}
 
 
@@ -128,7 +129,10 @@ def main():
             loading = True
             print(f"Nessus is still loading.\n Progess: {status['progress']}")
             time.sleep(300)
-
+        else:
+            print(status)
+            print("getting into else statement for some reason")
 
 if __name__ == "__main__":
+    print("generating api keys...")
     main()
