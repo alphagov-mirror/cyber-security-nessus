@@ -24,6 +24,29 @@ def get_password():
     return nessus_password
 
 
+def get_status_checks():
+    nessus_instance_id = ec2_client.describe_instances(
+        Filters=[
+            {
+                "Name": "tag:Name",
+                "Values": ["Nessus Scanning Instance"],
+                "Name": "instance-state-name",
+                "Values": ["running"],
+            }
+        ]
+    )["Reservations"][0]["Instances"][0]["instance-id"]
+
+    nessus_status_checks = ec2_client.describe_instance_status(
+        InstanceIds=[
+            nessus_instance_id,
+        ]
+    )
+
+    status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]
+    system = nessus_status_checks["InstanceStatuses"][0]["SystemStatus"]
+    print(f"Status: {status}\nSystem: {system}")
+
+
 def get_public_url():
     nessus_public_ip = ec2_client.describe_instances(
         Filters=[
@@ -115,6 +138,7 @@ def get_nessus_status():
 
 
 def main():
+    get_status_checks()
     loading = True
     timeout = time.time() + 60 * 60
     while loading:
