@@ -125,13 +125,10 @@ def main():
         elif time.time() > timeout:
             print("Timed out, check nessus is installed correctly.")
             break
-        elif status["status"] == "loading":
+        elif status["status"] != "ready":
             loading = True
             print(f"Nessus is still loading.\n Progess: {status['progress']}")
             time.sleep(300)
-        else:
-            print(status)
-            print("getting into else statement for some reason")
 
 if __name__ == "__main__":
     print("generating api keys...")
