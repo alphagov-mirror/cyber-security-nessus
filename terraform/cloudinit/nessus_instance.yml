@@ -9,6 +9,8 @@ bootcmd:
     set -euo pipefail
 
     echo "Starting Bootstrapping $(date)"
+    arp
+    ping -3 google.com
     yum update -y
     yum install expect -y
     service nessusd stop
