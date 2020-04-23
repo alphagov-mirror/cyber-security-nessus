@@ -43,7 +43,7 @@ def get_status_checks():
     )
 
     status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Status"]
-    reachability = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["details"][0]["Status"]
+    reachability = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Details"][0]["Status"]
 
     if status != "ok":
         print(f"EC2 is not ready. Status: {status}")
