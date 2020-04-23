@@ -34,7 +34,7 @@ def get_status_checks():
                 "Values": ["running"],
             }
         ]
-    )["Reservations"][0]["Instances"][0]["instance-id"]
+    )["Reservations"][0]["Instances"][0]["InstanceId"]
 
     nessus_status_checks = ec2_client.describe_instance_status(
         InstanceIds=[
