@@ -149,14 +149,16 @@ def get_nessus_status():
 
 
 def main():
-    timeout = time.time() + 60 * 60
 
     while True:
         if get_status_checks():
             status = get_nessus_status()
+            break
         else:
             time.sleep(300)
 
+    timeout = time.time() + 60 * 60
+    while True:
         if status["status"] == "ready":
             get_token()
             break
