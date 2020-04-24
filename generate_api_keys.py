@@ -152,19 +152,23 @@ def get_nessus_status():
 
 
 def main():
+    ec2_timeout = time.time() + 60 * 10
     while True:
         if get_status_checks():
             break
+        elif time.time() > ec2_timeout:
+            print('Timed out, failed to connect to ec2.')
+            break
         else:
-            time.sleep(300)
+            time.sleep(60)
 
-    timeout = time.time() + 60 * 60
+    nessus_timeout = time.time() + 60 * 60
     while True:
         status = get_nessus_status()
         if status["status"] == "ready":
             get_token()
             break
-        elif time.time() > timeout:
+        elif time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break
         elif status["status"] != "ready":
