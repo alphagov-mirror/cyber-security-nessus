@@ -115,6 +115,7 @@ def put_access_key(access_key):
         Name="/nessus/access_key",
         Description="API Access Key for the Nessus instance",
         Value=access_key,
+        Overwrite=True
         Type="SecureString",
     )
 
