@@ -1,20 +1,16 @@
 resource "aws_lambda_function" "nessus_lambda" {
-  filename         = var.lambda_zip_location
-  source_code_hash = filebase64sha256(var.lambda_zip_location)
-  function_name    = "nessus_scanner"
-  role             = aws_iam_role.nessus_lambda_exec_role.arn
-  handler          = "nessus_scanner.main"
-  runtime          = var.runtime
-  timeout          = "900"
-  memory_size      = 2048
+  filename             = var.lambda_zip_location
+  source_code_hash     = filebase64sha256(var.lambda_zip_location)
+  function_name        = "nessus_scanner"
+  role                 = aws_iam_role.nessus_lambda_exec_role.arn
+  handler              = "nessus_scanner.main"
+  runtime              = var.runtime
+  timeout              = "900"
+  memory_size          = 2048
 
-  environment {
-    variables = {
-      nessus_username = data.aws_ssm_parameter.nessus_username.value
-      nessus_password = data.aws_ssm_parameter.nessus_password.value
-    }
-    # nessus_access_key  = "${data.aws_ssm_parameter.nessus_access_key}"
-    # nessus_secret_key  = "${data.aws_ssm_parameter.nessus_secret_key}"
+  vpc_config {
+    subnet_ids         = [aws_subnet.cyber-security-nessus-subnet.id]
+    security_group_ids = [aws_security_group.nessus-sg.id]
   }
 
   tags = {
