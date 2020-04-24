@@ -72,7 +72,7 @@ jobs:
             message: "Nessus instance built successfully."
             health: healthy
         on_failure:
-          <<: *health_status_notify_for_prod
+          <<: *health_status_notify
           params:
             message: "Failed to build Nessus instance"
             health: unhealthy
