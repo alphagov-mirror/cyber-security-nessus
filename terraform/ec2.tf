@@ -29,14 +29,6 @@ data "template_file" "nessus_userdata" {
   }
 }
 
-resource "aws_ebs_volume" "nessus_volume" {
-  availability_zone = "eu-west-2a"
-  size              = 30
-
-  tags = {
-    Name = "Nessus volume"
-  }
-}
 
 resource "aws_instance" "nessus_instance" {
   ami           = data.aws_ami.cyber-security-nessus-ami.id

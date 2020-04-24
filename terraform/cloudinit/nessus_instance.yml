@@ -3,14 +3,12 @@ hostname: ${hostname}
 manage_etc_hosts: true
 package_upgrade: true
 locale: en_GB.UTF-8
-bootcmd:
+runcmd:
   - |
     cat>/usr/local/bin/nessus-cloudinit.sh<<EOF
-    set -euo pipefail
+    set -xeuo pipefail
 
     echo "Starting Bootstrapping $(date)"
-    arp
-    ping -c 3 google.com
     yum update -y
     yum install expect -y
     service nessusd stop
@@ -27,17 +25,14 @@ bootcmd:
 
     set timeout -1
 
-    set username ${username};
-    set password ${password};
-
     # update with path to nessuscli
-    spawn /opt/nessus/sbin/nessuscli adduser $username
+    spawn /opt/nessus/sbin/nessuscli adduser ${username}
 
     expect "Login password:"
-    send -- "$password\n"
+    send -- "${password}\n"
 
     expect "(again)"
-    send -- "$password\n"
+    send -- "${password}\n"
 
     expect "Do you want this user to be a Nessus"
     send -- "y\n"
@@ -55,4 +50,4 @@ bootcmd:
     EOF
   - 'chmod 0755 /usr/local/bin/nessus-cloudinit.sh'
   - 'chmod 0755 /usr/local/bin/nessus-user.sh'
-  - '/usr/local/bin/nessus-cloudinit.sh >> /var/log/nessus-cloudinit.log 2>&1'
+  - '/usr/local/bin/nessus-cloudinit.sh | tee -a /var/log/nessus-cloudinit.log'
