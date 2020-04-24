@@ -3,3 +3,4 @@ terraform/.terraform
 *.DS_Store
 *.zip
 *.csv
+*.pytest_cache
