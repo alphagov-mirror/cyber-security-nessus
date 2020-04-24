@@ -115,7 +115,7 @@ def put_access_key(access_key):
         Name="/nessus/access_key",
         Description="API Access Key for the Nessus instance",
         Value=access_key,
-        Overwrite=True
+        Overwrite=True,
         Type="SecureString",
     )
 
@@ -125,6 +125,7 @@ def put_secret_key(secret_key):
         Name="/nessus/secret_key",
         Description="API Secret Key for the Nessus instance",
         Value=secret_key,
+        Overwrite=True,
         Type="SecureString",
     )
 
@@ -134,6 +135,7 @@ def put_base_url(private_base_url):
         Name="/nessus/base_url",
         Description="Base url for the Nessus instance",
         Value=private_base_url,
+        Overwrite=True,
         Type="SecureString",
     )
 
