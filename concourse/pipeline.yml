@@ -5,7 +5,7 @@ resources:
     type: git
     source:
       uri: https://github.com/alphagov/cyber-security-nessus.git
-      branch: concourse
+      branch: master
 
 jobs:
   - name: nessus_deploy

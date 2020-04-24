@@ -152,7 +152,6 @@ def get_nessus_status():
 
 
 def main():
-    # will be refactored
     while True:
         if get_status_checks():
             break
@@ -162,7 +161,6 @@ def main():
     timeout = time.time() + 60 * 60
     while True:
         status = get_nessus_status()
-        print(status)
         if status["status"] == "ready":
             get_token()
             break
