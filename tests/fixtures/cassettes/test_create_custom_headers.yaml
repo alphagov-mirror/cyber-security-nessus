@@ -66,7 +66,7 @@ interactions:
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.587738359607E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"SECRET_KEY","Version":3}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.587738359607E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"SECRET_KEY","Version":3}}'
     headers:
       Content-Length:
       - '277'
