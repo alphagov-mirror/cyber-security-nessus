@@ -37,13 +37,13 @@ def get_status_checks():
     )["Reservations"][0]["Instances"][0]["InstanceId"]
 
     nessus_status_checks = ec2_client.describe_instance_status(
-        InstanceIds=[
-            nessus_instance_id,
-        ]
+        InstanceIds=[nessus_instance_id]
     )
 
     status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Status"]
-    reachability = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Details"][0]["Status"]
+    reachability = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"][
+        "Details"
+    ][0]["Status"]
 
     if status != "ok":
         print(f"EC2 is not ready. Status: {status}")
@@ -54,8 +54,6 @@ def get_status_checks():
         return False
 
     return True
-
-
 
 
 def get_public_url():
@@ -70,6 +68,7 @@ def get_public_url():
         ]
     )["Reservations"][0]["Instances"][0]["PublicIpAddress"]
     base_url = f"https://{nessus_public_ip}:8834"
+    put_base_url(base_url, url_type="public_base_url")
     return base_url
 
 
@@ -84,9 +83,9 @@ def get_private_url():
             }
         ]
     )["Reservations"][0]["Instances"][0]["PrivateIpAddress"]
-    private_base_url = f"https://{nessus_private_ip}:8834"
-    put_base_url(private_base_url)
-    return private_base_url
+    base_url = f"https://{nessus_private_ip}:8834"
+    put_base_url(base_url, url_type="private_base_url")
+    return base_url
 
 
 def get_keys(headers):
@@ -130,11 +129,12 @@ def put_secret_key(secret_key):
     )
 
 
-def put_base_url(private_base_url):
+def put_base_url(base_url, url_type):
+
     put_base_url = ssm_client.put_parameter(
-        Name="/nessus/base_url",
+        Name=f"/nessus/{url_type}",
         Description="Base url for the Nessus instance",
-        Value=private_base_url,
+        Value=base_url,
         Overwrite=True,
         Type="SecureString",
     )
@@ -157,13 +157,14 @@ def main():
         if get_status_checks():
             break
         elif time.time() > ec2_timeout:
-            print('Timed out, failed to connect to ec2.')
+            print("Timed out, failed to connect to ec2.")
             break
         else:
             time.sleep(60)
 
     nessus_timeout = time.time() + 60 * 60
     while True:
+        put_base_url(get_public_url(), url_type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
             get_token()
@@ -174,6 +175,7 @@ def main():
         elif status["status"] != "ready":
             print(f"Nessus is still loading.\n Progess: {status['progress']}")
             time.sleep(300)
+
 
 if __name__ == "__main__":
     print("generating api keys...")

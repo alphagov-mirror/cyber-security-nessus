@@ -50,7 +50,7 @@ def process_csv(csv_text):
 
 
 def main(event, context):
-    base_url = get_param_from_ssm("base_url")
+    base_url = get_param_from_ssm("public_base_url")
     custom_headers = create_custom_headers()
     token = prepare_export(custom_headers, base_url)
     csv_text = token_download(token, base_url, custom_headers)
