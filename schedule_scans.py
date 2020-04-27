@@ -3,6 +3,7 @@ from pprint import pprint as p
 from functools import lru_cache
 import boto3
 import requests
+import toml
 
 from nessus import get_param_from_ssm, create_custom_headers
 
@@ -35,7 +36,10 @@ def policy_details(id):
 
 def post(url, payload):
     return requests.post(
-        base_url() + url, headers=custom_headers(), json=payload, verify=False
+        base_url() + url,
+        headers=custom_headers(),
+        data=json.dumps(payload),
+        verify=False,
     ).json()
 
 
@@ -47,22 +51,26 @@ def create_policy(policy):
     return post("/policies", policy)
 
 
+def create_scan(settings):
+    return post("/scans", settings)
+
+
 #####
 
 
-def set_policy(base_url, custom_headers):
-    policies = list_policies(base_url, custom_headers)
-    print(policies)
+@lru_cache(maxsize=1)
+def set_policy():
+    policies = list_policies()
     try:
         for policy in policies["policies"]:
             if policy["name"] == "standard_scan":
-                template_id = policy["template_uuid"]
-                print(template_id)
+                return policy["template_uuid"]
     except KeyError:
         print("No policies exist.")
-        create_policy(base_url, custom_headers)
+        create_gds_scan_policy()
 
 
+@lru_cache(maxsize=1)
 def advanced_dynamic_policy_template_uuid():
     templates = list_policy_templates()
     return next(
@@ -77,12 +85,38 @@ def create_gds_scan_policy():
         policy = json.load(f)
     policy["uuid"] = advanced_dynamic_policy_template_uuid()
     r = create_policy(policy)
-    p(r)
+    return policy["uuid"]
+
+
+def create_scan_config(scan):
+    return {
+        "uuid": advanced_dynamic_policy_template_uuid(),
+        "settings": {
+            "name": scan["name"],
+            "enabled": scan["enabled"],
+            "rrules": f"FREQ={scan['rrules.freq']};INTERVAL={scan['rrules.interval']};BYDAY={scan['rrules.byday']}",
+            "policy_id": set_policy(),
+            "text_targets": scan["text_targets"],
+            "agent_group_id": [],
+        },
+    }
+
+
+def create_gds_scans(config):
+    for scan in config.values():
+        s = create_scan_config(scan)
+        p(s)
+        create_scan(create_scan_config(scan))
 
 
 def dump_policy(id):
     with open("out.json", "w") as f:
         json.dump(policy_details(id), f, indent=4)
+
+
+def load_scan_config():
+    with open("scan_config/scan.toml", "r") as f:
+        return toml.load(f)
 
 
 def main():
@@ -92,9 +126,8 @@ def main():
     # p(list_policy_templates())
     # p(advanced_dynamic_policy_template_uuid())
 
-    create_gds_scan_policy()
-
-    # new_scans = schedule_scans(custom_headers, base_url, config_file)
+    config = load_scan_config()
+    create_gds_scans(config)
 
 
 if __name__ == "__main__":

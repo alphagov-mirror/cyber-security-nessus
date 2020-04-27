@@ -1,0 +1,31 @@
+# This file is formatted using TOML. https://github.com/toml-lang/toml
+#
+# To add new scan use [NAME_OF_SCAN], this will not be used but will instead just allow us to separate scans in this file.
+# Please do not use special characters here, other than underscores.
+#
+
+# Each scan config should have the following sections:
+# name, enabled, rrules.freq, rrules.interval, rrules.byday,text_targets
+
+# _"enabled" config_
+# enabled will enable or disable your scheduled scan with a boolean
+#
+# _"rrules" config_
+# rrules are rules that will configure when your scans will run.
+# "freq" = "ON_DEMAND, DAILY, WEEKLY, MONTHLY, YEARLY"
+# "interval" = "1, 2, 3 or x being every x number of days, weeks etc"
+# "byday" = "MO, TU, WE, TH, FR"
+
+# _"text_targets" config_
+# text targets is a comma seperated list of targets, these can be URLs or IP addresses
+# "text_targets" = "www.gov.uk, 216.58.198.174"
+
+
+[gov_uk]
+"name" = "govuk weekly scan"
+"enabled" = "true"
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "3"
+"rrules.byday" = "MO"
+"starttime" = ""
+"text_targets" = "www.gov.uk"
