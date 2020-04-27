@@ -34,20 +34,20 @@ resources:
 
 
 jobs:
-
-    - name: python_lambda_validation
+  - name: python_lambda_validation
     serial: false
     plan:
-      - get: csls_git
+      - get: cyber-security-nessus-git
         trigger: true
       - task: run-lambda-formatting-validation
         config:
           inputs:
-           - name: cyber-security-nessus-git
+          - name: cyber-security-nessus-git
           platform: linux
           image_resource:
             type: docker-image
-            source: gdscyber/cyber-security-concourse-base-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
           run:
             path: bash
             args:
@@ -72,16 +72,17 @@ jobs:
   - name: terraform_validation
     serial: false
     plan:
-      - get: csls_git
+      - get: cyber-security-nessus-git
         trigger: true
       - task: run-terraform-fmt
         config:
           inputs:
-           - name: cyber-security-nessus-git
+          - name: cyber-security-nessus-git
           platform: linux
           image_resource:
             type: docker-image
-            source: gdscyber/cyber-security-concourse-base-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
           run:
             path: bash
             args:
