@@ -2,8 +2,8 @@
 import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Dict, List
 from functools import lru_cache
+from typing import Dict, List
 
 import boto3
 

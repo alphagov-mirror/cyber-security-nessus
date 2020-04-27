@@ -1,8 +1,9 @@
-import requests
-import json
 import csv
 import io
+import json
+
 import boto3
+import requests
 
 from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
 
@@ -28,13 +29,12 @@ def prepare_export(custom_headers, base_url, id=18):
     response = requests.post(
         base_url + url, headers=custom_headers, data=payload, verify=False
     )
-    response_dict = json.loads(response.text)
-    return response_dict
+    return response.json()
 
 
-def token_download(export_token, base_url, custom_headers):
+def download_report(export_token, base_url):
     url = f"/tokens/{export_token['token']}/download"
-    response = requests.get(base_url + url, headers=custom_headers, verify=False)
+    response = requests.get(base_url + url, verify=False)
     return response.text
 
 

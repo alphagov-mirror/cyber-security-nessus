@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Authorization:
+      - !!binary |
+        ===
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        ===
+      User-Agent:
+      - !!binary |
+        ===
+      X-Amz-Date:
+      - !!binary |
+        ===
+      X-Amz-Security-Token:
+      - !!binary |
+        ===
+      X-Amz-Target:
+      - !!binary |
+        ===
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.587738359607E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"fakeparam","Version":3}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Fri, 24 Apr 2020 15:32:17 GMT
+      x-amzn-RequestId:
+      - c5
+    status:
+      code: 200
+      message: OK
+version: 1
