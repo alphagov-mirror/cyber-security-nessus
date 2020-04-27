@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+      X-ApiKeys:
+      - accessKey=FOO; secretKey=BAR
+    method: GET
+    uri: https://localhost:8834/tokens/TOKEN/download
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+1STW/bMAy9G9h/IHLpBqhes/XQHYt2wHLJjKUYsKOsMLZgWfREKkb+/Si72XHA
+        rsMA25L59R752ITc+Qi7Z/P0/bO+h4P55nkwX4jFNImEHAXTUBKztyOawyXSxJ7NM7JLfhJP0Rwo
+        5PWCCI+ByTRr2a9Zpixvqs12+2H7aWM267OniHrM81x3dK7zoD/iJv0+3BU3MmeGw489sLMxYlLj
+        TsAzTMTs24AgBEcUTKOPCHPvXQ8vT436kzDYhEATxlrzXvqSttLRm13K3vQ2nG5LyM2ScsWpARSH
+        1RugRUhomaJtw6X6mb0bAM8YwXbWRxYtdfIJZ43FI4hNHUoNVbUnUXq9ld8NrISCdgU+Ssrsz0tE
+        XCi/PWVFc6R9Onm3MOHqitEmGhSSMZ29QzbQZtFUvMDou17A2cwIUyKdychworTiqCGzVFeCyiAe
+        waoy6raKnqMLxMr7FVfFY6BYSmvX49LC0pEBf6qKNaLMlIYyw0D2iMcy3LIgyhoulNNrAsxeeoWD
+        XaPzCSpRCSyxZc4Pd+9VaJht4ZqVk+qogy5KbP5iTe7vP/7fk395T1TgPy3KL2AzJrC2BAAA
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Disposition:
+      - attachment; filename="govuk_zadbsp.csv"
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - text/csv
+      Date:
+      - Mon, 27 Apr 2020 10:29:10 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

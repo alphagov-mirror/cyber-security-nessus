@@ -4,24 +4,24 @@ interactions:
     headers:
       Authorization:
       - !!binary |
-        QVd
+        ===
       Content-Length:
       - '54'
       Content-Type:
       - !!binary |
-        YXB
+        ===
       User-Agent:
       - !!binary |
-        Qm9
+        ===
       X-Amz-Date:
       - !!binary |
-        M
+        ===
       X-Amz-Security-Token:
       - !!binary |
-        Rn
+        ===
       X-Amz-Target:
       - !!binary |
-        QW1
+        ===
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
