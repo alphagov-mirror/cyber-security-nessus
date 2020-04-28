@@ -88,10 +88,11 @@ def get_private_url():
     return base_url
 
 
-def get_keys(headers):
+# TODO rename to put keys
+def get_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
-        get_public_url() + keys_url, headers=headers, verify=False
+        get_public_url() + keys_url, headers=get_token(), verify=False
     )
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]
@@ -105,8 +106,8 @@ def get_token():
     params = {"username": get_username(), "password": get_password()}
     response = requests.post(get_public_url() + session_url, data=params, verify=False)
     response_token = json.loads(response.text)
-    headers = {"X-Cookie": f"token={response_token['token']}"}
-    get_keys(headers)
+    return {"X-Cookie": f"token={response_token['token']}"}
+
 
 
 def put_access_key(access_key):
@@ -167,7 +168,7 @@ def main():
         put_base_url(get_public_url(), url_type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
-            get_token()
+            get_keys()
             break
         elif time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")

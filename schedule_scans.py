@@ -4,8 +4,10 @@ from functools import lru_cache
 import boto3
 import requests
 import toml
+import re
 
 from nessus import get_param_from_ssm, create_custom_headers
+from generate_api_keys import get_token
 
 
 @lru_cache(maxsize=1)
@@ -34,11 +36,11 @@ def policy_details(id):
     return get(f"/policies/{id}")
 
 
-def post(url, payload):
+def post(url, payload, headers=None):
     return requests.post(
         base_url() + url,
-        headers=custom_headers(),
-        data=json.dumps(payload),
+        headers=headers if headers else custom_headers(),
+        json=payload,
         verify=False,
     ).json()
 
@@ -52,8 +54,21 @@ def create_policy(policy):
 
 
 def create_scan(settings):
-    return post("/scans", settings)
+    headers = {
+        "X-API-Token": get_x_api_token(),
+    }
+    headers.update(get_token())
+    p(headers)
+    return post("/scans", settings, headers)
 
+
+def get_x_api_token():
+    r = requests.get(base_url() + "/nessus6.js", verify=False)
+    # r'"getApiToken",value:function(){return"C37F7A9A-0DE8-4961-8DFA-03D1F03684E3"}}'
+    m = re.search(
+        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r.text
+    )
+    return m.group(0)
 
 #####
 
@@ -64,7 +79,7 @@ def set_policy():
     try:
         for policy in policies["policies"]:
             if policy["name"] == "standard_scan":
-                return policy["template_uuid"]
+                return policy["id"]
     except KeyError:
         print("No policies exist.")
         create_gds_scan_policy()
@@ -85,7 +100,7 @@ def create_gds_scan_policy():
         policy = json.load(f)
     policy["uuid"] = advanced_dynamic_policy_template_uuid()
     r = create_policy(policy)
-    return policy["uuid"]
+    return policy["id"]
 
 
 def create_scan_config(scan):
@@ -106,7 +121,14 @@ def create_gds_scans(config):
     for scan in config.values():
         s = create_scan_config(scan)
         p(s)
-        create_scan(create_scan_config(scan))
+        r = create_scan(create_scan_config(scan))
+        print()
+        p(r.headers)
+        print()
+        p(r.text)
+        print()
+        p(r.request.headers)
+
 
 
 def dump_policy(id):

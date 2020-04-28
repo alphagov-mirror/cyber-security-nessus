@@ -27,5 +27,14 @@
 "rrules.freq" = "WEEKLY"
 "rrules.interval" = "3"
 "rrules.byday" = "MO"
-"starttime" = ""
+"starttime" = "20200428T133000"
+"text_targets" = "www.gov.uk"
+
+[foo]
+"name" = "govuk daily scan"
+"enabled" = "true"
+"rrules.freq" = "DAILY"
+"rrules.interval" = "3"
+"rrules.byday" = "MO"
+"starttime" = "20200428T133000"
 "text_targets" = "www.gov.uk"
