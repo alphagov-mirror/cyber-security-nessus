@@ -20,21 +20,23 @@
 # text targets is a comma seperated list of targets, these can be URLs or IP addresses
 # "text_targets" = "www.gov.uk, 216.58.198.174"
 
+# _"starttime" config_
+# "startime" refers to the date and time the first scan will run and must be in "YYYYMMDDTHHMMSS" format
 
-[gov_uk]
+[gov_uk_weekly]
 "name" = "govuk weekly scan"
 "enabled" = "true"
 "rrules.freq" = "WEEKLY"
 "rrules.interval" = "3"
 "rrules.byday" = "MO"
-"starttime" = "20200428T133000"
+"starttime" = "20200428T133000" # 28 April 2020 @ 1:30pm
 "text_targets" = "www.gov.uk"
 
-[foo]
+[gov_uk_daily]
 "name" = "govuk daily scan"
 "enabled" = "true"
 "rrules.freq" = "DAILY"
 "rrules.interval" = "3"
-"rrules.byday" = "MO"
-"starttime" = "20200428T133000"
+"rrules.byday" = "TU"
+"starttime" = "20200428T113000"
 "text_targets" = "www.gov.uk"

@@ -4,3 +4,4 @@ terraform/.terraform
 *.zip
 *.csv
 *.pytest_cache
+.vscode/

@@ -1,7 +1,7 @@
 import json
 from pprint import pprint as p
 from functools import lru_cache
-import boto3
+
 import requests
 import toml
 import re
@@ -70,6 +70,7 @@ def get_x_api_token():
     )
     return m.group(0)
 
+
 #####
 
 
@@ -111,6 +112,8 @@ def create_scan_config(scan):
             "enabled": scan["enabled"],
             "rrules": f"FREQ={scan['rrules.freq']};INTERVAL={scan['rrules.interval']};BYDAY={scan['rrules.byday']}",
             "policy_id": set_policy(),
+            "starttime": scan['starttime'],
+            "timezone": "Europe/London",
             "text_targets": scan["text_targets"],
             "agent_group_id": [],
         },
@@ -122,13 +125,6 @@ def create_gds_scans(config):
         s = create_scan_config(scan)
         p(s)
         r = create_scan(create_scan_config(scan))
-        print()
-        p(r.headers)
-        print()
-        p(r.text)
-        print()
-        p(r.request.headers)
-
 
 
 def dump_policy(id):

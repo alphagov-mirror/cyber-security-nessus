@@ -1,5 +1,6 @@
 import json
 import time
+from functools import lru_cache
 
 import boto3
 import requests
@@ -57,13 +58,13 @@ def get_status_checks():
 
 def get_public_url():
     base_url = f"https://{get_ec2_param('PublicIpAddress')}:8834"
-    put_base_url(base_url, url_type="public_base_url")
+    put_param(base_url, type="public_base_url")
     return base_url
 
 
 def get_private_url():
     base_url = f"https://{get_ec2_param('PrivateIpAddress')}:8834"
-    put_base_url(base_url, url_type="private_base_url")
+    put_param(base_url, type="private_base_url")
     return base_url
 
 
@@ -86,7 +87,6 @@ def get_token():
     response = requests.post(get_public_url() + session_url, data=params, verify=False)
     response_token = json.loads(response.text)
     return {"X-Cookie": f"token={response_token['token']}"}
-
 
 
 def put_param(param, type):

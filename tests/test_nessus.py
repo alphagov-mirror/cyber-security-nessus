@@ -29,6 +29,7 @@ my_vcr = vcr.VCR(
     path_transformer=vcr.VCR.ensure_suffix(".yaml"),
 )
 
+
 def test_process_csv(mocker):
     """The process csv function should forward each csv row
     separately. Rows may contain newline(\n) characters and there
