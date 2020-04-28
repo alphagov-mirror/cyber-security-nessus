@@ -4,28 +4,25 @@ import time
 import boto3
 import requests
 
+from nessus import get_param_from_ssm
+
+
 ssm_client = boto3.client("ssm")
 ec2_client = boto3.client("ec2")
 
 
-def get_username():
-    nessus_username_response = ssm_client.get_parameter(
-        Name="/nessus/username", WithDecryption=True
-    )
-    nessus_username = nessus_username_response["Parameter"]["Value"]
-    return nessus_username
+@lru_cache(maxsize=1)
+def username():
+    return get_param_from_ssm("username")
 
 
-def get_password():
-    nessus_password_response = ssm_client.get_parameter(
-        Name="/nessus/password", WithDecryption=True
-    )
-    nessus_password = nessus_password_response["Parameter"]["Value"]
-    return nessus_password
+@lru_cache(maxsize=1)
+def password():
+    return get_param_from_ssm("password")
 
 
-def get_status_checks():
-    nessus_instance_id = ec2_client.describe_instances(
+def get_ec2_param(param):
+    return ec2_client.describe_instances(
         Filters=[
             {
                 "Name": "tag:Name",
@@ -34,10 +31,12 @@ def get_status_checks():
                 "Values": ["running"],
             }
         ]
-    )["Reservations"][0]["Instances"][0]["InstanceId"]
+    )["Reservations"][0]["Instances"][0][f"{param}"]
 
+
+def get_status_checks():
     nessus_status_checks = ec2_client.describe_instance_status(
-        InstanceIds=[nessus_instance_id]
+        InstanceIds=[get_ec2_param("InstanceId")]
     )
 
     status = nessus_status_checks["InstanceStatuses"][0]["InstanceStatus"]["Status"]
@@ -57,33 +56,13 @@ def get_status_checks():
 
 
 def get_public_url():
-    nessus_public_ip = ec2_client.describe_instances(
-        Filters=[
-            {
-                "Name": "tag:Name",
-                "Values": ["Nessus Scanning Instance"],
-                "Name": "instance-state-name",
-                "Values": ["running"],
-            }
-        ]
-    )["Reservations"][0]["Instances"][0]["PublicIpAddress"]
-    base_url = f"https://{nessus_public_ip}:8834"
+    base_url = f"https://{get_ec2_param('PublicIpAddress')}:8834"
     put_base_url(base_url, url_type="public_base_url")
     return base_url
 
 
 def get_private_url():
-    nessus_private_ip = ec2_client.describe_instances(
-        Filters=[
-            {
-                "Name": "tag:Name",
-                "Values": ["Nessus Scanning Instance"],
-                "Name": "instance-state-name",
-                "Values": ["running"],
-            }
-        ]
-    )["Reservations"][0]["Instances"][0]["PrivateIpAddress"]
-    base_url = f"https://{nessus_private_ip}:8834"
+    base_url = f"https://{get_ec2_param('PrivateIpAddress')}:8834"
     put_base_url(base_url, url_type="private_base_url")
     return base_url
 
@@ -97,45 +76,24 @@ def get_keys():
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]
     secret_key = keys["secretKey"]
-    put_access_key(access_key)
-    put_secret_key(secret_key)
+    put_param(access_key, type="access_key")
+    put_param(secret_key, type="secret_key")
 
 
 def get_token():
     session_url = "/session"
-    params = {"username": get_username(), "password": get_password()}
+    params = {"username": username(), "password": password()}
     response = requests.post(get_public_url() + session_url, data=params, verify=False)
     response_token = json.loads(response.text)
     return {"X-Cookie": f"token={response_token['token']}"}
 
 
 
-def put_access_key(access_key):
-    put_access_key = ssm_client.put_parameter(
-        Name="/nessus/access_key",
-        Description="API Access Key for the Nessus instance",
-        Value=access_key,
-        Overwrite=True,
-        Type="SecureString",
-    )
-
-
-def put_secret_key(secret_key):
-    put_secret_key = ssm_client.put_parameter(
-        Name="/nessus/secret_key",
-        Description="API Secret Key for the Nessus instance",
-        Value=secret_key,
-        Overwrite=True,
-        Type="SecureString",
-    )
-
-
-def put_base_url(base_url, url_type):
-
-    put_base_url = ssm_client.put_parameter(
-        Name=f"/nessus/{url_type}",
-        Description="Base url for the Nessus instance",
-        Value=base_url,
+def put_param(param, type):
+    put_key = ssm_client.put_parameter(
+        Name=f"/nessus/{type}",
+        Description=f"{type} for the Nessus instance",
+        Value=f"{param}",
         Overwrite=True,
         Type="SecureString",
     )
@@ -165,7 +123,7 @@ def main():
 
     nessus_timeout = time.time() + 60 * 60
     while True:
-        put_base_url(get_public_url(), url_type="public_base_url")
+        put_param(get_public_url(), type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
             get_keys()
