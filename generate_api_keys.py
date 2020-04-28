@@ -68,8 +68,7 @@ def get_private_url():
     return base_url
 
 
-# TODO rename to put keys
-def get_keys():
+def put_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
         get_public_url() + keys_url, headers=get_token(), verify=False
@@ -90,7 +89,7 @@ def get_token():
 
 
 def put_param(param, type):
-    put_key = ssm_client.put_parameter(
+    ssm_client.put_parameter(
         Name=f"/nessus/{type}",
         Description=f"{type} for the Nessus instance",
         Value=f"{param}",
@@ -126,7 +125,7 @@ def main():
         put_param(get_public_url(), type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
-            get_keys()
+            put_keys()
             break
         elif time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
