@@ -5,21 +5,12 @@ from functools import lru_cache
 import boto3
 import requests
 
-from nessus import get_param_from_ssm
+from nessus import get_param_from_ssm, get_token
 
 
 ssm_client = boto3.client("ssm")
 ec2_client = boto3.client("ec2")
 
-
-@lru_cache(maxsize=1)
-def username():
-    return get_param_from_ssm("username")
-
-
-@lru_cache(maxsize=1)
-def password():
-    return get_param_from_ssm("password")
 
 
 def get_ec2_param(param):
@@ -78,14 +69,6 @@ def put_keys():
     secret_key = keys["secretKey"]
     put_param(access_key, type="access_key")
     put_param(secret_key, type="secret_key")
-
-
-def get_token():
-    session_url = "/session"
-    params = {"username": username(), "password": password()}
-    response = requests.post(get_public_url() + session_url, data=params, verify=False)
-    response_token = json.loads(response.text)
-    return {"X-Cookie": f"token={response_token['token']}"}
 
 
 def put_param(param, type):
