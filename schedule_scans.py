@@ -6,13 +6,13 @@ import requests
 import toml
 import re
 
-from nessus import get_param_from_ssm, create_custom_headers
+from nessus import get_param_from_ssm, create_custom_headers, get, post
 from generate_api_keys import get_token
 
 
 @lru_cache(maxsize=1)
 def base_url():
-    return get_param_from_ssm("public_base_url")
+    return "public_base_url"
 
 
 @lru_cache(maxsize=1)
@@ -20,50 +20,35 @@ def custom_headers():
     return create_custom_headers()
 
 
-def get(url):
-    return requests.get(base_url() + url, headers=custom_headers(), verify=False).json()
-
-
 def list_policies():
-    return get("/policies")
+    return get("/policies", base_url())
 
 
 def list_policy_templates():
-    return get("/editor/policy/templates")
+    return get("/editor/policy/templates", base_url())
 
 
 def policy_details(id):
-    return get(f"/policies/{id}")
-
-
-def post(url, payload, headers=None):
-    return requests.post(
-        base_url() + url,
-        headers=headers if headers else custom_headers(),
-        json=payload,
-        verify=False,
-    ).json()
+    return get(f"/policies/{id}", base_url())
 
 
 def schedule_scans(custom_headers, base_url, config_file):
-    return post("/scans/", {"format": "csv"})
+    return post("/scans/", base_url(), {"format": "csv"})
 
 
 def create_policy(policy):
-    return post("/policies", policy)
+    return post("/policies", base_url(), policy)
 
 
 def create_scan(settings):
-    headers = {
-        "X-API-Token": get_x_api_token(),
-    }
+    headers = {"X-API-Token": get_x_api_token()}
     headers.update(get_token())
     p(headers)
-    return post("/scans", settings, headers)
+    return post("/scans", base_url(), settings, headers)
 
 
 def get_x_api_token():
-    r = requests.get(base_url() + "/nessus6.js", verify=False)
+    r = requests.get(get_param_from_ssm(base_url()) + "/nessus6.js", verify=False)
     # r'"getApiToken",value:function(){return"C37F7A9A-0DE8-4961-8DFA-03D1F03684E3"}}'
     m = re.search(
         r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r.text
@@ -112,7 +97,7 @@ def create_scan_config(scan):
             "enabled": scan["enabled"],
             "rrules": f"FREQ={scan['rrules.freq']};INTERVAL={scan['rrules.interval']};BYDAY={scan['rrules.byday']}",
             "policy_id": set_policy(),
-            "starttime": scan['starttime'],
+            "starttime": scan["starttime"],
             "timezone": "Europe/London",
             "text_targets": scan["text_targets"],
             "agent_group_id": [],
