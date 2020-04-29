@@ -88,7 +88,7 @@ def create_policy(policy):
 
 
 def policy_details(id):
-    return get(f"/policies/id")
+    return get(f"/policies/{id}")
 
 
 def list_scans():

@@ -12,7 +12,6 @@ ssm_client = boto3.client("ssm")
 ec2_client = boto3.client("ec2")
 
 
-
 def get_ec2_param(param):
     return ec2_client.describe_instances(
         Filters=[

@@ -14,6 +14,7 @@ from nessus import (
     get_token,
 )
 
+
 @lru_cache(maxsize=1)
 def set_policy():
     policies = list_policies()
@@ -77,6 +78,7 @@ def load_scan_config():
 
 
 def main():
+    print("Scheduling scans...")
     config = load_scan_config()
     create_gds_scans(config)
 

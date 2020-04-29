@@ -91,6 +91,7 @@ def create_log_stream(group_name, stream_name):
 
 
 def main(event, context):
+    print("Processing scans and sending to cloudwatch...")
     find_scans()
     # scans = list_scans()
     # p(scans)
