@@ -1,61 +1,119 @@
-import csv
-import io
-import json
+import re
+from functools import lru_cache
 
 import boto3
 import requests
 
-from cloudwatch import send_logs_to_cloudwatch as send_to_cloudwatch
+
+def get(url, text=False):
+    if text:
+        return requests.get(
+            get_param_from_ssm(base_url()) + url,
+            headers=api_credentials(),
+            verify=False,
+        )
+    else:
+        return requests.get(
+            get_param_from_ssm(base_url()) + url,
+            headers=api_credentials(),
+            verify=False,
+        ).json()
 
 
+def post(url, payload, headers=None):
+    return requests.post(
+        get_param_from_ssm(base_url()) + url,
+        headers=headers if headers else api_credentials(),
+        json=payload,
+        verify=False,
+    ).json()
+
+
+@lru_cache(maxsize=10)
 def get_param_from_ssm(param):
     ssm_client = boto3.client("ssm")
     response = ssm_client.get_parameter(Name=f"/nessus/{param}", WithDecryption=True)
     return response["Parameter"]["Value"]
 
 
-def create_custom_headers():
+@lru_cache(maxsize=1)
+def username():
+    return get_param_from_ssm("username")
+
+
+@lru_cache(maxsize=1)
+def password():
+    return get_param_from_ssm("password")
+
+
+@lru_cache(maxsize=1)
+def get_token():
+    response = post("/session", {"username": username(), "password": password()})
+    return {"X-Cookie": f"token={response['token']}"}
+
+
+@lru_cache(maxsize=1)
+def get_x_api_token():
+    r = get("/nessus6.js", text=True)
+    m = re.search(
+        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r.text
+    )
+    return m.group(0)
+
+
+@lru_cache(maxsize=1)
+def api_credentials():
     access_key = get_param_from_ssm("access_key")
     secret_key = get_param_from_ssm("secret_key")
-    if access_key:
-        return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
-    else:
-        print("ERROR: Failed to get API keys from SSM.")
+    return {"X-ApiKeys": f"accessKey={access_key}; secretKey={secret_key}"}
 
 
-def prepare_export(custom_headers, base_url, id=18):
-    url = f"/scans/{id}/export"
-    payload = {"format": "csv"}
-    response = requests.post(
-        base_url + url, headers=custom_headers, data=payload, verify=False
-    )
-    return response.json()
+@lru_cache(maxsize=1)
+def manager_credentials():
+    headers = {"X-API-Token": get_x_api_token()}
+    headers.update(get_token())
+    return headers
 
 
-def download_report(export_token, base_url):
-    url = f"/tokens/{export_token['token']}/download"
-    response = requests.get(base_url + url, verify=False)
-    return response.text
+def base_url():
+    return "public_base_url"
 
 
-def process_csv(csv_text):
-    """
-    Send the CSV - 1 row at a time - to cloud watch. This will create a new event for each row in Splunk.
-    """
-    #  Need to use StringIO because csv.reader expects a file object
-    with io.StringIO(csv_text) as f:
-        reader = csv.reader(f)
-        for row in reader:
-            send_to_cloudwatch(row)
+def list_policies():
+    return get("/policies")
 
 
-def main(event, context):
-    base_url = get_param_from_ssm("base_url")
-    custom_headers = create_custom_headers()
-    token = prepare_export(custom_headers, base_url)
-    csv_text = token_download(token, base_url, custom_headers)
-    process_csv(csv_text)
+def create_policy(policy):
+    return post("/policies", policy)
 
 
-if __name__ == "__main__":
-    main(None, None)
+def policy_details(id):
+    return get(f"/policies/{id}")
+
+
+def list_scans():
+    return get("/scans")
+
+
+def create_scan(scan):
+    return post("/scans", scan, manager_credentials())
+
+
+def describe_scan(id):
+    return get(f"/scans/{id}")
+
+
+def prepare_export(id):
+    return post(f"/scans/{id}/export", {"format": "csv"})
+
+
+def schedule_scans(custom_headers, config_file):
+    return post("/scans/", {"format": "csv"})
+
+
+def list_policy_templates():
+    return get("/editor/policy/templates")
+
+
+def download_report(export_token):
+    return get(f"/tokens/{export_token['token']}/download", text=True).text
