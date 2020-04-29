@@ -16,6 +16,15 @@ resources:
       uri: https://github.com/alphagov/cyber-security-nessus.git
       branch: master
 
+  - name: toml-nessus-git
+    icon: github-circle
+    type: git
+    source:
+      uri: https://github.com/alphagov/cyber-security-nessus.git
+      branch: master
+      paths:
+        - scan_config/scan.toml
+
   - name: health-notification
     type: http-api
     source:
@@ -67,12 +76,12 @@ jobs:
         on_success:
           <<: *health_status_notify
           params:
-            message: "Nessus instance built successfully."
+            message: "Nessus python tests passed."
             health: healthy
         on_failure:
           <<: *health_status_notify
           params:
-            message: "Failed to build Nessus instance"
+            message: "Nessus python tests failed"
             health: unhealthy
 
   - name: terraform_validation
@@ -99,12 +108,12 @@ jobs:
         on_success:
           <<: *health_status_notify
           params:
-            message: "Nessus instance built successfully."
+            message: "Nessus terraform validated."
             health: healthy
         on_failure:
           <<: *health_status_notify
           params:
-            message: "Failed to build Nessus instance"
+            message: "Failed to validate nessus terraform."
             health: unhealthy
 
   - name: nessus_deploy
@@ -143,10 +152,48 @@ jobs:
         on_success:
           <<: *health_status_notify
           params:
-            message: "Nessus instance built successfully."
+            message: "Nessus deployed successfully."
             health: healthy
         on_failure:
           <<: *health_status_notify
           params:
-            message: "Failed to build Nessus instance"
+            message: "Failed to deploy nessus."
+            health: unhealthy
+
+  - name: schedule_scans_update
+    serial: false
+    plan:
+      - get: toml-nessus-git
+        trigger: true
+      - task: update_scheduled_scans
+        config:
+          inputs:
+          - name: toml-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: bash
+            args:
+              - -c
+              - |
+                pip install pipenv
+
+                cd toml-nessus-git
+                pipenv --python 3.7
+                pipenv install
+
+                source /usr/local/bin/sts-assume-role.sh 'arn:aws:iam::676218256630:role/nessus_role' 'eu-west-2'
+                pipenv run python schedule_scans.py
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "Nessus has scheduled new scans."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Failed to schedule new scans."
             health: unhealthy

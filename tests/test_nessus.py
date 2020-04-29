@@ -15,6 +15,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 import nessus as n
+import process_scans as ps
 
 ## Uncomment to DEBUG VCR
 #
@@ -42,47 +43,37 @@ def test_process_csv(mocker):
 2,2,2,"2
 2"
 """
-    mocker.patch("nessus.send_to_cloudwatch")
-    n.process_csv(csv)
+    mocker.patch("process_scans.process_csv")
+    ps.process_csv(csv)
 
-    expected = [call(["1", "1", "1", "1\n1"]), call(["2", "2", "2", "2\n2"])]
+    expected = [call('1,1,1,"1\n1"\n2,2,2,"2\n2"\n')]
 
-    assert n.send_to_cloudwatch.call_args_list == expected
+    assert ps.process_csv.call_args_list == expected
 
 
 @my_vcr.use_cassette()
 def test_get_param_from_ssm():
     param = n.get_param_from_ssm("access_key")
-    assert param == "fakeparam"
+    assert param == "ACCESS_KEY"
 
 
 @my_vcr.use_cassette()
-def test_create_custom_headers():
-    result = n.create_custom_headers()
+def test_api_credentials():
+    result = n.api_credentials()
     expected = {"X-ApiKeys": "accessKey=ACCESS_KEY; secretKey=SECRET_KEY"}
     assert result == expected
 
 
-@pytest.fixture
-def nessus_headers():
-    return {"X-ApiKeys": "accessKey=FOO; secretKey=BAR"}
-
-
-@pytest.fixture
-def nessus_host():
-    return "https://localhost:8834"
-
-
 @my_vcr.use_cassette()
-def test_prepare_export(nessus_host, nessus_headers):
-    result = n.prepare_export(nessus_headers, nessus_host, id=5)
+def test_prepare_export():
+    result = n.prepare_export(id=5)
     expected = {"token": "TOKEN", "file": 1111111}
     assert result == expected
 
 
 @my_vcr.use_cassette(record_mode="once")
-def test_download_report(nessus_host):
-    result = n.download_report({"token": "TOKEN"}, nessus_host)
+def test_download_report():
+    result = n.download_report({"token": "TOKEN"})
     checksum = hashlib.sha256(result.encode()).hexdigest()
-    expected = "eea68287cb85c63c0a68de31b8e73d4d7718b2c991747523c5c8ef2d9b5936ea"
+    expected = "f187c548fa8e20b44530def0e5cd7f3a35c739cb09a3868ae70d82bd65d23560"
     assert checksum == expected

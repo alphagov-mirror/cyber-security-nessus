@@ -1,5 +1,33 @@
 interactions:
 - request:
+    body: '{"Name": "/nessus/public_base_url", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '59'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi40NyBQeXRob24vMy43LjQgRGFyd2luLzE4LjcuMCBCb3RvY29yZS8xLjE1LjQ3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000:parameter/nessus/public_base_url","DataType":"text","LastModifiedDate":1.588155648471E9,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
+    headers:
+      Content-Length:
+      - '250'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 29 Apr 2020 15:40:02 GMT
+      x-amzn-RequestId:
+      - da354713-955e-4f51-864c-2399d0b3fcf1
+    status:
+      code: 200
+      message: OK
+- request:
     body: null
     headers:
       Accept:
@@ -9,9 +37,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
       X-ApiKeys:
-      - accessKey=FOO; secretKey=BAR
+      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
     method: GET
     uri: https://localhost:8834/tokens/TOKEN/download
   response:
@@ -30,19 +58,17 @@ interactions:
       - no-cache, no-store, must-revalidate
       Connection:
       - close
-      Content-Disposition:
-      - attachment; filename="govuk_zadbsp.csv"
-      Content-Encoding:
-      - gzip
+      Content-Length:
+      - '44'
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
         'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
         'none'
       Content-Type:
-      - text/csv
+      - application/json
       Date:
-      - Mon, 27 Apr 2020 10:29:10 GMT
+      - Wed, 29 Apr 2020 15:40:03 GMT
       Expect-CT:
       - max-age=0
       Expires:
@@ -53,8 +79,6 @@ interactions:
       - NessusWWW
       Strict-Transport-Security:
       - max-age=31536000
-      Transfer-Encoding:
-      - chunked
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
