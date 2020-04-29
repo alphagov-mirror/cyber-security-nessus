@@ -22,10 +22,10 @@ data "template_file" "nessus_userdata" {
   template = file("cloudinit/nessus_instance.yml")
 
   vars = {
-    hostname        = "nessus-01"
-    username        = data.aws_ssm_parameter.nessus_username.value
-    password        = data.aws_ssm_parameter.nessus_password.value
-    serial          = data.aws_ssm_parameter.nessus_licence.value
+    hostname = "nessus-01"
+    username = data.aws_ssm_parameter.nessus_username.value
+    password = data.aws_ssm_parameter.nessus_password.value
+    serial   = data.aws_ssm_parameter.nessus_licence.value
   }
 }
 

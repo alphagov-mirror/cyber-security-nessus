@@ -34,10 +34,84 @@ resources:
 
 
 jobs:
+  - name: python_validation
+    serial: false
+    plan:
+      - get: cyber-security-nessus-git
+        trigger: true
+      - task: run-lambda-formatting-validation
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: bash
+            args:
+              - -c
+              - |
+                pip install pipenv
+                cd cyber-security-nessus-git
+                pipenv --python 3.7
+                pipenv install
+
+                # These are needed to prevent the tests from contacting the AWS magic HTTP server.
+                export AWS_ACCESS_KEY_ID=AKIA00AA00AAAA0A0AAA
+                export AWS_SECRET_ACCESS_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAA
+                export AWS_DEFAULT_REGION=${region:-eu-west-2}
+
+                pipenv run pytest
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "Nessus instance built successfully."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Failed to build Nessus instance"
+            health: unhealthy
+
+  - name: terraform_validation
+    serial: false
+    plan:
+      - get: cyber-security-nessus-git
+        trigger: true
+      - task: run-terraform-fmt
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: bash
+            args:
+              - -c
+              - |
+                cd cyber-security-nessus-git
+                terraform fmt -diff -check -recursive
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "Nessus instance built successfully."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Failed to build Nessus instance"
+            health: unhealthy
+
   - name: nessus_deploy
     serial: true
     plan:
       - get: cyber-security-nessus-git
+        passed: [terraform_validation, python_validation]
         trigger: true
       - task: terraform_deploy
         config:
