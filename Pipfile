@@ -5,15 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 black = "*"
-
-[packages]
-requests = "*"
-boto3 = "*"
 mypy-boto3 = "*"
 mypy-boto3-logs = "*"
 boto3-stubs = {extras = ["logs"],version = "*"}
 pytest = "*"
 pytest-mock = "*"
+
+[packages]
+requests = "*"
+boto3 = "*"
 vcrpy = "*"
 toml = "*"
 black = "*"
