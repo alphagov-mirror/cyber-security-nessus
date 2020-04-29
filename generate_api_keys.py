@@ -1,11 +1,10 @@
 import json
 import time
-from functools import lru_cache
 
 import boto3
 import requests
 
-from nessus import get_param_from_ssm, get_token
+from nessus import get_token
 
 
 ssm_client = boto3.client("ssm")

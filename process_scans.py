@@ -93,11 +93,6 @@ def create_log_stream(group_name, stream_name):
 def main(event, context):
     print("Processing scans and sending to cloudwatch...")
     find_scans()
-    # scans = list_scans()
-    # p(scans)
-    # token = prepare_export()
-    # csv_text = download_report(token)
-    # process_csv(csv_text)
 
 
 if __name__ == "__main__":

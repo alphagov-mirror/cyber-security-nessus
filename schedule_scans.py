@@ -1,17 +1,15 @@
 import json
-from pprint import pprint as p
 from functools import lru_cache
 
-import requests
 import toml
 
 
 from nessus import (
-    get_param_from_ssm,
     list_policies,
     list_policy_templates,
     create_scan,
-    get_token,
+    create_policy,
+    policy_details,
 )
 
 
@@ -41,7 +39,7 @@ def create_gds_scan_policy():
     with open("scan_config/standard_scan_template.json", "r") as f:
         policy = json.load(f)
     policy["uuid"] = advanced_dynamic_policy_template_uuid()
-    r = create_policy(policy)
+    create_policy(policy)
     return policy["id"]
 
 
@@ -63,7 +61,7 @@ def create_scan_config(scan):
 
 def create_gds_scans(config):
     for scan in config.values():
-        s = create_scan_config(scan)
+        create_scan_config(scan)
         create_scan(create_scan_config(scan))
 
 
