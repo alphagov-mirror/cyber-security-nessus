@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi40OCBQeXRob24vMy43LjQgRGFyd2luLzE4LjcuMCBCb3RvY29yZS8xLjE1LjQ4
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000000:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.588247720363E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"SECRET_KEY","Version":24}}'
+    headers:
+      Content-Length:
+      - '278'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 30 Apr 2020 15:06:43 GMT
+      x-amzn-RequestId:
+      - 5305ad37-c3f2-45c9-8a4b-b5d9fb133937
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+      X-ApiKeys:
+      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
+    method: GET
+    uri: https://localhost:8834/nessus6.js
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAA/6vOTq20UlJKTy1xLMgMyc9OzVPSKUvMKU21SivNSy7JzM/T0KwuSi0pLcpTcjK2
+        cDN3tHTRNXNxs9A1tTQz17VwcXXUNTB2MXQzMDazMHE1VqqtBQCzSZrVUwAAAA==
+    headers:
+      Cache-Control:
+      - must-revalidate
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/javascript
+      Date:
+      - Thu, 30 Apr 2020 15:27:08 GMT
+      ETag:
+      - f4eb641586fb37d28341e010a5ca2d89
+      Expect-CT:
+      - max-age=0
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

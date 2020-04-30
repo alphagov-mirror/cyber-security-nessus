@@ -1,13 +1,11 @@
-import inspect
-import logging
+# import inspect
+# import logging
 import os
 import sys
-from pprint import pprint as p
+# from pprint import pprint as p
 from unittest.mock import call
 import hashlib
 
-import pytest
-import requests
 import vcr
 
 currentdir = os.path.dirname(__file__)
@@ -17,9 +15,11 @@ sys.path.insert(0, parentdir)
 import nessus as n
 import process_scans as ps
 
-## Uncomment to DEBUG VCR
+# Uncomment to DEBUG VCR
 #
-# logging.basicConfig()  # you need to initialize logging, otherwise you will not see anything from vcrpy
+# logging.basicConfig()  
+# you need to initialize logging,
+# otherwise you will not see anything from vcrpy
 # vcr_log = logging.getLogger("vcr")
 # vcr_log.setLevel(logging.DEBUG)
 
@@ -77,3 +77,32 @@ def test_download_report():
     checksum = hashlib.sha256(result.encode()).hexdigest()
     expected = "f187c548fa8e20b44530def0e5cd7f3a35c739cb09a3868ae70d82bd65d23560"
     assert checksum == expected
+
+
+@my_vcr.use_cassette()
+def test_get():
+    result = n.get("/server/status")
+    expected = {"code": 200, "progress": None, "status": "ready"}
+    assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_post():
+    result = n.prepare_export(id=5)
+    expected = {"token": "TOKEN", "file": 1111111}
+    assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_get_token():
+    result = n.get_token()
+    response = {"token": "111111111"}
+    expected = {"X-Cookie": f"token={response['token']}"}
+    assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_get_x_api_token():
+    result = n.get_x_api_token()
+    expected = "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3"
+    assert result == expected
