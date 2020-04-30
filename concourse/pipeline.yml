@@ -14,7 +14,7 @@ resources:
     type: git
     source:
       uri: https://github.com/alphagov/cyber-security-nessus.git
-      branch: schedule-pipeline-and-tests
+      branch: master
 
   - name: toml-nessus-git
     icon: github-circle
