@@ -165,6 +165,9 @@ jobs:
     plan:
       - get: toml-nessus-git
         trigger: true
+      - get: cyber-security-nessus-git
+        passed: [nessus_deploy]
+        trigger: true
       - task: update_scheduled_scans
         config:
           inputs:
