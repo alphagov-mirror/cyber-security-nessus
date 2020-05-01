@@ -2,6 +2,7 @@
 # import logging
 import os
 import sys
+
 # from pprint import pprint as p
 from unittest.mock import call
 import hashlib
@@ -17,7 +18,7 @@ import process_scans as ps
 
 # Uncomment to DEBUG VCR
 #
-# logging.basicConfig()  
+# logging.basicConfig()
 # you need to initialize logging,
 # otherwise you will not see anything from vcrpy
 # vcr_log = logging.getLogger("vcr")
@@ -105,4 +106,41 @@ def test_get_token():
 def test_get_x_api_token():
     result = n.get_x_api_token()
     expected = "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3"
+    assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_manager_credentials():
+    result = n.manager_credentials()
+    expected = {
+        "X-API-Token": "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3",
+        "X-Cookie": "token=111111111",
+    }
+    assert result == expected
+
+
+@my_vcr.use_cassette(record_mode="once")
+def test_list_policies():
+    result = n.list_policies()
+    expected = {
+        "policies": [
+            {
+                "is_scap": 0,
+                "has_credentials": 0,
+                "no_target": "false",
+                "plugin_filters": None,
+                "template_uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101",
+                "description": "\n",
+                "name": "standard_scan",
+                "owner": "USERNAME",
+                "visibility": "private",
+                "shared": 0,
+                "user_permissions": 128,
+                "last_modification_date": 1587999905,
+                "creation_date": 1587999905,
+                "owner_id": 1,
+                "id": 10,
+            }
+        ]
+    }
     assert result == expected
