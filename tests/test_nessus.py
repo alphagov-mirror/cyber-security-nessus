@@ -2,9 +2,9 @@
 # import logging
 import os
 import sys
+import json
 
 # from pprint import pprint as p
-from unittest.mock import call
 import hashlib
 
 import vcr
@@ -14,7 +14,6 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 import nessus as n
-import process_scans as ps
 
 # Uncomment to DEBUG VCR
 #
@@ -30,26 +29,6 @@ my_vcr = vcr.VCR(
     cassette_library_dir="tests/fixtures/cassettes",
     path_transformer=vcr.VCR.ensure_suffix(".yaml"),
 )
-
-
-def test_process_csv(mocker):
-    """The process csv function should forward each csv row
-    separately. Rows may contain newline(\n) characters and there
-    should be handled appropriately.
-
-    """
-
-    csv = """1,1,1,"1
-1"
-2,2,2,"2
-2"
-"""
-    mocker.patch("process_scans.process_csv")
-    ps.process_csv(csv)
-
-    expected = [call('1,1,1,"1\n1"\n2,2,2,"2\n2"\n')]
-
-    assert ps.process_csv.call_args_list == expected
 
 
 @my_vcr.use_cassette()
@@ -72,7 +51,7 @@ def test_prepare_export():
     assert result == expected
 
 
-@my_vcr.use_cassette(record_mode="once")
+@my_vcr.use_cassette()
 def test_download_report():
     result = n.download_report({"token": "TOKEN"})
     checksum = hashlib.sha256(result.encode()).hexdigest()
@@ -119,7 +98,7 @@ def test_manager_credentials():
     assert result == expected
 
 
-@my_vcr.use_cassette(record_mode="once")
+@my_vcr.use_cassette()
 def test_list_policies():
     result = n.list_policies()
     expected = {
@@ -144,3 +123,84 @@ def test_list_policies():
         ]
     }
     assert result == expected
+
+
+# def test_create_policy():
+#     with open("../scan_config/standard_scan_template.json", "r") as f:
+#         policy = json.load(f)
+#     result = n.create_policy(policy)
+#     expected = ""
+#     assert result == expected
+
+
+# def test_policy_details():
+#     result = n.policy_details(id=10)
+#     expected = ""
+#     assert result == expected
+
+
+@my_vcr.use_cassette(record_mode="once")
+def test_list_scans():
+    result = n.list_scans()
+    expected = {
+        "folders": [
+            {
+                "unread_count": None,
+                "custom": 0,
+                "default_tag": 0,
+                "type": "trash",
+                "name": "Trash",
+                "id": 2,
+            },
+            {
+                "unread_count": 0,
+                "custom": 0,
+                "default_tag": 1,
+                "type": "main",
+                "name": "My Scans",
+                "id": 3,
+            },
+        ],
+        "scans": [
+            {
+                "folder_id": 3,
+                "type": "local",
+                "read": True,
+                "last_modification_date": 1588095794,
+                "creation_date": 1588095592,
+                "status": "completed",
+                "uuid": "cc09a762-aa73-cbbf-fa16-7c240387613a6790f76f193da062",
+                "shared": False,
+                "user_permissions": 128,
+                "owner": "bodofraggins",
+                "timezone": None,
+                "rrules": None,
+                "starttime": None,
+                "enabled": False,
+                "control": True,
+                "live_results": 0,
+                "name": "localhost",
+                "id": 52,
+            }
+        ],
+        "timestamp": 1588332512,
+    }
+    assert result == expected
+
+
+# def test_create_scan():
+#     result = n.create_scan(scan)
+#     expected = ""
+#     assert result == expected
+
+
+# def test_describe_scan():
+#     result = n.describe_scan(id)
+#     expected = ""
+#     assert result == expected
+
+
+# def test_list_policy_templates():
+#     result = n.list_policy_templates()
+#     expected = ""
+#     assert result == expected
