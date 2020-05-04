@@ -15,23 +15,23 @@ interactions:
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstancesResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>045cd541-ce00-45de-9abb-f6441287ac0a</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>1e95b62d-1234-4a6f-bc94-7bbe15ed7467</requestId>\n
         \   <reservationSet>\n        <item>\n            <reservationId>r-00000000000000000</reservationId>\n
         \           <ownerId>000000000000</ownerId>\n            <groupSet/>\n            <instancesSet>\n
         \               <item>\n                    <instanceId>i-00000000000000000</instanceId>\n
-        \                   <imageId>ami-0f21bd1a9a7f1d934</imageId>\n                    <instanceState>\n
+        \                   <imageId>ami-00000000000000000</imageId>\n                    <instanceState>\n
         \                       <code>16</code>\n                        <name>running</name>\n
         \                   </instanceState>\n                    <privateDnsName>ip-10-0-0-0.eu-west-2.compute.internal</privateDnsName>\n
-        \                   <dnsName/>\n                    <reason/>\n                    <keyName>key_name</keyName>\n
+        \                   <dnsName/>\n                    <reason/>\n                    <keyName>nessus_sp</keyName>\n
         \                   <amiLaunchIndex>0</amiLaunchIndex>\n                    <productCodes>\n
-        \                       <item>\n                            <productCode>8fn69npzmbzcs4blc4583jd0y</productCode>\n
+        \                       <item>\n                            <productCode>00000000000000000</productCode>\n
         \                           <type>marketplace</type>\n                        </item>\n
         \                   </productCodes>\n                    <instanceType>t3a.xlarge</instanceType>\n
         \                   <launchTime>2020-04-24T12:11:57.000Z</launchTime>\n                    <placement>\n
         \                       <availabilityZone>eu-west-2a</availabilityZone>\n
         \                       <groupName/>\n                        <tenancy>default</tenancy>\n
         \                   </placement>\n                    <monitoring>\n                        <state>enabled</state>\n
-        \                   </monitoring>\n                    <subnetId>subnet-00000000000000000</subnetId>\n
+        \                   </monitoring>\n                    <subnetId>subnet-022040f9a6134c3b7</subnetId>\n
         \                   <vpcId>vpc-00000000000000000</vpcId>\n                    <privateIpAddress>10.0.0.0</privateIpAddress>\n
         \                   <ipAddress>127.0.0.1</ipAddress>\n                    <sourceDestCheck>true</sourceDestCheck>\n
         \                   <groupSet>\n                        <item>\n                            <groupId>sg-00000000000000000</groupId>\n
@@ -57,7 +57,7 @@ interactions:
         \                           <ownerId>000000000000</ownerId>\n                            <status>in-use</status>\n
         \                           <macAddress>00:00:00:00:00:00</macAddress>\n                            <privateIpAddress>10.0.0.0</privateIpAddress>\n
         \                           <sourceDestCheck>true</sourceDestCheck>\n                            <groupSet>\n
-        \                               <item>\n                                    <groupId>sg-00000000000000000</groupId>\n
+        \                               <item>\n                                    <groupId>sg-0a5d44c76b4d4ef2d</groupId>\n
         \                                   <groupName>group-sg</groupName>\n                                </item>\n
         \                           </groupSet>\n                            <attachment>\n
         \                               <attachmentId>eni-attach-00000000000000000</attachmentId>\n
@@ -93,11 +93,51 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Mon, 04 May 2020 13:26:31 GMT
+      - Mon, 04 May 2020 13:58:37 GMT
       Server:
       - AmazonEC2
       vary:
       - accept-encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: Action=DescribeInstanceStatus&Version=2016-11-15&InstanceId.1=i-00000000000000000
+    headers:
+      Content-Length:
+      - '81'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ec2.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstanceStatusResponse
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>b73d7f7d-2259-4030-8d84-ae882ee0750e</requestId>\n
+        \   <instanceStatusSet>\n        <item>\n            <instanceId>i-00000000000000000</instanceId>\n
+        \           <availabilityZone>eu-west-2a</availabilityZone>\n            <instanceState>\n
+        \               <code>16</code>\n                <name>running</name>\n            </instanceState>\n
+        \           <systemStatus>\n                <status>ok</status>\n                <details>\n
+        \                   <item>\n                        <name>reachability</name>\n
+        \                       <status>passed</status>\n                    </item>\n
+        \               </details>\n            </systemStatus>\n            <instanceStatus>\n
+        \               <status>ok</status>\n                <details>\n                    <item>\n
+        \                       <name>reachability</name>\n                        <status>passed</status>\n
+        \                   </item>\n                </details>\n            </instanceStatus>\n
+        \       </item>\n    </instanceStatusSet>\n</DescribeInstanceStatusResponse>"
+    headers:
+      Content-Length:
+      - '1139'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Mon, 04 May 2020 13:58:37 GMT
+      Server:
+      - AmazonEC2
     status:
       code: 200
       message: OK
