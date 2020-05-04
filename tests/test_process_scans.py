@@ -37,3 +37,12 @@ def test_find_scans(capsys):
     ps.find_scans()
     captured = capsys.readouterr()
     assert captured.out == "Scan localhost has not run.\n"
+
+
+@my_vcr.use_cassette(record_mode="once")
+def test_create_log_stream():
+    group_name = "/aws/lambda/nessus_scanner"
+    stream_name = "2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e"
+    result = ps.create_log_stream(group_name, stream_name)
+    expected = "49689435985798542297993617458544907186660420414545737314"
+    assert result == expected

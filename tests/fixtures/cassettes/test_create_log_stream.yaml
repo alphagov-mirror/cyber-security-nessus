@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: '{"logGroupName": "/aws/lambda/nessus_scanner", "logStreamName": "2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e"}'
+    headers:
+      Content-Length:
+      - '119'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://logs.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"__type":"ResourceAlreadyExistsException","message":"The specified
+        log stream already exists"}'
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '95'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Mon, 04 May 2020 13:08:10 GMT
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: '{"logGroupName": "/aws/lambda/nessus_scanner", "logStreamNamePrefix": "2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e"}'
+    headers:
+      Content-Length:
+      - '125'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://logs.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"logStreams":[{"arn":"arn:aws:logs:eu-west-2:000000000000:log-group:/aws/lambda/nessus_scanner:log-stream:2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e","creationTime":1588546814539,"firstEventTimestamp":1588546814796,"lastEventTimestamp":1588547005153,"lastIngestionTime":1588547014223,"logStreamName":"2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e","storedBytes":0,"uploadSequenceToken":"49689435985798542297993617458544907186660420414545737314"}]}'
+    headers:
+      Content-Length:
+      - '465'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Mon, 04 May 2020 13:08:11 GMT
+    status:
+      code: 200
+      message: OK
+version: 1
