@@ -1,55 +1,55 @@
 interactions:
-  - request:
-      body: null
-      headers:
-        Accept:
-          - "*/*"
-        Accept-Encoding:
-          - gzip, deflate
-        Connection:
-          - keep-alive
-        User-Agent:
-          - python-requests/2.23.0
-        X-ApiKeys:
-          - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
-      method: GET
-      uri: https://localhost:8834/policies
-    response:
-      body:
-        string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"USERNAME","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1587999905,"creation_date":1587999905,"owner_id":1,"id":10}]}'
-      headers:
-        Cache-Control:
-          - no-cache, no-store, must-revalidate
-        Connection:
-          - close
-        Content-Length:
-          - "367"
-        Content-Security-Policy:
-          - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
-            'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
-            'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
-            'none'
-        Content-Type:
-          - application/json
-        Date:
-          - Fri, 01 May 2020 09:54:05 GMT
-        Expect-CT:
-          - max-age=0
-        Expires:
-          - "0"
-        Pragma:
-          - no-cache
-        Server:
-          - NessusWWW
-        Strict-Transport-Security:
-          - max-age=31536000
-        X-Content-Type-Options:
-          - nosniff
-        X-Frame-Options:
-          - DENY
-        X-XSS-Protection:
-          - 1; mode=block
-      status:
-        code: 200
-        message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+      X-ApiKeys:
+      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
+    method: GET
+    uri: https://localhost:8834/policies
+  response:
+    body:
+      string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"USERNAME","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1587999905,"creation_date":1587999905,"owner_id":1,"id":10}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Length:
+      - '367'
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 01 May 2020 09:54:05 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1
