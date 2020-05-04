@@ -23,3 +23,13 @@ variable "dependabot_lambda_memory" {
 variable "dependabot_lambda_timeout" {
   default = 900
 }
+
+variable "root_domain" {
+  type = string
+  default = "gds-cyber-security.digital"
+}
+
+variable "fqdn" {
+  type = string
+  default = "nessus.gds-cyber-security.digital"
+}
