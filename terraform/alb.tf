@@ -29,11 +29,6 @@ resource "aws_lb_target_group" "nessus_web" {
   }
 }
 
-#resource "aws_lb_target_group_attachment" "splunk_hsh" {
-#  target_group_arn = aws_lb_target_group.splunk_hsh.arn
-#  target_id        = aws_instance.splunk_hybrid_searchhead.id
-#}
-
 resource "aws_lb_target_group_attachment" "nessus_web" {
   target_group_arn = aws_lb_target_group.nessus_web.arn
   target_id        = aws_instance.nessus_instance.id
@@ -67,18 +62,6 @@ resource "aws_lb_listener" "https" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.splunk_hsh.arn
-  }
-}
-
-resource "aws_lb_listener" "https_api" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "8089"
-  protocol          = "HTTPS"
-  certificate_arn   = aws_acm_certificate.fqdn.arn
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.splunk_hsh_api.arn
+    target_group_arn = aws_lb_target_group.nessus_web.arn
   }
 }
