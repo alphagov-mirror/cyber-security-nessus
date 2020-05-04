@@ -31,3 +31,17 @@ def test_get_status_checks():
     result = gak.get_status_checks()
     expected = True
     assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_get_public_url():
+    result = gak.get_public_url()
+    expected = "https://127.0.0.1:8834"
+    assert result == expected
+
+
+@my_vcr.use_cassette()
+def test_get_private_url():
+    result = gak.get_private_url()
+    expected = "https://10.0.0.0:8834"
+    assert result == expected
