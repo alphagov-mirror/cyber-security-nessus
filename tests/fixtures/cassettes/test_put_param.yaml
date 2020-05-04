@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: '{"Name": "/nessus/access_key", "Description": "access_key for the Nessus
+      instance", "Value": "ACCESS_KEY",
+      "Overwrite": true, "Type": "SecureString"}'
+    headers:
+      Content-Length:
+      - '203'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Tier":"Standard","Version":25}'
+    headers:
+      Content-Length:
+      - '32'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Mon, 04 May 2020 15:35:13 GMT
+      x-amzn-RequestId:
+      - 0abbd0d7-2145-4234-b069-2b1ffb3f294e
+    status:
+      code: 200
+      message: OK
+version: 1
