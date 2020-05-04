@@ -8,13 +8,13 @@ import requests
 def get(path, text=False):
     if text:
         return requests.get(
-            get_param_from_ssm(base_url()) + path,
+            base_url() + path,
             headers=api_credentials(),
             verify=False,
         )
     else:
         return requests.get(
-            get_param_from_ssm(base_url()) + path,
+            base_url() + path,
             headers=api_credentials(),
             verify=False,
         ).json()
@@ -22,7 +22,7 @@ def get(path, text=False):
 
 def post(path, payload, headers=None):
     return requests.post(
-        get_param_from_ssm(base_url()) + path,
+        base_url() + path,
         headers=headers if headers else api_credentials(),
         json=payload,
         verify=False,
@@ -75,8 +75,9 @@ def manager_credentials():
     return headers
 
 
+@lru_cache(maxsize=1)
 def base_url():
-    return "public_base_url"
+    return get_param_from_ssm("public_base_url")
 
 
 def list_policies():
