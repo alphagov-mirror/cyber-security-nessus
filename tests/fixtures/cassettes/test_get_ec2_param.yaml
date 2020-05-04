@@ -1,0 +1,104 @@
+interactions:
+- request:
+    body: Action=DescribeInstances&Version=2016-11-15&Filter.1.Name=instance-state-name&Filter.1.Value.1=running
+    headers:
+      Content-Length:
+      - '102'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ec2.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstancesResponse
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>045cd541-ce00-45de-9abb-f6441287ac0a</requestId>\n
+        \   <reservationSet>\n        <item>\n            <reservationId>r-00000000000000000</reservationId>\n
+        \           <ownerId>000000000000</ownerId>\n            <groupSet/>\n            <instancesSet>\n
+        \               <item>\n                    <instanceId>i-00000000000000000</instanceId>\n
+        \                   <imageId>ami-0f21bd1a9a7f1d934</imageId>\n                    <instanceState>\n
+        \                       <code>16</code>\n                        <name>running</name>\n
+        \                   </instanceState>\n                    <privateDnsName>ip-10-0-0-0.eu-west-2.compute.internal</privateDnsName>\n
+        \                   <dnsName/>\n                    <reason/>\n                    <keyName>key_name</keyName>\n
+        \                   <amiLaunchIndex>0</amiLaunchIndex>\n                    <productCodes>\n
+        \                       <item>\n                            <productCode>8fn69npzmbzcs4blc4583jd0y</productCode>\n
+        \                           <type>marketplace</type>\n                        </item>\n
+        \                   </productCodes>\n                    <instanceType>t3a.xlarge</instanceType>\n
+        \                   <launchTime>2020-04-24T12:11:57.000Z</launchTime>\n                    <placement>\n
+        \                       <availabilityZone>eu-west-2a</availabilityZone>\n
+        \                       <groupName/>\n                        <tenancy>default</tenancy>\n
+        \                   </placement>\n                    <monitoring>\n                        <state>enabled</state>\n
+        \                   </monitoring>\n                    <subnetId>subnet-00000000000000000</subnetId>\n
+        \                   <vpcId>vpc-00000000000000000</vpcId>\n                    <privateIpAddress>10.0.0.0</privateIpAddress>\n
+        \                   <ipAddress>127.0.0.1</ipAddress>\n                    <sourceDestCheck>true</sourceDestCheck>\n
+        \                   <groupSet>\n                        <item>\n                            <groupId>sg-00000000000000000</groupId>\n
+        \                           <groupName>group-sg</groupName>\n                        </item>\n
+        \                   </groupSet>\n                    <architecture>x86_64</architecture>\n
+        \                   <rootDeviceType>ebs</rootDeviceType>\n                    <rootDeviceName>/dev/xvda</rootDeviceName>\n
+        \                   <blockDeviceMapping>\n                        <item>\n
+        \                           <deviceName>/dev/xvda</deviceName>\n                            <ebs>\n
+        \                               <volumeId>vol-00000000000000000</volumeId>\n
+        \                               <status>attached</status>\n                                <attachTime>2020-04-24T12:11:58.000Z</attachTime>\n
+        \                               <deleteOnTermination>true</deleteOnTermination>\n
+        \                           </ebs>\n                        </item>\n                    </blockDeviceMapping>\n
+        \                   <virtualizationType>hvm</virtualizationType>\n                    <clientToken/>\n
+        \                   <tagSet>\n                        <item>\n                            <key>ManagedBy</key>\n
+        \                           <value>terraform</value>\n                        </item>\n
+        \                       <item>\n                            <key>Name</key>\n
+        \                           <value>Nessus Scanning Instance</value>\n                        </item>\n
+        \                   </tagSet>\n                    <hypervisor>xen</hypervisor>\n
+        \                   <networkInterfaceSet>\n                        <item>\n
+        \                           <networkInterfaceId>eni-00000000000000000</networkInterfaceId>\n
+        \                           <subnetId>subnet-00000000000000000</subnetId>\n
+        \                           <vpcId>vpc-00000000000000000</vpcId>\n                            <description/>\n
+        \                           <ownerId>000000000000</ownerId>\n                            <status>in-use</status>\n
+        \                           <macAddress>06:0a:e2:97:cb:2c</macAddress>\n                            <privateIpAddress>10.0.0.0</privateIpAddress>\n
+        \                           <sourceDestCheck>true</sourceDestCheck>\n                            <groupSet>\n
+        \                               <item>\n                                    <groupId>sg-00000000000000000</groupId>\n
+        \                                   <groupName>group-sg</groupName>\n                                </item>\n
+        \                           </groupSet>\n                            <attachment>\n
+        \                               <attachmentId>eni-attach-00000000000000000</attachmentId>\n
+        \                               <deviceIndex>0</deviceIndex>\n                                <status>attached</status>\n
+        \                               <attachTime>2020-04-24T12:11:57.000Z</attachTime>\n
+        \                               <deleteOnTermination>true</deleteOnTermination>\n
+        \                           </attachment>\n                            <association>\n
+        \                               <publicIp>127.0.0.1</publicIp>\n                                <publicDnsName/>\n
+        \                               <ipOwnerId>amazon</ipOwnerId>\n                            </association>\n
+        \                           <privateIpAddressesSet>\n                                <item>\n
+        \                                   <privateIpAddress>10.0.0.0</privateIpAddress>\n
+        \                                   <primary>true</primary>\n                                    <association>\n
+        \                                   <publicIp>127.0.0.1</publicIp>\n                                    <publicDnsName/>\n
+        \                                   <ipOwnerId>amazon</ipOwnerId>\n                                    </association>\n
+        \                               </item>\n                            </privateIpAddressesSet>\n
+        \                           <ipv6AddressesSet/>\n                            <interfaceType>interface</interfaceType>\n
+        \                       </item>\n                    </networkInterfaceSet>\n
+        \                   <ebsOptimized>false</ebsOptimized>\n                    <enaSupport>true</enaSupport>\n
+        \                   <cpuOptions>\n                        <coreCount>2</coreCount>\n
+        \                       <threadsPerCore>2</threadsPerCore>\n                    </cpuOptions>\n
+        \                   <capacityReservationSpecification>\n                        <capacityReservationPreference>open</capacityReservationPreference>\n
+        \                   </capacityReservationSpecification>\n                    <hibernationOptions>\n
+        \                       <configured>false</configured>\n                    </hibernationOptions>\n
+        \                   <enclaveOptions>\n                        <enabled>false</enabled>\n
+        \                   </enclaveOptions>\n                    <metadataOptions>\n
+        \                       <state>applied</state>\n                        <httpTokens>optional</httpTokens>\n
+        \                       <httpPutResponseHopLimit>1</httpPutResponseHopLimit>\n
+        \                       <httpEndpoint>enabled</httpEndpoint>\n                    </metadataOptions>\n
+        \               </item>\n            </instancesSet>\n        </item>\n    </reservationSet>\n</DescribeInstancesResponse>"
+    headers:
+      Content-Length:
+      - '7220'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Mon, 04 May 2020 13:26:31 GMT
+      Server:
+      - AmazonEC2
+      vary:
+      - accept-encoding
+    status:
+      code: 200
+      message: OK
+version: 1
