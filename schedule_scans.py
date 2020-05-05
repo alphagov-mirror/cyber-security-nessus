@@ -116,6 +116,10 @@ def compare_targets(new_scan, id):
     # Check if they are the same here
 
 
+def update_gds_scans(config):
+    # Update with a new nessus.py method PUT /scans/{scan_id}
+
+
 def check_scan():
     scan_list = list_scans()
     config = load_scan_config()
