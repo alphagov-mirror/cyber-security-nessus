@@ -1,7 +1,6 @@
 import sys
 import os
 
-import pytest
 import vcr
 
 currentdir = os.path.dirname(__file__)
@@ -24,7 +23,6 @@ def test_get_status_checks():
     result = gak.get_status_checks()
     expected = True
     assert result == expected
-
 
 def test_put_keys():
     with vcr.use_cassette("tests/fixtures/cassettes/test_put_keys.yaml") as cass:
