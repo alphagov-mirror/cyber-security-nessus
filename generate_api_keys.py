@@ -1,18 +1,25 @@
 import json
 import time
+from functools import lru_cache
 
 import boto3
 import requests
 
-from nessus import get_token
+from nessus import get_token, base_url
 
 
-ssm_client = boto3.client("ssm")
-ec2_client = boto3.client("ec2")
+@lru_cache(maxsize=None)
+def ssm_client():
+    return boto3.client("ssm")
+
+
+@lru_cache(maxsize=None)
+def ec2_client():
+    return boto3.client("ec2")
 
 
 def get_ec2_param(param):
-    return ec2_client.describe_instances(
+    return ec2_client().describe_instances(
         Filters=[
             {
                 "Name": "tag:Name",
@@ -25,7 +32,7 @@ def get_ec2_param(param):
 
 
 def get_status_checks():
-    nessus_status_checks = ec2_client.describe_instance_status(
+    nessus_status_checks = ec2_client().describe_instance_status(
         InstanceIds=[get_ec2_param("InstanceId")]
     )
 
@@ -45,22 +52,10 @@ def get_status_checks():
     return True
 
 
-def get_public_url():
-    base_url = f"https://{get_ec2_param('PublicIpAddress')}:8834"
-    put_param(base_url, type="public_base_url")
-    return base_url
-
-
-def get_private_url():
-    base_url = f"https://{get_ec2_param('PrivateIpAddress')}:8834"
-    put_param(base_url, type="private_base_url")
-    return base_url
-
-
 def put_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
-        get_public_url() + keys_url, headers=get_token(), verify=False
+        base_url() + keys_url, headers=get_token(), verify=False
     )
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]
@@ -70,7 +65,7 @@ def put_keys():
 
 
 def put_param(param, type):
-    ssm_client.put_parameter(
+    ssm_client().put_parameter(
         Name=f"/nessus/{type}",
         Description=f"{type} for the Nessus instance",
         Value=f"{param}",

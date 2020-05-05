@@ -10,6 +10,7 @@ mypy-boto3-logs = "*"
 boto3-stubs = {extras = ["logs"],version = "*"}
 pytest = "*"
 pytest-mock = "*"
+pytest-cov = "*"
 
 [packages]
 requests = "*"
