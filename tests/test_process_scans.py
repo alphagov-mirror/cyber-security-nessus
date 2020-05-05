@@ -9,6 +9,8 @@ my_vcr = vcr.VCR(
     match_on=["uri", "method", "body"],
     cassette_library_dir="tests/fixtures/cassettes",
     path_transformer=vcr.VCR.ensure_suffix(".yaml"),
+    filter_headers=['authorization']
+
 )
 
 

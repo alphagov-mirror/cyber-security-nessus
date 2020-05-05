@@ -1,0 +1,111 @@
+interactions:
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjgtZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":25}}'
+    headers:
+      Content-Length:
+      - '278'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Tue, 05 May 2020 01:14:27 GMT
+      x-amzn-RequestId:
+      - d981c4a6-4d21-457f-a5ea-4e6d011ec251
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjgtZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":25}}'
+    headers:
+      Content-Length:
+      - '278'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Tue, 05 May 2020 01:14:27 GMT
+      x-amzn-RequestId:
+      - a436c86c-ca1f-444b-a065-32df8e2f3eac
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+    method: GET
+    uri: https://localhost:8834/policies
+  response:
+    body:
+      string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1587999905,"creation_date":1587999905,"owner_id":1,"id":10},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_01","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588609506,"creation_date":1588609506,"owner_id":1,"id":68},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_02","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588609551,"creation_date":1588609551,"owner_id":1,"id":69},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_03","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588609562,"creation_date":1588609562,"owner_id":1,"id":70},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_04","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588610225,"creation_date":1588610225,"owner_id":1,"id":71},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_05","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588610614,"creation_date":1588610614,"owner_id":1,"id":72},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_06","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588610633,"creation_date":1588610633,"owner_id":1,"id":73},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_07","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588611427,"creation_date":1588611427,"owner_id":1,"id":74},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_08","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588611482,"creation_date":1588611482,"owner_id":1,"id":75},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_09","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588611637,"creation_date":1588611637,"owner_id":1,"id":76},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_10","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588634816,"creation_date":1588634816,"owner_id":1,"id":77},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_11","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588634993,"creation_date":1588634993,"owner_id":1,"id":78},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_12","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588635018,"creation_date":1588635018,"owner_id":1,"id":79},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_13","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588635053,"creation_date":1588635053,"owner_id":1,"id":80},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_14","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588640861,"creation_date":1588640861,"owner_id":1,"id":81},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_15","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588640893,"creation_date":1588640893,"owner_id":1,"id":82},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_16","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588640966,"creation_date":1588640966,"owner_id":1,"id":83},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan_17","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1588641059,"creation_date":1588641059,"owner_id":1,"id":84}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 May 2020 01:14:28 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '6419'
+    status:
+      code: 200
+      message: OK
+version: 1

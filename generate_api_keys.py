@@ -4,7 +4,7 @@ import time
 import boto3
 import requests
 
-from nessus import get_token
+from nessus import get_token, base_url
 
 
 ssm_client = boto3.client("ssm")
@@ -45,22 +45,10 @@ def get_status_checks():
     return True
 
 
-def get_public_url():
-    base_url = f"https://{get_ec2_param('PublicIpAddress')}:8834"
-    put_param(base_url, type="public_base_url")
-    return base_url
-
-
-def get_private_url():
-    base_url = f"https://{get_ec2_param('PrivateIpAddress')}:8834"
-    put_param(base_url, type="private_base_url")
-    return base_url
-
-
 def put_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
-        get_public_url() + keys_url, headers=get_token(), verify=False
+        base_url() + keys_url, headers=get_token(), verify=False
     )
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]

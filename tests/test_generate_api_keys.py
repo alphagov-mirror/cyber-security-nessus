@@ -1,6 +1,7 @@
 import sys
 import os
 
+import pytest
 import vcr
 
 currentdir = os.path.dirname(__file__)
@@ -10,15 +11,7 @@ sys.path.insert(0, parentdir)
 import generate_api_keys as gak
 
 
-my_vcr = vcr.VCR(
-    record_mode="none",
-    match_on=["uri", "method", "body"],
-    cassette_library_dir="tests/fixtures/cassettes",
-    path_transformer=vcr.VCR.ensure_suffix(".yaml"),
-)
-
-
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get_ec2_param():
     param = "PublicIpAddress"
     result = gak.get_ec2_param(param)
@@ -26,8 +19,14 @@ def test_get_ec2_param():
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get_status_checks():
     result = gak.get_status_checks()
     expected = True
     assert result == expected
+
+# @vcr.use_cassette
+# def test_get_public_url():
+#     result = gak.get_status_checks()
+#     expected = True
+#     assert result == expected

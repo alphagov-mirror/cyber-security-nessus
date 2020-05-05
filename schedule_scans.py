@@ -16,13 +16,17 @@ from nessus import (
 @lru_cache(maxsize=1)
 def set_policy():
     policies = list_policies()
-    try:
-        for policy in policies["policies"]:
-            if policy["name"] == "standard_scan":
-                return policy["id"]
-    except KeyError:
+    policy_id = None
+
+    for policy in policies["policies"]:
+        if policy["name"] == "standard_scan":
+            policy_id = policy["id"]
+
+    if not policy_id:
         print("No policies exist.")
-        create_gds_scan_policy()
+        policy_id = create_gds_scan_policy()
+
+    return policy_id
 
 
 @lru_cache(maxsize=1)
@@ -39,8 +43,8 @@ def create_gds_scan_policy():
     with open("scan_config/standard_scan_template.json", "r") as f:
         policy = json.load(f)
     policy["uuid"] = advanced_dynamic_policy_template_uuid()
-    create_policy(policy)
-    return policy["id"]
+    policy = create_policy(policy)
+    return policy["policy_id"]
 
 
 def create_scan_config(scan):
@@ -63,11 +67,6 @@ def create_gds_scans(config):
     for scan in config.values():
         create_scan_config(scan)
         create_scan(create_scan_config(scan))
-
-
-def dump_policy(id):
-    with open("out.json", "w") as f:
-        json.dump(policy_details(id), f, indent=4)
 
 
 def load_scan_config():
