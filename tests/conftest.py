@@ -37,20 +37,21 @@ def scrub_body(response):
 def scrub_json(data):
     """Helper to remove secret values from JSON"""
     parameters = [
-        "/nessus/secret_key",
-        "/nessus/access_key",
-        "/nessus/username",
-        "/nessus/password",
-        "/nessus/public_base_url",
+        ("/nessus/secret_key", ),
+        ("/nessus/access_key",),
+        ("/nessus/username",),
+        ("/nessus/password",),
+        ("/nessus/public_base_url", "https://localhost:8834"),
     ]
     if "Parameter" in data:
         data["Parameter"][
             "ARN"
         ] = "arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key"
         data["Parameter"]["LastModifiedDate"] = 0
+
         for parameter in parameters:
-            if data["Parameter"]["Name"] == parameter:
-                data["Parameter"]["Value"] = parameter
+            if data["Parameter"]["Name"] == parameter[0]:
+                data["Parameter"]["Value"] = parameter[1] if parameter[1] else parameter[0]
 
     secrets = [
         "token",

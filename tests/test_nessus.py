@@ -15,43 +15,28 @@ sys.path.insert(0, parentdir)
 
 import nessus as n
 
-# Uncomment to DEBUG VCR
-#
-# logging.basicConfig()
-# you need to initialize logging,
-# otherwise you will not see anything from vcrpy
-# vcr_log = logging.getLogger("vcr")
-# vcr_log.setLevel(logging.DEBUG)
 
-my_vcr = vcr.VCR(
-    record_mode="none",
-    match_on=["uri", "method", "body"],
-    cassette_library_dir="tests/fixtures/cassettes",
-    path_transformer=vcr.VCR.ensure_suffix(".yaml"),
-)
-
-
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get_param_from_ssm():
     param = n.get_param_from_ssm("access_key")
     assert param == "ACCESS_KEY"
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_api_credentials():
     result = n.api_credentials()
     expected = {"X-ApiKeys": "accessKey=ACCESS_KEY; secretKey=SECRET_KEY"}
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_prepare_export():
     result = n.prepare_export(id=5)
-    expected = {"token": "TOKEN", "file": 1111111}
+    expected = {"token": "token", "file": 1111111}
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_download_report():
     result = n.download_report({"token": "TOKEN"})
     checksum = hashlib.sha256(result.encode()).hexdigest()
@@ -59,46 +44,46 @@ def test_download_report():
     assert checksum == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get():
     result = n.get("/server/status")
     expected = {"code": 200, "progress": None, "status": "ready"}
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_post():
     result = n.prepare_export(id=5)
-    expected = {"token": "TOKEN", "file": 1111111}
+    expected = {"token": "token", "file": 1111111}
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get_token():
     result = n.get_token()
-    response = {"token": "111111111"}
+    response = {"token": "token"}
     expected = {"X-Cookie": f"token={response['token']}"}
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_get_x_api_token():
     result = n.get_x_api_token()
     expected = "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3"
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_manager_credentials():
     result = n.manager_credentials()
     expected = {
         "X-API-Token": "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3",
-        "X-Cookie": "token=111111111",
+        "X-Cookie": "token=token",
     }
     assert result == expected
 
 
-@my_vcr.use_cassette()
+@vcr.use_cassette
 def test_list_policies():
     result = n.list_policies()
     expected = {
@@ -139,7 +124,7 @@ def test_list_policies():
 #     assert result == expected
 
 
-@my_vcr.use_cassette(record_mode="once")
+@vcr.use_cassette(record_mode="once")
 def test_list_scans():
     result = n.list_scans()
     expected = {
