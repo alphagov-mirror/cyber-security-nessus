@@ -72,7 +72,7 @@ def scrub_json(data):
 
 # Standardise vcr config
 vcr.default_vcr = vcr.VCR(
-    record_mode="append",
+    record_mode="once",
     match_on=["uri", "method", "body"],
     cassette_library_dir="tests/fixtures/cassettes",
     path_transformer=vcr.VCR.ensure_suffix(".yaml"),
