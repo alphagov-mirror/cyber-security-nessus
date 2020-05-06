@@ -76,14 +76,13 @@ def put_param(param, type):
 
 def get_nessus_status():
     try:
-        ip = requests.get('https://ipv4.icanhazip.com/')
-        print(ip.json())
         server_status_url = "/server/status"
         print(f"baseurl:{base_url()}")
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
         print(status)
         return status
+        
     except (ConnectionError, requests.exceptions.ConnectionError) as e:
         print("connection error")
         print(e)
