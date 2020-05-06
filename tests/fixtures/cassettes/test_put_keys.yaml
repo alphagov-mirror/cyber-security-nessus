@@ -200,7 +200,7 @@ interactions:
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000000:parameter/nessus/public_base_url","DataType":"text","LastModifiedDate":1.588606512805E9,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":78}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":78}}'
     headers:
       Content-Length:
       - '250'
@@ -278,13 +278,11 @@ interactions:
       - application/json
       User-Agent:
       - python-requests/2.23.0
-      X-ApiKeys:
-      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
     method: POST
     uri: https://localhost:8834/session
   response:
     body:
-      string: '{"token":"111111111"}'
+      string: '{"token":"token"}'
     headers:
       Cache-Control:
       - no-cache, no-store, must-revalidate
@@ -377,8 +375,7 @@ interactions:
       message: OK
 - request:
     body: '{"Name": "/nessus/access_key", "Description": "access_key for the Nessus
-      instance", "Value": "ACCESS_KEY",
-      "Overwrite": true, "Type": "SecureString"}'
+      instance", "Value": "ACCESS_KEY", "Overwrite": true, "Type": "SecureString"}'
     headers:
       Content-Length:
       - '203'
@@ -407,8 +404,7 @@ interactions:
       message: OK
 - request:
     body: '{"Name": "/nessus/secret_key", "Description": "secret_key for the Nessus
-      instance", "Value": "SECRET_KEY",
-      "Overwrite": true, "Type": "SecureString"}'
+      instance", "Value": "SECRET_KEY", "Overwrite": true, "Type": "SecureString"}'
     headers:
       Content-Length:
       - '203'
