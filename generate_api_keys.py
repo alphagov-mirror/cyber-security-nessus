@@ -4,7 +4,6 @@ from functools import lru_cache
 
 import boto3
 import requests
-import requests.exceptions
 from urllib3.exceptions import NewConnectionError
 
 from nessus import get_token, base_url
@@ -82,7 +81,7 @@ def get_nessus_status():
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
         return status
-    except (NewConnectionError, ConnectionError, Timeout):
+    except (NewConnectionError, ConnectionError, requests.exceptions.Timeout):
         print("connection error")
         return {"status": "loading", "progress": "0"}
 
