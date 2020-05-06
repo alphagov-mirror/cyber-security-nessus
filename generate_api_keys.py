@@ -4,6 +4,7 @@ from functools import lru_cache
 
 import boto3
 import requests
+import requests.exceptions
 from urllib3.exceptions import NewConnectionError
 
 from nessus import get_token, base_url
