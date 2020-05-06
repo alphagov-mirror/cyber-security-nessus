@@ -80,8 +80,9 @@ def get_nessus_status():
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
         return status
-    except (ConnectionError, requests.exceptions.ConnectionError):
+    except (ConnectionError, requests.exceptions.ConnectionError) as e:
         print("connection error")
+        print(e)
         return {"status": "loading", "progress": "0"}
 
 
