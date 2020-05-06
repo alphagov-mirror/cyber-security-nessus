@@ -4,7 +4,7 @@ from functools import lru_cache
 
 import boto3
 import requests
-from requests.exceptions import Timeout
+import requests.exceptions
 
 from nessus import get_token, base_url
 
