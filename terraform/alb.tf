@@ -1,8 +1,8 @@
 resource "aws_lb" "alb" {
   name               = "nessus-load-balancer"
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.nessus-sg.id]
-  subnets            = [aws_subnet.cyber-security-nessus-subnet.id]
+  security_groups    = [aws_security_group.nessus-alb-sg.id]
+  subnets            = [aws_subnet.cyber-security-nessus-subnet.id, aws_subnet.cyber-security-nessus-subnet-b.id]
 }
 
 resource "aws_lb_target_group" "nessus_web" {

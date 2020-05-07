@@ -32,6 +32,13 @@ resource "aws_security_group" "nessus-sg" {
     cidr_blocks = local.gds-ips
   }
 
+  ingress {
+    from_port   = 8834
+    to_port     = 8834
+    protocol    = "tcp"
+    security_groups = [aws_security_group.nessus-alb-sg.id]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -41,6 +48,38 @@ resource "aws_security_group" "nessus-sg" {
 
   tags = {
     Name      = "Nessus Scanning Instance"
+    ManagedBy = "terraform"
+  }
+}
+
+resource "aws_security_group" "nessus-alb-sg" {
+  name        = "nessus-alb-sg"
+  description = "ALB Security Group for Nessus"
+  vpc_id      = aws_vpc.cyber-security-nessus.id
+
+  ingress {
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+    cidr_blocks = local.gds-ips
+  }
+
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = local.gds-ips
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name      = "ALB for Nessus Scanning Instance"
     ManagedBy = "terraform"
   }
 }
