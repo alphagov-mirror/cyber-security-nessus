@@ -91,3 +91,12 @@ def test_set_policy_no_policies(clean_cache):
     result = s.set_policy()
     expected = 84
     assert result == expected
+
+
+@vcr.use_cassette
+def test_compare_targets(clean_cache):
+    """Check are compare targets function works as intended"""
+    toml_scan = {"name": "The nightmare before nessus", "text_targets": "www.gov.uk"}
+    id = 1289
+    result = s.compare_targets(toml_scan, id)
+    assert result == True

@@ -114,12 +114,6 @@ interactions:
     headers:
       Content-Length:
       - '59'
-      Content-Type:
-      - !!binary |
-        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
-      User-Agent:
-      - !!binary |
-        Qm90bzMvMS4xMi40NyBQeXRob24vMy43LjQgRGFyd2luLzE4LjcuMCBCb3RvY29yZS8xLjE1LjQ3
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
@@ -142,12 +136,6 @@ interactions:
     headers:
       Content-Length:
       - '59'
-      Content-Type:
-      - !!binary |
-        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
-      User-Agent:
-      - !!binary |
-        Qm90bzMvMS4xMi40NyBQeXRob24vMy43LjQgRGFyd2luLzE4LjcuMCBCb3RvY29yZS8xLjE1LjQ3
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:

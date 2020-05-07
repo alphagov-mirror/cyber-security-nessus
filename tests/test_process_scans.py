@@ -9,8 +9,7 @@ my_vcr = vcr.VCR(
     match_on=["uri", "method", "body"],
     cassette_library_dir="tests/fixtures/cassettes",
     path_transformer=vcr.VCR.ensure_suffix(".yaml"),
-    filter_headers=['authorization']
-
+    filter_headers=["authorization"],
 )
 
 
@@ -34,14 +33,14 @@ def test_process_csv(mocker):
     assert ps.process_csv.call_args_list == expected
 
 
-@my_vcr.use_cassette()
+@my_vcr.use_cassette
 def test_find_scans(capsys):
     ps.find_scans()
     captured = capsys.readouterr()
     assert captured.out == "Scan localhost has not run.\n"
 
 
-@my_vcr.use_cassette(record_mode="once")
+@my_vcr.use_cassette()
 def test_create_log_stream():
     group_name = "/aws/lambda/nessus_scanner"
     stream_name = "2020/05/03/[$LATEST]09788309846457e5b9dfc1d5dfae648e"

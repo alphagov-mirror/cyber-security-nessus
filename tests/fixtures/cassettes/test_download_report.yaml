@@ -14,7 +14,7 @@ interactions:
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000:parameter/nessus/public_base_url","DataType":"text","LastModifiedDate":1.588155648471E9,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
     headers:
       Content-Length:
       - '250'
@@ -38,8 +38,6 @@ interactions:
       - keep-alive
       User-Agent:
       - python-requests/2.23.0
-      X-ApiKeys:
-      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
     method: GET
     uri: https://localhost:8834/tokens/TOKEN/download
   response:

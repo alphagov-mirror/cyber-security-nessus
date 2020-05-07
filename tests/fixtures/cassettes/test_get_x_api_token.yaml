@@ -38,22 +38,16 @@ interactions:
       - keep-alive
       User-Agent:
       - python-requests/2.23.0
-      X-ApiKeys:
-      - accessKey=ACCESS_KEY; secretKey=SECRET_KEY
     method: GET
     uri: https://localhost:8834/nessus6.js
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAA/6vOTq20UlJKTy1xLMgMyc9OzVPSKUvMKU21SivNSy7JzM/T0KwuSi0pLcpTcjK2
-        cDN3tHTRNXNxs9A1tTQz17VwcXXUNTB2MXQzMDazMHE1VqqtBQCzSZrVUwAAAA==
+      string: '{key:""getApiToken",value:function(){return"B38F7A9D-6DF8-5967-8DEA-03D1F03684E3"}}'
     headers:
       Cache-Control:
       - must-revalidate
       Connection:
       - close
-      Content-Encoding:
-      - gzip
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src

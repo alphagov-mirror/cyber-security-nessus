@@ -7,21 +7,24 @@ import requests
 
 def get(path, text=False):
     if text:
-        return requests.get(
-            base_url() + path,
-            headers=api_credentials(),
-            verify=False,
-        )
+        return requests.get(base_url() + path, headers=api_credentials(), verify=False,)
     else:
         return requests.get(
-            base_url() + path,
-            headers=api_credentials(),
-            verify=False,
+            base_url() + path, headers=api_credentials(), verify=False,
         ).json()
 
 
 def post(path, payload, headers=None):
     return requests.post(
+        base_url() + path,
+        headers=headers if headers else api_credentials(),
+        json=payload,
+        verify=False,
+    ).json()
+
+
+def put(path, payload, headers=None):
+    return requests.put(
         base_url() + path,
         headers=headers if headers else api_credentials(),
         json=payload,
@@ -98,6 +101,10 @@ def list_scans():
 
 def create_scan(scan):
     return post("/scans", scan, manager_credentials())
+
+
+def update_scan(scan, id):
+    return put(f"/scans/{id}", scan, manager_credentials())
 
 
 def describe_scan(id):

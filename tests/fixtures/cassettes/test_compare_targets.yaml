@@ -1,0 +1,377 @@
+interactions:
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.58878081434E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"ACCESS_KEY","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 11:46:35 GMT
+      x-amzn-RequestId:
+      - 8fa58eab-ac83-492b-a207-9e774e1e4015
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000000:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58878081439E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"SECRET_KEY","Version":33}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 11:46:35 GMT
+      x-amzn-RequestId:
+      - 039a72ab-8061-4a1b-aac5-da0880e77f25
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.58878081434E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"6493347577505f128f4d842fa46c727605c8ca99b8fc7e5edfb8ee101d63ecb0","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:22:46 GMT
+      x-amzn-RequestId:
+      - b07603c6-361c-4288-b9e2-41116581dacb
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58878081439E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"611a01afe839404802d686dcd6c46e05e1da883fc473e65eb44f32f03f84df2a","Version":33}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:22:47 GMT
+      x-amzn-RequestId:
+      - 15157ead-c8a8-406c-ac34-aa40cbfc5d1a
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.58878081434E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"6493347577505f128f4d842fa46c727605c8ca99b8fc7e5edfb8ee101d63ecb0","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:30:16 GMT
+      x-amzn-RequestId:
+      - c1e590f4-a07a-493d-b2d7-ab7a31a196c4
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58878081439E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"611a01afe839404802d686dcd6c46e05e1da883fc473e65eb44f32f03f84df2a","Version":33}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:30:16 GMT
+      x-amzn-RequestId:
+      - 25b93b13-5777-4f2f-9301-ed8be27a7e33
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.58878081434E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"6493347577505f128f4d842fa46c727605c8ca99b8fc7e5edfb8ee101d63ecb0","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:31:07 GMT
+      x-amzn-RequestId:
+      - 84dd2b54-8eb6-44f3-80b9-0fba915511a0
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58878081439E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"611a01afe839404802d686dcd6c46e05e1da883fc473e65eb44f32f03f84df2a","Version":33}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:31:07 GMT
+      x-amzn-RequestId:
+      - 1ddd6ebf-3a0c-4984-a829-59a6405ffd79
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.58878081434E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"6493347577505f128f4d842fa46c727605c8ca99b8fc7e5edfb8ee101d63ecb0","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:32:08 GMT
+      x-amzn-RequestId:
+      - 1abc5809-5a6d-4b82-b4fa-a232f0c4a020
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58878081439E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"611a01afe839404802d686dcd6c46e05e1da883fc473e65eb44f32f03f84df2a","Version":33}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:32:08 GMT
+      x-amzn-RequestId:
+      - f58edacd-2d7f-4e40-85b0-7729714fbeef
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/access_key","DataType":"text","LastModifiedDate":1.588858391504E9,"Name":"/nessus/access_key","Type":"SecureString","Value":"ACCESS_KEY","Version":36}}'
+    headers:
+      Content-Length:
+      - '224'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:33:27 GMT
+      x-amzn-RequestId:
+      - 0d489784-f97a-4690-95ed-95c0601985e2
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:676218256630:parameter/nessus/secret_key","DataType":"text","LastModifiedDate":1.58885839136E9,"Name":"/nessus/secret_key","Type":"SecureString","Value":"99eaa18dd44db6106a63514d923dab1e7ee03c652a441daa56e88d87da5d077d","Version":34}}'
+    headers:
+      Content-Length:
+      - '277'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Thu, 07 May 2020 13:33:28 GMT
+      x-amzn-RequestId:
+      - 8d7a46d3-b94b-4396-bf44-efc941fcf38e
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://localhost:8834/scans/1289
+  response:
+    body:
+      string: '{"info": {"targets": "www.gov.uk"}, "name": "The nightmare before nessus"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Length:
+      - '31'
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 07 May 2020 13:33:28 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 401
+      message: Authorization required
+version: 1

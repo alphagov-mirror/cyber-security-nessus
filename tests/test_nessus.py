@@ -124,46 +124,51 @@ def test_list_policies():
 #     assert result == expected
 
 
-@vcr.use_cassette(record_mode="once")
+@vcr.use_cassette
 def test_list_scans():
     result = n.list_scans()
     expected = {
-        "folders": [{
-            "unread_count": None,
-            "custom": 0,
-            "default_tag": 0,
-            "type": "trash",
-            "name": "Trash",
-            "id": 2
-        }, {
-            "unread_count": 0,
-            "custom": 0,
-            "default_tag": 1,
-            "type": "main",
-            "name": "My Scans",
-            "id": 3
-        }],
-        "scans": [{
-            "folder_id": 3,
-            "type": "local",
-            "read": True,
-            "last_modification_date": 1588095794,
-            "creation_date": 1588095592,
-            "status": "completed",
-            "uuid": "cc09a762-aa73-cbbf-fa16-7c240387613a6790f76f193da062",
-            "shared": False,
-            "user_permissions": 128,
-            "owner": "USERNAME",
-            "timezone": None,
-            "rrules": None,
-            "starttime": None,
-            "enabled": False,
-            "control": True,
-            "live_results": 0,
-            "name": "localhost",
-            "id": 52
-        }],
-        "timestamp": 1588332512
+        "folders": [
+            {
+                "unread_count": None,
+                "custom": 0,
+                "default_tag": 0,
+                "type": "trash",
+                "name": "Trash",
+                "id": 2,
+            },
+            {
+                "unread_count": 0,
+                "custom": 0,
+                "default_tag": 1,
+                "type": "main",
+                "name": "My Scans",
+                "id": 3,
+            },
+        ],
+        "scans": [
+            {
+                "folder_id": 3,
+                "type": "local",
+                "read": True,
+                "last_modification_date": 1588095794,
+                "creation_date": 1588095592,
+                "status": "completed",
+                "uuid": "cc09a762-aa73-cbbf-fa16-7c240387613a6790f76f193da062",
+                "shared": False,
+                "user_permissions": 128,
+                "owner": "USERNAME",
+                "timezone": None,
+                "rrules": None,
+                "starttime": None,
+                "enabled": False,
+                "control": True,
+                "live_results": 0,
+                "name": "localhost",
+                "id": 52,
+            }
+        ],
+        "timestamp": 1588332512,
     }
     assert result == expected
 

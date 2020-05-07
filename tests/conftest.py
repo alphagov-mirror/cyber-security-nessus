@@ -21,6 +21,7 @@ sys.path.insert(0, parentdir)
 import nessus as n
 import schedule_scans as s
 
+
 def scrub_body(response):
     """Helper to scub secrets from a vcr request body"""
     try:
@@ -37,7 +38,7 @@ def scrub_body(response):
 def scrub_json(data):
     """Helper to remove secret values from JSON"""
     parameters = [
-        ("/nessus/secret_key", ),
+        ("/nessus/secret_key",),
         ("/nessus/access_key",),
         ("/nessus/username",),
         ("/nessus/password",),
@@ -51,7 +52,9 @@ def scrub_json(data):
 
         for parameter in parameters:
             if data["Parameter"]["Name"] == parameter[0]:
-                data["Parameter"]["Value"] = parameter[1] if parameter[1] else parameter[0]
+                data["Parameter"]["Value"] = (
+                    parameter[1] if parameter[1] else parameter[0]
+                )
 
     secrets = [
         "token",
@@ -64,6 +67,7 @@ def scrub_json(data):
             data[secret] = secret
 
     return data
+
 
 # VCR debugging
 # logging.basicConfig()  # you need to initialize logging, otherwise you will not see anything from vcrpy
@@ -99,7 +103,6 @@ def clean_cache():
     n.api_credentials.cache_clear()
     n.get_x_api_token.cache_clear()
     s.set_policy.cache_clear()
-
 
 
 # Helper functions for working with the `!!binary` strings in VCR cassettes

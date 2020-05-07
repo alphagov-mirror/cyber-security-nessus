@@ -14,13 +14,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - python-requests/2.22.0
-      X-ApiKeys:
-      - accessKey=FOO; secretKey=BAR
     method: POST
     uri: https://localhost:8834/scans/5/export
   response:
     body:
-      string: '{"token":"TOKEN","file":1111111}'
+      string: '{"token":"token","file":1111111}'
     headers:
       Cache-Control:
       - no-cache, no-store, must-revalidate
@@ -71,7 +69,7 @@ interactions:
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:eu-west-2:000000000000:parameter/nessus/public_base_url","DataType":"text","LastModifiedDate":1.588155648471E9,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
     headers:
       Content-Length:
       - '250'
