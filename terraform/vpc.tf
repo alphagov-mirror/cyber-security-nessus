@@ -75,6 +75,18 @@ resource "aws_subnet" "cyber-security-nessus-subnet" {
   }
 }
 
+resource "aws_subnet" "cyber-security-nessus-subnet-b" {
+  vpc_id                  = aws_vpc.cyber-security-nessus.id
+  cidr_block              = "10.1.2.0/24"
+  availability_zone       = "eu-west-2b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name      = "Cyber Security Nessus Subnet in London AZ b"
+    ManagedBy = "terraform"
+  }
+}
+
 resource "aws_route_table" "cyber-security-nessus-route-table" {
   vpc_id = aws_vpc.cyber-security-nessus.id
 
@@ -91,5 +103,10 @@ resource "aws_route_table" "cyber-security-nessus-route-table" {
 
 resource "aws_route_table_association" "cyber-security-nessus-association" {
   subnet_id      = aws_subnet.cyber-security-nessus-subnet.id
+  route_table_id = aws_route_table.cyber-security-nessus-route-table.id
+}
+
+resource "aws_route_table_association" "cyber-security-nessus-association-b" {
+  subnet_id      = aws_subnet.cyber-security-nessus-subnet-b.id
   route_table_id = aws_route_table.cyber-security-nessus-route-table.id
 }
