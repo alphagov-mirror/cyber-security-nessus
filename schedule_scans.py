@@ -104,19 +104,16 @@ def load_scan_config():
 
 def compare_rrules(toml_scan, nessus_scan_rrules):
     rrules = f"FREQ={toml_scan['rrules.freq']};INTERVAL={toml_scan['rrules.interval']};BYDAY={toml_scan['rrules.byday']}"
-    if nessus_scan_rrules == rrules:
-        return True
-    else:
-        return False
+    return nessus_scan_rrules == rrules
 
 
 def check_remaining_rules(nessus_scan, toml_scan, config):
     rules = ["enabled", "starttime", "text_targets"]
     for rule in rules:
-        if nessus_scan[rule] != toml_scan[rule]:
-            return False
-        else:
+        if nessus_scan[rule] == toml_scan[rule]:
             return True
+        else:
+            return False
 
 
 def compare_targets(toml_scan, id):
