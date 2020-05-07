@@ -8,7 +8,7 @@ resource "aws_route53_record" "subdomain_validation" {
   type    = aws_acm_certificate.fqdn.domain_validation_options.0.resource_record_type
   records = [aws_acm_certificate.fqdn.domain_validation_options.0.resource_record_value]
 
-  zone_id = aws_route53_zone.root_domain.id
+  zone_id = data.aws_route53_zone.nessus_domain.id
   ttl     = 60
 }
 

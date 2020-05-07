@@ -1,9 +1,9 @@
-resource "aws_route53_zone" "root_domain" {
-  name = "${var.root_domain}."
+data "aws_route53_zone" "nessus_domain" {
+  name = var.fqdn
 }
 
 resource "aws_route53_record" "fqdn" {
-  zone_id = aws_route53_zone.root_domain.zone_id
+  zone_id = data.aws_route53_zone.nessus_domain.zone_id
   name    = var.fqdn
   type    = "A"
 
