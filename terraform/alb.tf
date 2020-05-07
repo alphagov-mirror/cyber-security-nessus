@@ -5,18 +5,6 @@ resource "aws_lb" "alb" {
   subnets            = [aws_subnet.cyber-security-nessus-subnet.id]
 }
 
-# HTTP version... I'm not sure if we still need this
-#resource "aws_lb_target_group" "nessus-web" {
-#  name     = "nessus-web"
-#  port     = 8834
-#  protocol = "HTTP"
-#  vpc_id   = aws_vpc.cyber-security-nessus.id
-#  health_check {
-#    path    = "/"
-#    matcher = "200"
-#  }
-#}
-
 resource "aws_lb_target_group" "nessus_web" {
   name     = "nessus-web"
   port     = 8834
