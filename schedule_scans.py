@@ -108,13 +108,15 @@ def compare_rrules(toml_scan, nessus_scan_rrules):
 
 
 def check_remaining_rules(nessus_scan, toml_scan, config):
+    """Check all remaining rules match. If all match return True, else return early with False"""
     rules = ["enabled", "starttime", "text_targets"]
     for rule in rules:
         if nessus_scan[rule] == toml_scan[rule]:
-            return True
+            continue
         else:
             return False
 
+    return True
 
 def compare_targets(toml_scan, id):
     scan = describe_scan(id)
@@ -131,7 +133,7 @@ def update_gds_scans(toml_scan, id):
     update_scan(scan, id)
 
 
-def compare_scans(config, nessus_scans):
+def update_scans(config, nessus_scans):
     nessus_scan_names = [scan["name"] for scan in nessus_scans]
     toml_scans = get_scans_from_toml(config)
     for toml_scan in toml_scans:
@@ -139,35 +141,32 @@ def compare_scans(config, nessus_scans):
             print("New scan config found, creating...")
             create_gds_scans(config, toml_scan)
             continue
+
+        print(f"Scan {toml_scan['name']} already exists checking for changed config.")
+        nessus_scan = [
+            scan for scan in nessus_scans if scan["name"] == toml_scan["name"]
+        ][0]
+        compare_scans = [
+            compare_rrules(toml_scan, nessus_scan["rrules"]),
+            compare_targets(toml_scan, nessus_scan["id"]),
+            check_remaining_rules(nessus_scan, toml_scan, config),
+        ]
+        if all(compare_scans):
+            print("Scan already exists, skipping...")
         else:
-            print(f"Scan {toml_scan['name']} already exists checking for changed config.")
-            nessus_scan = [
-                scan for scan in nessus_scans if scan["name"] == toml_scan["name"]
-            ][0]
-            compare_scans = [
-                compare_rrules(toml_scan, nessus_scan["rrules"]),
-                compare_targets(toml_scan, nessus_scan["id"]),
-                check_remaining_rules(nessus_scan, toml_scan, config),
-            ]
-            if all(compare_scans):
-                print("Scan already exists, skipping...")
-            else:
-                id = nessus_scan["id"]
-                update_gds_scans(toml_scan, id)
+            id = nessus_scan["id"]
+            update_gds_scans(toml_scan, id)
 
 
 def check_scan():
-    if list_scans():
-        scan_list = list_scans()
-    else:
-        scan_list = []
+    scan_list = list_scans()
 
     config = load_scan_config()
     nessus_scans = scan_list["scans"]
     if not nessus_scans:
         create_all_gds_scans(config)
     else:
-        compare_scans(config, nessus_scans)
+        update_scans(config, nessus_scans)
 
 
 def main():
