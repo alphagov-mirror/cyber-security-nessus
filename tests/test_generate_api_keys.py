@@ -42,3 +42,9 @@ def test_put_param():
         response = '{"Tier":"Standard","Version":25}'
         assert cass.responses[0]["body"]["string"].decode("utf-8") == response
         assert cass.responses[0]["status"]["code"] == 200
+
+@vcr.use_cassette
+def test_get_nessus_status():
+    result = gak.get_nessus_status()
+    expected = {"code":200,"progress":None,"status":"ready"}
+    assert result == expected
