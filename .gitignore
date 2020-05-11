@@ -5,3 +5,5 @@ terraform/.terraform
 *.csv
 *.pytest_cache
 .vscode/
+.coverage
+htmlcov
