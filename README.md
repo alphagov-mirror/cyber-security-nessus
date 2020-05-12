@@ -18,7 +18,7 @@ This deploys to account `676218256630` in region `eu-west-2`
 ## Prerequisites
 Before working on this project, install pipenv and create an environment for this repo:
 ```
-brew install pipenv
+pip install pipenv
 cd cyber-security-nessus
 pipenv shell
 ```
