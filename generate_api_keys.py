@@ -77,10 +77,11 @@ def put_param(param, type):
 def get_nessus_status():
     try:
         server_status_url = "/server/status"
-        response = requests.get(get_public_url() + server_status_url, verify=False)
+        response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
         return status
-    except ConnectionError:
+        
+    except (ConnectionError, requests.exceptions.ConnectionError) as e:
         print("connection error")
         return {"status": "loading", "progress": "0"}
 
@@ -98,7 +99,7 @@ def main():
 
     nessus_timeout = time.time() + 60 * 60
     while True:
-        put_param(get_public_url(), type="public_base_url")
+        put_param(base_url(), type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
             put_keys()

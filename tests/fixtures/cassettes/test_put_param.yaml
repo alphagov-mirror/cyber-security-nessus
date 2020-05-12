@@ -1,8 +1,7 @@
 interactions:
 - request:
     body: '{"Name": "/nessus/access_key", "Description": "access_key for the Nessus
-      instance", "Value": "ACCESS_KEY",
-      "Overwrite": true, "Type": "SecureString"}'
+      instance", "Value": "ACCESS_KEY", "Overwrite": true, "Type": "SecureString"}'
     headers:
       Content-Length:
       - '203'
