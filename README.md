@@ -1,5 +1,5 @@
 # Cyber Security Nessus
-This repo holds the infrastructure to support cyber security's Nessus instance. Nessus is a vulnerability scanner which we have set up to scan specified government domains on a daily schedule. 
+This repo holds the infrastructure to support cyber security's Nessus instance. [Nessus](https://www.tenable.com/products/nessus) is a vulnerability scanner which we have set up to scan specified government domains on a daily schedule. 
 
 ## Architecture
 This infrastructure can broadly be broken down into the following steps:
@@ -22,6 +22,8 @@ brew install pipenv
 cd cyber-security-nessus
 pipenv shell
 ```
+
+This will install all dependencies listed in Pipfile.lock.
 
 ## Tests
 Tests are run as part of the concourse deployment, however if you want to run the tests manually, you need to use AWS credentials. The easiest was to do this is with aws-vault:
