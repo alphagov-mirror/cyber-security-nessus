@@ -25,6 +25,6 @@ variable "dependabot_lambda_timeout" {
 }
 
 variable "fqdn" {
-  type = string
+  type    = string
   default = "nessus.gds-cyber-security.digital"
 }
