@@ -32,6 +32,12 @@ Tests are run as part of the concourse deployment, however if you want to run th
   aws-vault exec {vulnerability-account} -- pipenv run pytest
   ```
 
+## Adding a new scan
+In order to schedule a new scan, you will need to add the scan details to [scan.toml](scan_config/scan.toml). Here you can
+configure scan schedule and domain. Information on how to do this can be found in this file. 
+
+This change is deployed by the [Concourse](https://cd.gds-reliability.engineering/teams/cybersecurity-tools/pipelines/nessus) pipeline on a merge to master.
+
 ## Resources
 
 - TODO [link to Nessus api docs when we have hostname]()
