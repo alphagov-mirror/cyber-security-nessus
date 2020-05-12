@@ -16,14 +16,14 @@ Merges to master will trigger a deploy in [Concourse](https://cd.gds-reliability
 This deploys to account `676218256630` in region `eu-west-2`
 
 ## Prerequisites
-Before working on this project, install pipenv and create an environment for this repo:
+Before contributing to this project for the first time, you will need to install pipenv and create an environment for this repo:
 ```
-pip install pipenv
+pip install pipenv --dev
 cd cyber-security-nessus
 pipenv shell
 ```
 
-This will install all dependencies listed in Pipfile.lock.
+This will install all dev dependencies listed in Pipfile.
 
 ## Tests
 Tests are run as part of the concourse deployment, however if you want to run the tests manually, you need to use AWS credentials. The easiest was to do this is with aws-vault:
