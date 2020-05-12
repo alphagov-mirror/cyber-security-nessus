@@ -115,6 +115,8 @@ resource "aws_subnet" "cyber-security-nessus-subnet" {
   }
 }
 
+# ALB requires two subnets in different AZs, so we create this
+# subnet just for it
 resource "aws_subnet" "cyber-security-nessus-subnet-b" {
   vpc_id                  = aws_vpc.cyber-security-nessus.id
   cidr_block              = "10.1.2.0/24"
