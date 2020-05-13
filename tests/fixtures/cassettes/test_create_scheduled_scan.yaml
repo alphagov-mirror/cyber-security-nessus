@@ -220,4 +220,60 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":60}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:42:27 GMT
+      x-amzn-RequestId:
+      - 6cd6bb04-05ba-4b9f-999c-422f64fe45f6
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":56}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:42:27 GMT
+      x-amzn-RequestId:
+      - 357c1f9d-cf3a-4dcb-8217-68d9ea129e04
+    status:
+      code: 200
+      message: OK
 version: 1

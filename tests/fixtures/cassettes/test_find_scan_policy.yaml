@@ -1,0 +1,221 @@
+interactions:
+- request:
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":59}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:23:02 GMT
+      x-amzn-RequestId:
+      - 33624b8e-e578-45be-a4d1-9b646c11dd2b
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":55}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:23:03 GMT
+      x-amzn-RequestId:
+      - f436a250-6c09-48eb-b4ea-a7ca76aa7b3d
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":59}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:24:47 GMT
+      x-amzn-RequestId:
+      - d625b38a-7622-4eed-b59c-f472d52c15e4
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":55}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:24:47 GMT
+      x-amzn-RequestId:
+      - dc53ac58-40fe-46f8-9b54-2cad8768b0ef
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":59}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:26:26 GMT
+      x-amzn-RequestId:
+      - 6ca01c77-fdf8-440d-9a8c-2271c2e37ef9
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":55}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 10:26:26 GMT
+      x-amzn-RequestId:
+      - 8ff84a5d-8d94-402f-99b3-7ac212ce509f
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+    method: GET
+    uri: https://localhost:8834/policies
+  response:
+    body:
+      string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325400,"creation_date":1589325400,"owner_id":1,"id":4},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325427,"creation_date":1589325427,"owner_id":1,"id":5},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_03","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327277,"creation_date":1589327277,"owner_id":1,"id":15},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_01","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327355,"creation_date":1589327355,"owner_id":1,"id":17},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_02","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589328198,"creation_date":1589328198,"owner_id":1,"id":19},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_04","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329651,"creation_date":1589329651,"owner_id":1,"id":23},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_05","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329825,"creation_date":1589329825,"owner_id":1,"id":27}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 13 May 2020 00:33:56 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '2492'
+    status:
+      code: 200
+      message: OK
+version: 1

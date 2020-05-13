@@ -9,6 +9,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 import schedule_scans as s
+from test_nessus import policy
 
 
 @vcr.use_cassette
