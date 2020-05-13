@@ -41,5 +41,5 @@ This change is deployed by the [Concourse](https://cd.gds-reliability.engineerin
 
 ## Resources
 
-- TODO [link to Nessus api docs when we have hostname]()
+- `TODO: link to Nessus api docs when we have hostname`
 - tests are mocked with [vcrpy](https://github.com/kevin1024/vcrpy)
