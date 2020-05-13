@@ -1,0 +1,223 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+    method: GET
+    uri: https://localhost:8834/nessus6.js
+  response:
+    body:
+      string: AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE
+    headers:
+      Cache-Control:
+      - must-revalidate
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/javascript
+      Date:
+      - Wed, 13 May 2020 00:34:44 GMT
+      ETag:
+      - f4eb641586fb37d28341e010a5ca2d89
+      Expect-CT:
+      - max-age=0
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '36'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/username","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '52'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/username","Type":"SecureString","Value":"/nessus/username","Version":1}}'
+    headers:
+      Content-Length:
+      - '212'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 00:34:52 GMT
+      x-amzn-RequestId:
+      - 96e8ea30-3e27-4daa-bafb-cb2bc1894eaf
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/password","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '52'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/password","Type":"SecureString","Value":"/nessus/password","Version":2}}'
+    headers:
+      Content-Length:
+      - '212'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 00:34:52 GMT
+      x-amzn-RequestId:
+      - c9a4b23a-3b2b-49c8-b34a-95e3ddf0f555
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"username":"/nessus/username","password":"/nessus/password"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '73'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.22.0
+    method: POST
+    uri: https://localhost:8834/session
+  response:
+    body:
+      string: '{"token":"token"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Length:
+      - '17'
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 13 May 2020 00:34:54 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","settings":{"name":"weekly
+      scan","enabled":1,"rrules":"FREQ=WEEKLY;INTERVAL=3;BYDAY=MO","policy_id":5,"starttime":"20200428T133000","timezone":"Europe/London","text_targets":"localhost","agent_group_id":[]}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '288'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.22.0
+    method: POST
+    uri: https://localhost:8834/scans
+  response:
+    body:
+      string: '{"scan":{"container_id":0,"uuid":"template-ac0b1ff3-2e04-84be-5827-aa203b94b8319656581e665e3ecf","name":"weekly
+        scan","description":null,"policy_id":5,"scanner_id":1,"emails":null,"attach_report":0,"attached_report_maximum_size":26214400,"attached_report_type":null,"sms":null,"enabled":1,"use_dashboard":0,"dashboard_file":null,"live_results":0,"scan_time_window":null,"custom_targets":"localhost","migrated":0,"starttime":"20200428T133000","rrules":"FREQ=WEEKLY;INTERVAL=3;BYDAY=MO","timezone":"Europe/London","notification_filters":null,"shared":0,"user_permissions":128,"default_permisssions":0,"owner":"bodofraggins","owner_id":1,"last_modification_date":1589330094,"creation_date":1589330094,"type":"public","id":34}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Length:
+      - '723'
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 13 May 2020 00:34:54 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

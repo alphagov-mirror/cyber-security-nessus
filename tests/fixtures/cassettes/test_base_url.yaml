@@ -1,9 +1,9 @@
 interactions:
 - request:
-    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
+    body: '{"Name":"/nessus/public_base_url","WithDecryption":true}'
     headers:
       Content-Length:
-      - '54'
+      - '59'
       Content-Type:
       - !!binary |
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
@@ -15,16 +15,16 @@ interactions:
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":125}}'
     headers:
       Content-Length:
-      - '217'
+      - '227'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
       - Wed, 13 May 2020 00:33:35 GMT
       x-amzn-RequestId:
-      - ce3618d4-4758-404e-b3d2-4b2e7fc15a5a
+      - e5dac02e-2024-435d-8658-556d72689b1a
     status:
       code: 200
       message: OK

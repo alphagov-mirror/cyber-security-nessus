@@ -52,6 +52,14 @@ def get_status_checks():
     return True
 
 
+def update_ssm_base_url():
+    """Update the `base_url` SSM parameter with the current instances
+    public IP"""
+    return put_param(
+        f"https://{get_ec2_param('PublicIpAddress')}:8834", "public_base_url"
+    )
+
+
 def put_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
@@ -60,15 +68,19 @@ def put_keys():
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]
     secret_key = keys["secretKey"]
-    put_param(access_key, type="access_key")
-    put_param(secret_key, type="secret_key")
+
+    out = [
+        put_param(access_key, name="access_key"),
+        put_param(secret_key, name="secret_key"),
+    ]
+    return out
 
 
-def put_param(param, type):
+def put_param(value, name):
     ssm_client().put_parameter(
-        Name=f"/nessus/{type}",
-        Description=f"{type} for the Nessus instance",
-        Value=f"{param}",
+        Name=f"/nessus/{name}",
+        Description=f"{name} for the Nessus instance",
+        Value=f"{value}",
         Overwrite=True,
         Type="SecureString",
     )
@@ -98,10 +110,11 @@ def main():
 
     nessus_timeout = time.time() + 60 * 60
     while True:
-        put_param(base_url(), "public_base_url")
+        update_ssm_base_url()
         status = get_nessus_status()
         if status["status"] == "ready":
             put_keys()
+
             break
         elif time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")

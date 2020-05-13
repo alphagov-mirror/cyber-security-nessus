@@ -3,8 +3,7 @@
 import os
 import sys
 import json
-
-# from pprint import pprint as p
+import re
 import hashlib
 
 import vcr
@@ -19,29 +18,29 @@ import nessus as n
 @vcr.use_cassette
 def test_get_param_from_ssm():
     param = n.get_param_from_ssm("access_key")
-    assert param == "ACCESS_KEY"
+    assert param
 
 
 @vcr.use_cassette
 def test_api_credentials():
     result = n.api_credentials()
-    expected = {"X-ApiKeys": "accessKey=ACCESS_KEY; secretKey=SECRET_KEY"}
-    assert result == expected
+    assert "X-ApiKeys" in result
+    assert "accessKey=" in result["X-ApiKeys"]
+    assert "secretKey=" in result["X-ApiKeys"]
 
 
 @vcr.use_cassette
-def test_prepare_export():
-    result = n.prepare_export(id=5)
-    expected = {"token": "token", "file": 1111111}
-    assert result == expected
+def test_base_url():
+    result = n.base_url()
+    assert "https://" in result
+    assert "8834" in result
 
 
-@vcr.use_cassette
-def test_download_report():
-    result = n.download_report({"token": "TOKEN"})
-    checksum = hashlib.sha256(result.encode()).hexdigest()
-    expected = "f187c548fa8e20b44530def0e5cd7f3a35c739cb09a3868ae70d82bd65d23560"
-    assert checksum == expected
+# @vcr.use_cassette
+# def test_prepare_export(scan_id):
+#     result = n.prepare_export(id=scan_id)
+#     assert "token" in result
+#     assert "file" in result
 
 
 @vcr.use_cassette
@@ -52,140 +51,124 @@ def test_get():
 
 
 @vcr.use_cassette
-def test_post():
-    result = n.prepare_export(id=5)
-    expected = {"token": "token", "file": 1111111}
-    assert result == expected
-
-
-@vcr.use_cassette
 def test_get_token():
     result = n.get_token()
-    response = {"token": "token"}
-    expected = {"X-Cookie": f"token={response['token']}"}
-    assert result == expected
+    assert "X-Cookie" in result
+    assert "token=" in result["X-Cookie"]
 
 
 @vcr.use_cassette
 def test_get_x_api_token():
     result = n.get_x_api_token()
-    expected = "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3"
-    assert result == expected
+    assert re.match(
+        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", result
+    )
 
 
 @vcr.use_cassette
 def test_manager_credentials():
     result = n.manager_credentials()
-    expected = {
-        "X-API-Token": "B38F7A9D-6DF8-5967-8DEA-03D1F03684E3",
-        "X-Cookie": "token=token",
-    }
-    assert result == expected
+    assert re.match(
+        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})",
+        result["X-API-Token"],
+    )
+    assert re.match(r"token=.*", result["X-Cookie"])
 
 
 @vcr.use_cassette
 def test_list_policies():
     result = n.list_policies()
-    expected = {
-        "policies": [
-            {
-                "is_scap": 0,
-                "has_credentials": 0,
-                "no_target": "false",
-                "plugin_filters": None,
-                "template_uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101",
-                "description": "\n",
-                "name": "standard_scan",
-                "owner": "USERNAME",
-                "visibility": "private",
-                "shared": 0,
-                "user_permissions": 128,
-                "last_modification_date": 1587999905,
-                "creation_date": 1587999905,
-                "owner_id": 1,
-                "id": 10,
-            }
-        ]
-    }
-    assert result == expected
-
-
-# def test_create_policy():
-#     with open("../scan_config/standard_scan_template.json", "r") as f:
-#         policy = json.load(f)
-#     result = n.create_policy(policy)
-#     expected = ""
-#     assert result == expected
-
-
-# def test_policy_details():
-#     result = n.policy_details(id=10)
-#     expected = ""
-#     assert result == expected
+    assert "policies" in result
 
 
 @vcr.use_cassette
 def test_list_scans():
     result = n.list_scans()
-    expected = {
-        "folders": [
-            {
-                "unread_count": None,
-                "custom": 0,
-                "default_tag": 0,
-                "type": "trash",
-                "name": "Trash",
-                "id": 2,
-            },
-            {
-                "unread_count": 0,
-                "custom": 0,
-                "default_tag": 1,
-                "type": "main",
-                "name": "My Scans",
-                "id": 3,
-            },
-        ],
-        "scans": [
-            {
-                "folder_id": 3,
-                "type": "local",
-                "read": True,
-                "last_modification_date": 1588095794,
-                "creation_date": 1588095592,
-                "status": "completed",
-                "uuid": "cc09a762-aa73-cbbf-fa16-7c240387613a6790f76f193da062",
-                "shared": False,
-                "user_permissions": 128,
-                "owner": "USERNAME",
-                "timezone": None,
-                "rrules": None,
-                "starttime": None,
-                "enabled": False,
-                "control": True,
-                "live_results": 0,
-                "name": "localhost",
-                "id": 52,
-            }
-        ],
-        "timestamp": 1588332512,
+    assert "folders" in result
+    assert "scans" in result
+
+
+@vcr.use_cassette
+def test_policy_details(policy):
+    result = n.policy_details(policy["id"])
+    assert "settings" in result
+
+
+@vcr.use_cassette
+def test_create_scan(policy):
+    scan = {
+        "settings": {
+            "enabled": 1,
+            "name": "NAME",
+            "policy_id": policy["id"],
+            "rrules": "FREQ=WEEKLY;INTERVAL=000;BYDAY=MO",
+            "starttime": "20200428T133000",
+            "text_targets": "WWW.TEST.COM",
+            "timezone": "Europe/London",
+        },
+        "uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101",
     }
-    assert result == expected
+    expected = {
+        "enabled": 1,
+        "name": "NAME",
+        "policy_id": policy["id"],
+        "rrules": "FREQ=WEEKLY;INTERVAL=000;BYDAY=MO",
+        "starttime": "20200428T133000",
+        "custom_targets": "WWW.TEST.COM",
+        "timezone": "Europe/London",
+    }
+    new_scan = n.create_scan(scan)
+    for setting, value in expected.items():
+        assert new_scan["scan"][setting] == value
 
 
-# def test_create_scan():
-#     result = n.create_scan(scan)
-#     expected = ""
-#     assert result == expected
+# @vcr.use_cassette
+# def test_update_scan(clean_cache, scan_id, policy_id):
+#     scan = {
+#         "settings": {
+#             "agent_group_id": [],
+#             "enabled": 1,
+#             "name": "NAME1",
+#             "policy_id": policy_id,
+#             "rrules": "FREQ=WEEKLY;INTERVAL=000;BYDAY=MO",
+#             "starttime": "20200428T111000",
+#             "text_targets": "WWW.TESTOTHER.COM",
+#             "timezone": "Europe/London",
+#         },
+#         "uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101",
+#     }
+
+#     updated_scan = n.update_scan(scan, scan_id)
+
+#     expected = {
+#         "enabled": 1,
+#         "name": "NAME1",
+#         "policy_id": policy_id,
+#         "rrules": "FREQ=WEEKLY;INTERVAL=000;BYDAY=MO",
+#         "starttime": "20200428T111000",
+#         "custom_targets": "WWW.TESTOTHER.COM",
+#         "timezone": "Europe/London",
+#     }
+#     for setting, value in expected.items():
+#         assert updated_scan[setting] == value
 
 
+# @vcr.use_cassette
+# def test_download_report():
+#     result = n.download_report('token')
+#     checksum = hashlib.sha256(result.encode()).hexdigest()
+#     expected = "11ee62d6261141e99e0a9ccae253e6d2008dff26e172cb73da0646b53ae941eb"
+#     assert checksum == expected
+
+
+@vcr.use_cassette
+def test_list_policy_templates():
+    result = n.list_policy_templates()
+    assert "templates" in result
+
+
+# @vcr.use_cassette
 # def test_describe_scan():
-#     result = n.describe_scan(id)
-#     expected = ""
-#     assert result == expected
-
-
-# def test_list_policy_templates():
-#     result = n.list_policy_templates()
-#     expected = ""
-#     assert result == expected
+#     result = n.describe_scan(1308)
+#     assert "history" in result
+#     assert "info" in result

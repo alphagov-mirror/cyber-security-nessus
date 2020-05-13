@@ -5,12 +5,19 @@ import boto3
 import requests
 
 
+def verify_ssl():
+    return False
+
+
 def get(path, text=False):
+    """Make a GET request to Nessus"""
     if text:
-        return requests.get(base_url() + path, headers=api_credentials(), verify=False,)
+        return requests.get(
+            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
+        )
     else:
         return requests.get(
-            base_url() + path, headers=api_credentials(), verify=False,
+            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
         ).json()
 
 
@@ -19,7 +26,7 @@ def post(path, payload, headers=None):
         base_url() + path,
         headers=headers if headers else api_credentials(),
         json=payload,
-        verify=False,
+        verify=verify_ssl(),
     ).json()
 
 
@@ -28,7 +35,7 @@ def put(path, payload, headers=None):
         base_url() + path,
         headers=headers if headers else api_credentials(),
         json=payload,
-        verify=False,
+        verify=verify_ssl(),
     ).json()
 
 
@@ -115,13 +122,9 @@ def prepare_export(id):
     return post(f"/scans/{id}/export", {"format": "csv"})
 
 
-def schedule_scans(custom_headers, config_file):
-    return post("/scans/", {"format": "csv"})
-
-
 def list_policy_templates():
     return get("/editor/policy/templates")
 
 
-def download_report(export_token):
-    return get(f"/tokens/{export_token['token']}/download", text=True).text
+def download_report(token):
+    return get(f"/tokens/{token}/download", text=True).text
