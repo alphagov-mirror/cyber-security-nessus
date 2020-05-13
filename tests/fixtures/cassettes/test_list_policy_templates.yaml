@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: '{"Name": "/nessus/access_key", "WithDecryption": true}'
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
     headers:
       Content-Length:
       - '54'
@@ -9,27 +9,27 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjgtZ2VuZXJpYyBCb3RvY29y
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
         ZS8xLjE1LjM3
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":25}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
     headers:
       Content-Length:
-      - '278'
+      - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Tue, 05 May 2020 01:10:58 GMT
+      - Wed, 13 May 2020 00:34:07 GMT
       x-amzn-RequestId:
-      - 03290adf-5633-4298-a0b4-5eac1d8e710e
+      - 39e98706-62d4-43b7-bb5b-8c086ba9dd9f
     status:
       code: 200
       message: OK
 - request:
-    body: '{"Name": "/nessus/secret_key", "WithDecryption": true}'
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
     headers:
       Content-Length:
       - '54'
@@ -38,73 +38,22 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjgtZ2VuZXJpYyBCb3RvY29y
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
         ZS8xLjE1LjM3
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":25}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":52}}'
     headers:
       Content-Length:
-      - '278'
+      - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Tue, 05 May 2020 01:10:58 GMT
+      - Wed, 13 May 2020 00:34:07 GMT
       x-amzn-RequestId:
-      - 34559b79-587d-43e1-8e44-11d80e524e35
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python-requests/2.22.0
-    method: GET
-    uri: https://localhost:8834/policies
-  response:
-    body:
-      string: '{"policies":[]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Connection:
-      - close
-      Content-Security-Policy:
-      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
-        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
-        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
-        'none'
-      Content-Type:
-      - application/json
-      Date:
-      - Tue, 05 May 2020 01:10:59 GMT
-      Expect-CT:
-      - max-age=0
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - NessusWWW
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - DENY
-      X-XSS-Protection:
-      - 1; mode=block
-      content-length:
-      - '6063'
+      - abfded1d-f37f-465d-bdb0-04e5db2200f9
     status:
       code: 200
       message: OK
@@ -185,7 +134,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 May 2020 01:10:59 GMT
+      - Wed, 13 May 2020 00:34:08 GMT
       Expect-CT:
       - max-age=0
       Expires:
@@ -204,148 +153,6 @@ interactions:
       - 1; mode=block
       content-length:
       - '114740'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"plugins": {"SMTP problems": {"status": "enabled"}, "Backdoors": {"status":
-      "enabled"}, "Ubuntu Local Security Checks": {"status": "enabled"}, "Gentoo Local
-      Security Checks": {"status": "enabled"}, "Oracle Linux Local Security Checks":
-      {"status": "enabled"}, "RPC": {"status": "enabled"}, "Gain a shell remotely":
-      {"status": "enabled"}, "Service detection": {"status": "enabled"}, "DNS": {"status":
-      "enabled"}, "Mandriva Local Security Checks": {"status": "enabled"}, "Junos
-      Local Security Checks": {"status": "enabled"}, "Misc.": {"status": "enabled"},
-      "FTP": {"status": "enabled"}, "Slackware Local Security Checks": {"status":
-      "enabled"}, "Default Unix Accounts": {"status": "enabled"}, "AIX Local Security
-      Checks": {"status": "enabled"}, "SNMP": {"status": "enabled"}, "OracleVM Local
-      Security Checks": {"status": "enabled"}, "CGI abuses": {"status": "enabled"},
-      "Settings": {"status": "enabled"}, "CISCO": {"status": "enabled"}, "Firewalls":
-      {"status": "enabled"}, "Databases": {"status": "enabled"}, "Debian Local Security
-      Checks": {"status": "enabled"}, "Fedora Local Security Checks": {"status": "enabled"},
-      "Netware": {"status": "enabled"}, "Huawei Local Security Checks": {"status":
-      "enabled"}, "Windows : User management": {"status": "enabled"}, "VMware ESX
-      Local Security Checks": {"status": "enabled"}, "Virtuozzo Local Security Checks":
-      {"status": "enabled"}, "CentOS Local Security Checks": {"status": "enabled"},
-      "Peer-To-Peer File Sharing": {"status": "enabled"}, "NewStart CGSL Local Security
-      Checks": {"status": "enabled"}, "General": {"status": "enabled"}, "Policy Compliance":
-      {"status": "enabled"}, "Amazon Linux Local Security Checks": {"status": "enabled"},
-      "Solaris Local Security Checks": {"status": "enabled"}, "F5 Networks Local Security
-      Checks": {"status": "enabled"}, "Denial of Service": {"status": "disabled"},
-      "Windows : Microsoft Bulletins": {"status": "enabled"}, "SuSE Local Security
-      Checks": {"status": "enabled"}, "Palo Alto Local Security Checks": {"status":
-      "enabled"}, "Red Hat Local Security Checks": {"status": "enabled"}, "PhotonOS
-      Local Security Checks": {"status": "enabled"}, "HP-UX Local Security Checks":
-      {"status": "enabled"}, "CGI abuses : XSS": {"status": "enabled"}, "FreeBSD Local
-      Security Checks": {"status": "enabled"}, "Windows": {"status": "enabled"}, "Scientific
-      Linux Local Security Checks": {"status": "enabled"}, "MacOS X Local Security
-      Checks": {"status": "enabled"}, "Web Servers": {"status": "enabled"}, "SCADA":
-      {"status": "enabled"}}, "settings": {"name": "standard_scan", "wol_mac_addresses":
-      "", "samr_enumeration": "yes", "tcp_ping_dest_ports": "built-in", "netapp_offline_configs":
-      "", "thorough_tests": "no", "report_superseded_patches": "no", "smtp_domain":
-      "example.com", "webcrawl_exclude_regex": "/server_privileges\\.php|logout",
-      "enable_plugin_list": "no", "custom_find_filesystem_exclusions": "", "snmp_port":
-      "161", "unixfileanalysis_disable_xdev": "no", "icmp_ping": "yes", "custom_find_filepath_exclusions":
-      "", "region_hkg_pref_name": "yes", "http_login_max_redir": "0", "ssl_prob_ports":
-      "Known SSL ports", "stop_scan_on_disconnect": "yes", "description": "\n", "wmi_netstat_scanner":
-      "yes", "never_send_win_creds_in_the_clear": "yes", "report_paranoia": "Normal",
-      "test_embedded_web_servers": "yes", "cisco_config_to_audit": "Saved/(show config)",
-      "microsoft_azure_subscriptions_ids": "", "udp_scanner": "no", "smtp_to": "postmaster@[AUTO_REPLACED_IP]",
-      "try_all_http_methods": "yes", "icmp_unreach_means_host_down": "no", "scan_network_printers":
-      "no", "fortios_offline_configs": "", "enable_plugin_debugging": "no", "syn_firewall_detection":
-      "Automatic (normal)", "sonicos_offline_configs": "", "region_dfw_pref_name":
-      "yes", "icmp_ping_retries": "2", "generic_webapp_tests_max_time": "5", "region_ord_pref_name":
-      "yes", "scan_netware_hosts": "no", "max_simult_tcp_sessions_per_scan": "", "network_receive_timeout":
-      "5", "adtran_aos_offline_configs": "", "tcp_ping": "yes", "tcp_scanner": "yes",
-      "watchguard_offline_configs": "", "additional_snmp_port1": "161", "fast_network_discovery":
-      "no", "unixfileanalysis_exclude_paths": "", "arp_ping": "yes", "start_cotp_tsap":
-      "8", "apm_force_updates": "yes", "silent_dependencies": "yes", "generic_ssh_escalation_success":
-      "", "log_whole_attack": "no", "enable_admin_shares": "no", "scan_malware": "no",
-      "provided_creds_only": "no", "smtp_from": "nobody@example.com", "rid_brute_forcing":
-      "no", "test_local_nessus_host": "yes", "region_syd_pref_name": "yes", "unixfileanalysis_max_size":
-      "", "brocade_offline_configs": "", "scan_ot_devices": "no", "unix_docker_scan_scope":
-      "host", "abort_generic_webapp_if_login_fails": "no", "http_param_pollution":
-      "yes", "region_lon_pref_name": "yes", "unscanned_closed": "no", "additional_snmp_port2":
-      "161", "patch_audit_over_telnet": "no", "extremeos_offline_configs": "", "arista_offline_configs":
-      "", "request_windows_domain_info": "no", "av_grace_period": "0", "bluecoat_proxysg_offline_configs":
-      "", "url_for_rfi": "http://rfi.nessus.org/rfi.txt", "stop_cotp_tsap": "8", "ssh_netstat_scanner":
-      "yes", "svc_detection_on_all_ports": "yes", "junos_offline_configs": "", "include_kb":
-      "use_scanner_default", "only_portscan_if_enum_failed": "yes", "tcp_firewall_detection":
-      "Do not detect RST rate limitation (soft)", "ssh_port": "22", "unixfileanalysis_include_paths":
-      "", "max_checks_per_host": "5", "ssh_client_banner": "OpenSSH_5.0", "procurve_offline_configs":
-      "", "attempt_least_privilege": "no", "reverse_lookup": "no", "cisco_offline_configs":
-      "", "log_live_hosts": "no", "procurve_config_to_audit": "Saved/(show config)",
-      "apm_update_timeout": "5", "dont_use_ntlmv1": "yes", "aws_ui_region_type": "Rest
-      of the World", "generic_ssh_escalation_command": "", "max_hosts_per_scan": "100",
-      "generic_webapp_tests": "yes", "test_default_oracle_accounts": "no", "cert_expiry_warning_days":
-      "60", "unixfileanalysis_max_depth": "", "verify_open_ports": "no", "checkpoint_gaia_offline_configs":
-      "", "alcatel_timos_offline_configs": "", "max_simult_tcp_sessions_per_host":
-      "", "wol_wait_time": "5", "modbus_end_reg": "16", "slice_network_addresses":
-      "no", "report_verbosity": "Normal", "huawei_offline_configs": "", "patch_audit_over_rexec":
-      "no", "webcrawler_start_page": "/", "cloud_web_screenshots": "yes", "unixfileanalysis_file_extensions":
-      "", "ping_the_remote_host": "yes", "user_agent_string": "Mozilla/4.0 (compatible;
-      MSIE 8.0; Windows NT 5.1; Trident/4.0)", "combo_arg_values": "some pairs", "patch_audit_over_rsh":
-      "no", "enumerate_all_ciphers": "yes", "allow_post_scan_editing": "yes", "http_login_invert_auth_regex":
-      "no", "wmi_query": "yes", "aws_use_https": "yes", "dell_f10_offline_configs":
-      "", "safe_checks": "yes", "detect_ssl": "yes", "http_login_auth_regex_on_headers":
-      "no", "display_unreachable_hosts": "no", "adsi_query": "yes", "udp_ping": "no",
-      "webcrawler_max_pages": "1000", "syn_scanner": "yes", "scan_webapps": "yes",
-      "modbus_start_reg": "0", "http_login_method": "POST", "portscan_range": "default",
-      "fireeye_offline_configs": "", "webcrawl_follow_dynamic_pages": "no", "http_reauth_delay":
-      0, "snmp_scanner": "yes", "additional_snmp_port3": "161", "reduce_connections_on_congestion":
-      "yes", "webcrawl_max_depth": "6", "http_login_auth_regex_nocase": "no", "check_crl":
-      "no", "region_iad_pref_name": "yes", "ssh_known_hosts": "", "start_remote_registry":
-      "no", "unixfileanalysis_max_cumulative_size": "", "audit_trail": "use_scanner_default",
-      "stop_at_first_flaw": "look for all flaws (slower)"}, "uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101"}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '7560'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - python-requests/2.22.0
-    method: POST
-    uri: https://localhost:8834/policies
-  response:
-    body:
-      string: '{"policy_id":84,"policy_name":"standard_scan_17"}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Connection:
-      - close
-      Content-Length:
-      - '49'
-      Content-Security-Policy:
-      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
-        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
-        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
-        'none'
-      Content-Type:
-      - application/json
-      Date:
-      - Tue, 05 May 2020 01:11:00 GMT
-      Expect-CT:
-      - max-age=0
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - NessusWWW
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - DENY
-      X-XSS-Protection:
-      - 1; mode=block
     status:
       code: 200
       message: OK

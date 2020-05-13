@@ -1,29 +1,59 @@
 interactions:
 - request:
-    body: '{"Name": "/nessus/public_base_url", "WithDecryption": true}'
+    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
     headers:
       Content-Length:
-      - '59'
+      - '54'
       Content-Type:
       - !!binary |
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi40NyBQeXRob24vMy43LjQgRGFyd2luLzE4LjcuMCBCb3RvY29yZS8xLjE1LjQ3
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":64}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
     headers:
       Content-Length:
-      - '250'
+      - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 29 Apr 2020 15:40:02 GMT
+      - Wed, 13 May 2020 00:33:35 GMT
       x-amzn-RequestId:
-      - da354713-955e-4f51-864c-2399d0b3fcf1
+      - 76d2a3d6-1eac-4f7f-8b27-c988e5f96c3a
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
+    headers:
+      Content-Length:
+      - '54'
+      Content-Type:
+      - !!binary |
+        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
+      User-Agent:
+      - !!binary |
+        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
+        ZS8xLjE1LjM3
+    method: POST
+    uri: https://ssm.eu-west-2.amazonaws.com/
+  response:
+    body:
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":52}}'
+    headers:
+      Content-Length:
+      - '217'
+      Content-Type:
+      - application/x-amz-json-1.1
+      Date:
+      - Wed, 13 May 2020 00:33:35 GMT
+      x-amzn-RequestId:
+      - 96ef6a7b-05f8-4913-b455-9e64b838849e
     status:
       code: 200
       message: OK
@@ -37,7 +67,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - python-requests/2.22.0
     method: GET
     uri: https://localhost:8834/server/status
   response:
@@ -49,7 +79,7 @@ interactions:
       Connection:
       - close
       Content-Length:
-      - '44'
+      - '45'
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
@@ -58,7 +88,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Apr 2020 15:40:03 GMT
+      - Wed, 13 May 2020 00:33:35 GMT
       Expect-CT:
       - max-age=0
       Expires:
