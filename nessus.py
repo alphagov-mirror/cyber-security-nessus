@@ -3,10 +3,16 @@ from functools import lru_cache
 
 import boto3
 import requests
+import validators
 
 
 def verify_ssl():
-    return False
+    is_domain = validators.domain(base_url())
+
+    if is_domain:
+        return True
+    else:
+        return False
 
 
 def get(path, text=False):
