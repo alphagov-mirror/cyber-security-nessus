@@ -1,5 +1,6 @@
 import json
 import time
+import os
 from functools import lru_cache
 
 import boto3
@@ -29,6 +30,12 @@ def get_ec2_param(param):
             }
         ]
     )["Reservations"][0]["Instances"][0][f"{param}"]
+
+
+def get_fqdn():
+    default_domain = "nessus.gds-cyber-security.digital"
+    fqdn = f"https://{os.environ.get('fqdn', default_domain)}"
+    return fqdn
 
 
 def get_status_checks():
@@ -99,7 +106,7 @@ def main():
 
     nessus_timeout = time.time() + 60 * 60
     while True:
-        put_param(base_url(), type="public_base_url")
+        put_param(get_fqdn(), type="public_base_url")
         status = get_nessus_status()
         if status["status"] == "ready":
             put_keys()
