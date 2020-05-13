@@ -4,13 +4,13 @@ from functools import lru_cache
 import toml
 
 
-import nessus as n
+import nessus as ness_func
 
 
 @lru_cache(maxsize=1)
 def find_scan_policy(name="standard_scan"):
     """Find policy ID from policy Name"""
-    for policy in n.list_policies()["policies"]:
+    for policy in ness_func.list_policies()["policies"]:
         if policy["name"] == name:
             return policy
 
@@ -22,7 +22,7 @@ def create_scan_policy(policy_file="scan_config/standard_scan_template.json"):
 
     policy["uuid"] = advanced_dynamic_policy_template_uuid()
 
-    return n.create_policy(policy)
+    return ness_func.create_policy(policy)
 
 
 def gds_scan_policy_id():
@@ -35,7 +35,7 @@ def advanced_dynamic_policy_template_uuid():
     """Find the UUID of the builtin `Advanced Dynamic Scan` template"""
     return next(
         template["uuid"]
-        for template in n.list_policy_templates()["templates"]
+        for template in ness_func.list_policy_templates()["templates"]
         if template["title"] == "Advanced Dynamic Scan"
     )
 
@@ -62,12 +62,12 @@ def create_scan_config(scan, policy_id):
 
 def create_all_scans(config, policy_id):
     return [
-        n.create_scan(create_scan_config(scan, policy_id)) for scan in config.values()
+        ness_func.create_scan(create_scan_config(scan, policy_id)) for scan in config.values()
     ]
 
 
 def create_scan(toml_scan, policy_id):
-    return n.create_scan(create_scan_config(toml_scan, policy_id))
+    return ness_func.create_scan(create_scan_config(toml_scan, policy_id))
 
 
 def get_config_by_name(config, name):
@@ -100,7 +100,7 @@ def check_remaining_rules(nessus_scan, toml_scan):
 
 
 def compare_targets(toml_scan, id):
-    scan = n.describe_scan(id)
+    scan = ness_func.describe_scan(id)
     try:
         scan_targets = scan["info"]["targets"].split(",")
         toml_targets = toml_scan["text_targets"].split(",")
@@ -112,7 +112,7 @@ def compare_targets(toml_scan, id):
 
 def update_gds_scans(toml_scan, id):
     scan = create_scan_config(toml_scan)
-    n.update_scan(scan, id)
+    ness_func.update_scan(scan, id)
 
 
 def update_scans(config, nessus_scans):
@@ -141,7 +141,7 @@ def update_scans(config, nessus_scans):
 
 
 def check_scan():
-    scan_list = n.list_scans()
+    scan_list = ness_func.list_scans()
 
     config = load_scan_config()
     nessus_scans = scan_list["scans"]

@@ -20,8 +20,8 @@ currentdir = os.path.dirname(__file__)
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
-import nessus as n
-import schedule_scans as s
+import nessus as ness_func
+import schedule_scans as schedule
 
 import traceback
 
@@ -142,15 +142,15 @@ vcr.use_cassette = vcr.default_vcr.use_cassette
 @pytest.fixture(autouse=True)
 def clean_cache():
     """Clear the lru_caches"""
-    n.api_credentials.cache_clear()
-    n.get_param_from_ssm.cache_clear()
-    n.get_token.cache_clear()
-    n.get_x_api_token.cache_clear()
-    n.manager_credentials.cache_clear()
-    n.password.cache_clear()
-    n.username.cache_clear()
-    s.find_scan_policy.cache_clear()
-    s.create_scan_policy.cache_clear()
+    ness_func.api_credentials.cache_clear()
+    ness_func.get_param_from_ssm.cache_clear()
+    ness_func.get_token.cache_clear()
+    ness_func.get_x_api_token.cache_clear()
+    ness_func.manager_credentials.cache_clear()
+    ness_func.password.cache_clear()
+    ness_func.username.cache_clear()
+    schedule.find_scan_policy.cache_clear()
+    schedule.create_scan_policy.cache_clear()
 
 
 # Helper functions for working with the `!!binary` strings in VCR cassettes
@@ -175,10 +175,10 @@ def policy():
     The data formats returned by `find` and `create` are different.
     """
 
-    policy = s.find_scan_policy("testing_scan")
+    policy = schedule.find_scan_policy("testing_scan")
     if policy:
         return policy
 
-    s.create_scan_policy("tests/fixtures/test_scan_template.json")
+    schedule.create_scan_policy("tests/fixtures/test_scan_template.json")
 
-    return s.find_scan_policy("testing_scan")
+    return schedule.find_scan_policy("testing_scan")
