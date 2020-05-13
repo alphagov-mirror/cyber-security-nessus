@@ -32,6 +32,7 @@ def test_get_status_checks():
 #     assert result == response
 
 
+
 # def test_put_param():
 #     with vcr.use_cassette("tests/fixtures/cassettes/test_put_param.yaml") as cass:
 #         access_key = "ACCESS_KEY"
@@ -39,3 +40,17 @@ def test_get_status_checks():
 #         response = '{"Tier":"Standard","Version":25}'
 #         assert cass.responses[0]["body"]["string"].decode("utf-8") == response
 #         assert cass.responses[0]["status"]["code"] == 200
+
+# def test_put_param():
+#     with vcr.use_cassette("tests/fixtures/cassettes/test_put_param.yaml") as cass:
+#         access_key = "ACCESS_KEY"
+#         gak.put_param(access_key, type="access_key")
+#         response = '{"Tier":"Standard","Version":25}'
+#         assert cass.responses[0]["body"]["string"].decode("utf-8") == response
+#         assert cass.responses[0]["status"]["code"] == 200
+
+# @vcr.use_cassette
+# def test_get_nessus_status():
+#     result = gak.get_nessus_status()
+#     expected = {"code":200,"progress":None,"status":"ready"}
+#     assert result == expected
