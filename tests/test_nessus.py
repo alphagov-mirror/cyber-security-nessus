@@ -88,6 +88,7 @@ def test_list_scans():
     assert "folders" in result
     assert "scans" in result
 
+
 @pytest.fixture
 def policy():
     return {
@@ -107,6 +108,7 @@ def policy():
         "owner_id": 1,
         "id": 5,
     }
+
 
 @vcr.use_cassette
 def test_policy_details(policy):

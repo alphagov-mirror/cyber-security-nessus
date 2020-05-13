@@ -156,7 +156,10 @@ def test_create_scheduled_scan(config_scan, policy):
 
 def test_compare_rrules(config_scan):
     assert schedule.compare_rrules(config_scan, schedule.config_rrules(config_scan))
-    assert not schedule.compare_rrules(config_scan, schedule.config_rrules(config_scan) + "foo")
+    assert not schedule.compare_rrules(
+        config_scan, schedule.config_rrules(config_scan) + "foo"
+    )
+
 
 def test_check_remaining_rules(config):
     config = list(config.values())

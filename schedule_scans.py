@@ -62,7 +62,8 @@ def create_scan_config(scan, policy_id):
 
 def create_all_scans(config, policy_id):
     return [
-        ness_func.create_scan(create_scan_config(scan, policy_id)) for scan in config.values()
+        ness_func.create_scan(create_scan_config(scan, policy_id))
+        for scan in config.values()
     ]
 
 

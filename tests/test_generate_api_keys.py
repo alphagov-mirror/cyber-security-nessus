@@ -32,7 +32,6 @@ def test_get_status_checks():
 #     assert result == response
 
 
-
 # def test_put_param():
 #     with vcr.use_cassette("tests/fixtures/cassettes/test_put_param.yaml") as cass:
 #         access_key = "ACCESS_KEY"
