@@ -33,6 +33,13 @@ resource "aws_security_group" "nessus-sg" {
     cidr_blocks = local.gds-ips
   }
 
+  ingress {
+    from_port       = 8834
+    to_port         = 8834
+    protocol        = "tcp"
+    security_groups = [aws_security_group.nessus-alb-sg.id]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -42,6 +49,38 @@ resource "aws_security_group" "nessus-sg" {
 
   tags = {
     Name      = "Nessus Scanning Instance"
+    ManagedBy = "terraform"
+  }
+}
+
+resource "aws_security_group" "nessus-alb-sg" {
+  name        = "nessus-alb-sg"
+  description = "ALB Security Group for Nessus"
+  vpc_id      = aws_vpc.cyber-security-nessus.id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = local.gds-ips
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = local.gds-ips
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name      = "ALB for Nessus Scanning Instance"
     ManagedBy = "terraform"
   }
 }
@@ -76,6 +115,20 @@ resource "aws_subnet" "cyber-security-nessus-subnet" {
   }
 }
 
+# ALB requires two subnets in different AZs, so we create this
+# subnet just for it
+resource "aws_subnet" "cyber-security-nessus-subnet-b" {
+  vpc_id                  = aws_vpc.cyber-security-nessus.id
+  cidr_block              = "10.1.2.0/24"
+  availability_zone       = "eu-west-2b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name      = "Cyber Security Nessus Subnet in London AZ b"
+    ManagedBy = "terraform"
+  }
+}
+
 resource "aws_route_table" "cyber-security-nessus-route-table" {
   vpc_id = aws_vpc.cyber-security-nessus.id
 
@@ -92,5 +145,10 @@ resource "aws_route_table" "cyber-security-nessus-route-table" {
 
 resource "aws_route_table_association" "cyber-security-nessus-association" {
   subnet_id      = aws_subnet.cyber-security-nessus-subnet.id
+  route_table_id = aws_route_table.cyber-security-nessus-route-table.id
+}
+
+resource "aws_route_table_association" "cyber-security-nessus-association-b" {
+  subnet_id      = aws_subnet.cyber-security-nessus-subnet-b.id
   route_table_id = aws_route_table.cyber-security-nessus-route-table.id
 }
