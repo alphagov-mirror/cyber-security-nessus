@@ -7,6 +7,7 @@ import re
 import hashlib
 
 import vcr
+import pytest
 
 currentdir = os.path.dirname(__file__)
 parentdir = os.path.dirname(currentdir)
@@ -87,6 +88,25 @@ def test_list_scans():
     assert "folders" in result
     assert "scans" in result
 
+@pytest.fixture
+def policy():
+    return {
+        "is_scap": 0,
+        "has_credentials": 0,
+        "no_target": "false",
+        "plugin_filters": None,
+        "template_uuid": "939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101",
+        "description": "\n",
+        "name": "testing_scan",
+        "owner": "bodofraggins",
+        "visibility": "private",
+        "shared": 0,
+        "user_permissions": 128,
+        "last_modification_date": 1589325427,
+        "creation_date": 1589325427,
+        "owner_id": 1,
+        "id": 5,
+    }
 
 @vcr.use_cassette
 def test_policy_details(policy):
