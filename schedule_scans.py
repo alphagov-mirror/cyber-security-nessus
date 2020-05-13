@@ -122,22 +122,21 @@ def update_scans(config, nessus_scans):
         if toml_scan["name"] not in nessus_scan_names:
             print("New scan config found, creating...")
             create_scan(toml_scan, gds_scan_policy_id())
-            continue
-
-        print(f"Scan {toml_scan['name']} already exists checking for changed config.")
-        nessus_scan = [
-            scan for scan in nessus_scans if scan["name"] == toml_scan["name"]
-        ][0]
-        compare_scans = [
-            compare_rrules(toml_scan, nessus_scan["rrules"]),
-            compare_targets(toml_scan, nessus_scan["id"]),
-            check_remaining_rules(nessus_scan, toml_scan),
-        ]
-        if all(compare_scans):
-            print("Scan already exists, skipping...")
         else:
-            id = nessus_scan["id"]
-            update_gds_scans(toml_scan, id)
+            print(f"Scan {toml_scan['name']} already exists checking for changed config.")
+            nessus_scan = [
+                scan for scan in nessus_scans if scan["name"] == toml_scan["name"]
+            ][0]
+            compare_scans = [
+                compare_rrules(toml_scan, nessus_scan["rrules"]),
+                compare_targets(toml_scan, nessus_scan["id"]),
+                check_remaining_rules(nessus_scan, toml_scan),
+            ]
+            if all(compare_scans):
+                print("Scan already exists, skipping...")
+            else:
+                id = nessus_scan["id"]
+                update_gds_scans(toml_scan, id)
 
 
 def check_scan():
