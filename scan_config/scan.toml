@@ -25,7 +25,7 @@
 
 [gov_uk_weekly]
 "name" = "govuk weekly scan"
-"enabled" = "true"
+"enabled" = 1
 "rrules.freq" = "WEEKLY"
 "rrules.interval" = "3"
 "rrules.byday" = "MO"
@@ -34,7 +34,7 @@
 
 [gov_uk_daily]
 "name" = "govuk daily scan"
-"enabled" = "true"
+"enabled" = 1
 "rrules.freq" = "DAILY"
 "rrules.interval" = "3"
 "rrules.byday" = "TU"

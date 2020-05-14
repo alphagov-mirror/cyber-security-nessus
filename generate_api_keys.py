@@ -1,5 +1,6 @@
 import json
 import time
+import os
 from functools import lru_cache
 
 import boto3
@@ -21,17 +22,21 @@ def ec2_client():
 def get_ec2_param(param):
     return ec2_client().describe_instances(
         Filters=[
-            {
-                "Name": "tag:Name",
-                "Values": ["Nessus Scanning Instance"],
-                "Name": "instance-state-name",
-                "Values": ["running"],
-            }
+            {"Name": "tag:Name", "Values": ["Nessus Scanning Instance"]},
+            {"Name": "instance-state-name", "Values": ["running"]},
         ]
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
-def get_status_checks():
+def get_fqdn():
+    tf_fqdn = os.environ.get("fqdn")
+    if tf_fqdn:
+        return f"https://{tf_fqdn}"
+    else:
+        return base_url()
+
+
+def instance_ready():
     nessus_status_checks = ec2_client().describe_instance_status(
         InstanceIds=[get_ec2_param("InstanceId")]
     )
@@ -52,6 +57,12 @@ def get_status_checks():
     return True
 
 
+def update_ssm_base_url():
+    """Update the `base_url` SSM parameter with the current instances
+    public IP"""
+    return put_param(get_fqdn(), "public_base_url")
+
+
 def put_keys():
     keys_url = "/session/keys"
     keys_response = requests.put(
@@ -60,56 +71,55 @@ def put_keys():
     keys = json.loads(keys_response.text)
     access_key = keys["accessKey"]
     secret_key = keys["secretKey"]
-    put_param(access_key, type="access_key")
-    put_param(secret_key, type="secret_key")
+
+    out = [
+        put_param(access_key, name="access_key"),
+        put_param(secret_key, name="secret_key"),
+    ]
+    return out
 
 
-def put_param(param, type):
+def put_param(value, name):
     ssm_client().put_parameter(
-        Name=f"/nessus/{type}",
-        Description=f"{type} for the Nessus instance",
-        Value=f"{param}",
+        Name=f"/nessus/{name}",
+        Description=f"{name} for the Nessus instance",
+        Value=f"{value}",
         Overwrite=True,
         Type="SecureString",
     )
 
 
-def get_nessus_status():
+def nessus_ready():
     try:
         server_status_url = "/server/status"
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
-        return status
-        
-    except (ConnectionError, requests.exceptions.ConnectionError) as e:
+        return status["status"] == "ready"
+
+    except (ConnectionError, requests.exceptions.ConnectionError):
         print("connection error")
-        return {"status": "loading", "progress": "0"}
+        return False
 
 
 def main():
     ec2_timeout = time.time() + 60 * 10
-    while True:
-        if get_status_checks():
+    while not instance_ready():
+        if time.time() > ec2_timeout:
+            print("Timed out, instance has not passed AWS EC2 status checks.")
             break
-        elif time.time() > ec2_timeout:
-            print("Timed out, failed to connect to ec2.")
-            break
-        else:
-            time.sleep(60)
+        time.sleep(60)
+
+    update_ssm_base_url()
 
     nessus_timeout = time.time() + 60 * 60
-    while True:
-        put_param(base_url(), type="public_base_url")
-        status = get_nessus_status()
-        if status["status"] == "ready":
-            put_keys()
-            break
-        elif time.time() > nessus_timeout:
+    while nessus_ready():
+        if time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break
-        elif status["status"] != "ready":
-            print(f"Nessus is still loading.\n Progess: {status['progress']}")
-            time.sleep(300)
+        print("Nessus is still loading.")
+        time.sleep(300)
+
+    put_keys()
 
 
 if __name__ == "__main__":

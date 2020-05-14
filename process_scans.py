@@ -14,7 +14,7 @@ def find_scans():
         if scan["status"] == "completed":
             print(f"Preparing export for {scan['name']}")
             token = prepare_export(scan["id"])
-            csv_text = download_report(token)
+            csv_text = download_report(token["token"])
             process_csv(csv_text, scan)
         elif scan["status"] == "empty":
             print(f"Scan {scan['name']} has not run.")

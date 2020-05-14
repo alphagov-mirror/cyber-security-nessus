@@ -13,7 +13,7 @@ variable "region" {
 }
 
 variable "aws_account_id" {
-  default = "676218256630"
+  default = data.aws_ssm_parameter.account_id
 }
 
 variable "dependabot_lambda_memory" {
@@ -22,4 +22,9 @@ variable "dependabot_lambda_memory" {
 
 variable "dependabot_lambda_timeout" {
   default = 900
+}
+
+variable "fqdn" {
+  type    = string
+  default = data.aws_ssm_parameter.nessus_base_url
 }

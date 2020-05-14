@@ -141,14 +141,11 @@ jobs:
                 cd cyber-security-nessus-git
                 pipenv --python 3.7
                 pipenv install
-
                 make zip
-                source /usr/local/bin/sts-assume-role.sh 'arn:aws:iam::676218256630:role/nessus_role' 'eu-west-2'
+                source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
                 cd terraform
                 terraform init
                 terraform apply --auto-approve
-                cd ..
-                pipenv run python generate_api_keys.py
         on_success:
           <<: *health_status_notify
           params:
@@ -159,6 +156,50 @@ jobs:
           params:
             message: "Failed to deploy nessus."
             health: unhealthy
+  
+  - name: generate_keys
+    serial: true
+    plan:
+      - get: cyber-security-nessus-git
+        passed: [nessus_deploy]
+        trigger: true
+      - task: generate_api_keys
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: /bin/bash
+            args:
+              - -c
+              - |
+                pip install pipenv
+
+                cd cyber-security-nessus-git
+                pipenv --python 3.7
+                pipenv install
+
+                make zip
+                source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
+                cd terraform
+                terraform init
+                export fqdn=$(terraform output fqdn)
+                cd ..
+                pipenv run python generate_api_keys.py
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "API keys generated successfully."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Failed to generate nessus API keys."
+            health: unhealthy
 
   - name: schedule_scans_update
     serial: false
@@ -166,7 +207,7 @@ jobs:
       - get: toml-nessus-git
         trigger: true
       - get: cyber-security-nessus-git
-        passed: [nessus_deploy]
+        passed: [generate_keys]
         trigger: true
       - task: update_scheduled_scans
         config:
@@ -188,7 +229,7 @@ jobs:
                 pipenv --python 3.7
                 pipenv install
 
-                source /usr/local/bin/sts-assume-role.sh 'arn:aws:iam::676218256630:role/nessus_role' 'eu-west-2'
+                source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
                 pipenv run python schedule_scans.py
         on_success:
           <<: *health_status_notify
