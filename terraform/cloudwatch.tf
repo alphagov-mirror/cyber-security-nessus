@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "nessus_data" {
-  name = "/gds/nessus-data"
+  name = "/gds/nessus-scans"
 
   tags = {
     Environment = "production"
