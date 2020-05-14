@@ -21,14 +21,8 @@ def ec2_client():
 def get_ec2_param(param):
     return ec2_client().describe_instances(
         Filters=[
-            {
-                "Name": "tag:Name",
-                "Values": ["Nessus Scanning Instance"],
-            },
-            {
-                "Name": "instance-state-name",
-                "Values": ["running"],
-            }
+            {"Name": "tag:Name", "Values": ["Nessus Scanning Instance"]},
+            {"Name": "instance-state-name", "Values": ["running"]},
         ]
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
@@ -115,7 +109,7 @@ def main():
         if time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break
-        print(f"Nessus is still loading.")
+        print("Nessus is still loading.")
         time.sleep(300)
 
     put_keys()

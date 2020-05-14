@@ -2,12 +2,9 @@
 # import logging
 import os
 import sys
-import json
 import re
-import hashlib
 
 import vcr
-import pytest
 
 currentdir = os.path.dirname(__file__)
 parentdir = os.path.dirname(currentdir)
@@ -108,6 +105,7 @@ def policy():
         "id": 5,
     }
  """
+
 
 @vcr.use_cassette
 def test_policy_details(policy):

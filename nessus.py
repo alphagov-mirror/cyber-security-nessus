@@ -71,9 +71,7 @@ def get_token():
 @lru_cache(maxsize=1)
 def get_x_api_token():
     r = get("/nessus6.js", text=True)
-    m = re.search(
-        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r
-    )
+    m = re.search(r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r)
     return m.group(0)
 
 

@@ -67,7 +67,7 @@ def scrub_request(request):
 
     url = urlparse(request.uri)
 
-    if 'nessus' in url.netloc:
+    if "nessus" in url.netloc:
         url = url._replace(netloc="localhost")
         request.uri = urlunparse(url)
 
@@ -110,6 +110,7 @@ def scrub_json(data):
 
 # VCR debugging
 import logging
+
 logging.basicConfig()  # you need to initialize logging, otherwise you will not see anything from vcrpy
 vcr_log = logging.getLogger("vcr")
 vcr_log.setLevel(logging.DEBUG)
