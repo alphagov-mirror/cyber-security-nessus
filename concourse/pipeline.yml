@@ -147,8 +147,6 @@ jobs:
                 cd terraform
                 terraform init
                 terraform apply --auto-approve
-                cd ..
-                pipenv run python generate_api_keys.py
         on_success:
           <<: *health_status_notify
           params:
@@ -158,6 +156,33 @@ jobs:
           <<: *health_status_notify
           params:
             message: "Failed to deploy nessus."
+            health: unhealthy
+
+      - task: generate_api_keys
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: /bin/bash
+            args:
+            - -c
+            - |
+              cd cyber-security-nessus-git
+              pipenv run python generate_api_keys.py
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "Nessus API keys generated successfully."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Failed to generate Nessus API keys."
             health: unhealthy
 
   - name: schedule_scans_update
