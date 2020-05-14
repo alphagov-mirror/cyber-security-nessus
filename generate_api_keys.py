@@ -28,6 +28,15 @@ def get_ec2_param(param):
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
+
+def get_fqdn():
+    tf_fqdn = os.environ.get("fqdn")
+    if tf_fqdn:
+        return f"https://{tf_fqdn}"
+    else:
+        return base_url()
+
+
 def instance_ready():
     nessus_status_checks = ec2_client().describe_instance_status(
         InstanceIds=[get_ec2_param("InstanceId")]

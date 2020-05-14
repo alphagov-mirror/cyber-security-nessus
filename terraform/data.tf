@@ -9,3 +9,11 @@ data "aws_ssm_parameter" "nessus_password" {
 data "aws_ssm_parameter" "nessus_licence" {
   name = "/nessus/licence"
 }
+
+data "aws_ssm_parameter" "nessus_base_url" {
+  name = "/nessus/public_base_url"
+}
+
+data "aws_ssm_parameter" "account_id" {
+  name = "/nessus/account_id"
+}
