@@ -1,5 +1,6 @@
 import json
 import time
+import os
 from functools import lru_cache
 
 import boto3
@@ -48,12 +49,18 @@ def instance_ready():
     return True
 
 
+def get_fqdn():
+    tf_fqdn = os.environ.get("fqdn")
+    if tf_fqdn:
+        return f"https://{tf_fqdn}"
+    else:
+        return base_url()
+
+
 def update_ssm_base_url():
     """Update the `base_url` SSM parameter with the current instances
     public IP"""
-    return put_param(
-        f"https://{get_ec2_param('PublicIpAddress')}:8834", "public_base_url"
-    )
+    return put_param(get_fqdn(), "public_base_url")
 
 
 def put_keys():
