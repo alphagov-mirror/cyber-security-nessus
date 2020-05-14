@@ -152,7 +152,7 @@ jobs:
           params:
             message: "Failed to deploy nessus."
             health: unhealthy
-  
+
   - name: generate_keys
     serial: true
     plan:
@@ -219,9 +219,11 @@ jobs:
             args:
               - -c
               - |
-                pip install pipenv
+                cp toml-nessus-git/scan_config/scan.toml cyber-security-nessus-git/scan_config/scan.toml
 
-                cd toml-nessus-git
+                cd cyber-security-nessus-git
+
+                pip install pipenv
                 pipenv --python 3.7
                 pipenv install --dev
 
