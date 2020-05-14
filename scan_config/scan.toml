@@ -38,5 +38,5 @@
 "rrules.freq" = "DAILY"
 "rrules.interval" = "1"
 "rrules.byday" = "TH"
-"starttime" = "20200514T174500"
+"starttime" = "20200514T180000"
 "text_targets" = "www.gov.uk"

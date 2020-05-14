@@ -4,6 +4,7 @@ from functools import lru_cache
 import boto3
 import requests
 import validators
+import os
 
 
 def verify_ssl():
@@ -89,8 +90,27 @@ def manager_credentials():
     return headers
 
 
+@lru_cache(maxsize=None)
+def ec2_client():
+    return boto3.client("ec2")
+
+
+def get_ec2_param(param):
+    return ec2_client().describe_instances(
+        Filters=[
+            {"Name": "tag:Name", "Values": ["Nessus Scanning Instance"]},
+            {"Name": "instance-state-name", "Values": ["running"]},
+        ]
+    )["Reservations"][0]["Instances"][0][f"{param}"]
+
+
+
 @lru_cache(maxsize=1)
 def base_url():
+    # Hack: See if we're a Lambda and use a different Nessus endpoint
+    # to work around Lambda > ALB security groups.
+    if os.getenv('AWS_EXECUTION_ENV'):
+        return f"https://{get_ec2_param('PrivateIpAddress')}:8834"
     return get_param_from_ssm("public_base_url")
 
 
