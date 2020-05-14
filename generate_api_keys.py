@@ -6,26 +6,12 @@ from functools import lru_cache
 import boto3
 import requests
 
-from nessus import get_token, base_url
+from nessus import get_token, base_url, get_ec2_param, ec2_client
 
 
 @lru_cache(maxsize=None)
 def ssm_client():
     return boto3.client("ssm")
-
-
-@lru_cache(maxsize=None)
-def ec2_client():
-    return boto3.client("ec2")
-
-
-def get_ec2_param(param):
-    return ec2_client().describe_instances(
-        Filters=[
-            {"Name": "tag:Name", "Values": ["Nessus Scanning Instance"]},
-            {"Name": "instance-state-name", "Values": ["running"]},
-        ]
-    )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
 def get_fqdn():
