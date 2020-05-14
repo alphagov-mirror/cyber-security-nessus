@@ -29,7 +29,7 @@ def process_csv(csv_text, scan):
     with io.StringIO(csv_text) as f:
         reader = csv.reader(f)
 
-        group_name = "/gds/nessus-data"
+        group_name = "/gds/nessus-scans"
         stream_name = f"{scan['last_modification_date']}-{scan['name']}"
         token = create_log_stream(group_name, stream_name)
 
@@ -47,7 +47,7 @@ def process_csv(csv_text, scan):
             # Send in batches of 10_000
             if len(events) >= 9999:
                 token = logs_client().put_log_events(
-                    logGroupName="/gds/nessus-data",
+                    logGroupName=group_name,
                     logStreamName=stream_name,
                     logEvents=events,
                     sequenceToken=token,
@@ -57,7 +57,7 @@ def process_csv(csv_text, scan):
 
         # send finial batch
         logs_client().put_log_events(
-            logGroupName="/gds/nessus-data",
+            logGroupName=group_name,
             logStreamName=stream_name,
             logEvents=events,
             sequenceToken=token,
