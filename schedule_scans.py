@@ -96,7 +96,7 @@ def compare_rrules(scan, nessus_scan_rrules):
 
 def check_remaining_rules(nessus_scan, toml_scan):
     """Check all remaining rules match. If all match return True, else return early with False"""
-    keys = ["enabled", "starttime", "text_targets"]
+    keys = ["enabled", "starttime"]
     return all(nessus_scan[key] == toml_scan[key] for key in keys)
 
 
