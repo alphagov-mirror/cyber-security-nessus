@@ -37,7 +37,7 @@ resource "aws_security_group" "nessus-sg" {
     from_port       = 8834
     to_port         = 8834
     protocol        = "tcp"
-    security_groups = [aws_security_group.nessus-alb-sg.id, aws_security_group.nessus-sg.id]
+    security_groups = [aws_security_group.nessus-alb-sg.id]
   }
 
   egress {
