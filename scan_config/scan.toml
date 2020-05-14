@@ -36,7 +36,7 @@
 "name" = "govuk daily scan"
 "enabled" = 1
 "rrules.freq" = "DAILY"
-"rrules.interval" = "3"
-"rrules.byday" = "TU"
-"starttime" = "20200428T113000"
+"rrules.interval" = "1"
+"rrules.byday" = "TH"
+"starttime" = "20200514T174500"
 "text_targets" = "www.gov.uk"
