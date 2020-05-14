@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
+    method: GET
+    uri: https://localhost/policies/5
+  response:
+    body:
+      string: '{"settings":{"samr_enumeration":"yes","wol_mac_addresses":"","tcp_ping_dest_ports":"built-in","name":"testing_scan","smtp_domain":"example.com","thorough_tests":"no","report_superseded_patches":"no","custom_find_filesystem_exclusions":"","webcrawl_exclude_regex":"/server_privileges\\.php|logout","enable_plugin_list":"no","region_hkg_pref_name":"yes","snmp_port":"161","ssl_prob_ports":"Known
+        SSL ports","http_login_max_redir":"0","wmi_netstat_scanner":"yes","stop_scan_on_disconnect":"yes","icmp_ping":"yes","custom_find_filepath_exclusions":"","description":"\n","never_send_win_creds_in_the_clear":"yes","report_paranoia":"Normal","test_embedded_web_servers":"yes","microsoft_azure_subscriptions_ids":"","try_all_http_methods":"yes","udp_scanner":"no","smtp_to":"postmaster@[AUTO_REPLACED_IP]","scan_network_printers":"no","syn_firewall_detection":"Automatic
+        (normal)","enable_plugin_debugging":"no","icmp_unreach_means_host_down":"no","region_dfw_pref_name":"yes","region_ord_pref_name":"yes","scan_netware_hosts":"no","network_receive_timeout":"5","icmp_ping_retries":"2","max_simult_tcp_sessions_per_scan":"","generic_webapp_tests_max_time":"5","tcp_ping":"yes","tcp_scanner":"yes","arp_ping":"yes","start_cotp_tsap":"8","additional_snmp_port1":"161","fast_network_discovery":"no","apm_force_updates":"yes","log_whole_attack":"no","provided_creds_only":"no","scan_malware":"no","silent_dependencies":"yes","enable_admin_shares":"no","smtp_from":"nobody@example.com","region_syd_pref_name":"yes","rid_brute_forcing":"no","test_local_nessus_host":"yes","region_lon_pref_name":"yes","scan_ot_devices":"no","http_param_pollution":"yes","abort_generic_webapp_if_login_fails":"no","request_windows_domain_info":"no","unscanned_closed":"no","av_grace_period":"0","additional_snmp_port2":"161","patch_audit_over_telnet":"no","url_for_rfi":"http://rfi.nessus.org/rfi.txt","ssh_netstat_scanner":"yes","stop_cotp_tsap":"8","tcp_firewall_detection":"Do
+        not detect RST rate limitation (soft)","only_portscan_if_enum_failed":"yes","ssh_port":"22","include_kb":"use_scanner_default","ssh_client_banner":"OpenSSH_5.0","svc_detection_on_all_ports":"yes","max_checks_per_host":"5","apm_update_timeout":"5","attempt_least_privilege":"no","log_live_hosts":"no","reverse_lookup":"no","max_hosts_per_scan":"100","dont_use_ntlmv1":"yes","generic_webapp_tests":"yes","aws_ui_region_type":"Rest
+        of the World","test_default_oracle_accounts":"no","cert_expiry_warning_days":"60","verify_open_ports":"no","modbus_end_reg":"16","patch_audit_over_rexec":"no","max_simult_tcp_sessions_per_host":"","slice_network_addresses":"no","wol_wait_time":"5","report_verbosity":"Normal","cloud_web_screenshots":"yes","ping_the_remote_host":"yes","combo_arg_values":"some
+        pairs","webcrawler_start_page":"/","patch_audit_over_rsh":"no","user_agent_string":"Mozilla/4.0
+        (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)","http_login_invert_auth_regex":"no","wmi_query":"yes","aws_use_https":"yes","allow_post_scan_editing":"yes","enumerate_all_ciphers":"yes","display_unreachable_hosts":"no","safe_checks":"yes","udp_ping":"no","http_login_auth_regex_on_headers":"no","detect_ssl":"yes","adsi_query":"yes","http_login_method":"POST","syn_scanner":"yes","modbus_start_reg":"0","portscan_range":"default","scan_webapps":"yes","webcrawler_max_pages":"1000","webcrawl_follow_dynamic_pages":"no","webcrawl_max_depth":"6","snmp_scanner":"yes","http_reauth_delay":"0","reduce_connections_on_congestion":"yes","additional_snmp_port3":"161","http_login_auth_regex_nocase":"no","region_iad_pref_name":"yes","ssh_known_hosts":"","audit_trail":"use_scanner_default","stop_at_first_flaw":"look
+        for all flaws (slower)","start_remote_registry":"no","check_crl":"no"},"uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 14 May 2020 11:44:01 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '3779'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -3,20 +3,27 @@ from functools import lru_cache
 
 import boto3
 import requests
+import validators
+
+
+def verify_ssl():
+    is_domain = validators.domain(base_url())
+
+    if is_domain:
+        return True
+    else:
+        return False
 
 
 def get(path, text=False):
+    """Make a GET request to Nessus"""
     if text:
         return requests.get(
-            base_url() + path,
-            headers=api_credentials(),
-            verify=False,
-        )
+            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
+        ).text
     else:
         return requests.get(
-            base_url() + path,
-            headers=api_credentials(),
-            verify=False,
+            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
         ).json()
 
 
@@ -25,7 +32,16 @@ def post(path, payload, headers=None):
         base_url() + path,
         headers=headers if headers else api_credentials(),
         json=payload,
-        verify=False,
+        verify=verify_ssl(),
+    ).json()
+
+
+def put(path, payload, headers=None):
+    return requests.put(
+        base_url() + path,
+        headers=headers if headers else api_credentials(),
+        json=payload,
+        verify=verify_ssl(),
     ).json()
 
 
@@ -55,9 +71,7 @@ def get_token():
 @lru_cache(maxsize=1)
 def get_x_api_token():
     r = get("/nessus6.js", text=True)
-    m = re.search(
-        r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r.text
-    )
+    m = re.search(r"([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})", r)
     return m.group(0)
 
 
@@ -88,8 +102,8 @@ def create_policy(policy):
     return post("/policies", policy)
 
 
-def policy_details(id):
-    return get(f"/policies/{id}")
+def policy_details(policy_id):
+    return get(f"/policies/{policy_id}")
 
 
 def list_scans():
@@ -100,21 +114,21 @@ def create_scan(scan):
     return post("/scans", scan, manager_credentials())
 
 
-def describe_scan(id):
-    return get(f"/scans/{id}")
+def update_scan(scan, scan_id):
+    return put(f"/scans/{scan_id}", scan, manager_credentials())
 
 
-def prepare_export(id):
-    return post(f"/scans/{id}/export", {"format": "csv"})
+def describe_scan(scan_id):
+    return get(f"/scans/{scan_id}")
 
 
-def schedule_scans(custom_headers, config_file):
-    return post("/scans/", {"format": "csv"})
+def prepare_export(scan_id):
+    return post(f"/scans/{scan_id}/export", {"format": "csv"})
 
 
 def list_policy_templates():
     return get("/editor/policy/templates")
 
 
-def download_report(export_token):
-    return get(f"/tokens/{export_token['token']}/download", text=True).text
+def download_report(token):
+    return get(f"/tokens/{token}/download", text=True)
