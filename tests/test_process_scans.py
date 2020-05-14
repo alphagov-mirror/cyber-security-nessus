@@ -1,7 +1,7 @@
 from unittest.mock import call
 import process_scans
 
-import vcr
+#import vcr
 
 
 def test_process_csv(mocker):

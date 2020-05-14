@@ -9,8 +9,7 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
@@ -22,9 +21,9 @@ interactions:
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:33:35 GMT
+      - Thu, 14 May 2020 11:43:29 GMT
       x-amzn-RequestId:
-      - ba2db25a-d5aa-4953-adbe-6699eb69e124
+      - 07a48fea-921f-4744-b3e6-ddcd061d45a4
     status:
       code: 200
       message: OK
@@ -38,8 +37,7 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
@@ -51,9 +49,9 @@ interactions:
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:33:35 GMT
+      - Thu, 14 May 2020 11:43:29 GMT
       x-amzn-RequestId:
-      - adf9645f-9d5a-47ed-bc6e-318d241ee03a
+      - 591874c2-f4f4-44b4-93f9-4061322d783d
     status:
       code: 200
       message: OK
@@ -67,22 +65,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":69}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:33:36 GMT
+      - Thu, 14 May 2020 11:43:29 GMT
       x-amzn-RequestId:
-      - 14c74cae-065b-4327-8202-426ef464aadf
+      - b400cfa6-7e24-4f18-bbf3-ed74d8b17f74
     status:
       code: 200
       message: OK
@@ -96,22 +93,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":52}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":65}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:33:36 GMT
+      - Thu, 14 May 2020 11:43:30 GMT
       x-amzn-RequestId:
-      - f90be455-6763-4ab5-b5a7-85d1c2eee777
+      - 61771ec1-0ae6-4552-a535-578884e219f7
     status:
       code: 200
       message: OK
@@ -129,9 +125,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: POST
-    uri: https://localhost:8834/session
+    uri: https://localhost/session
   response:
     body:
       string: '{"token":"token"}'
@@ -139,7 +135,7 @@ interactions:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '17'
       Content-Security-Policy:
@@ -150,7 +146,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:33:37 GMT
+      - Thu, 14 May 2020 11:43:31 GMT
       Expect-CT:
       - max-age=0
       Expires:

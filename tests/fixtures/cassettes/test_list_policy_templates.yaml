@@ -9,22 +9,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":69}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:07 GMT
+      - Thu, 14 May 2020 11:44:16 GMT
       x-amzn-RequestId:
-      - 39e98706-62d4-43b7-bb5b-8c086ba9dd9f
+      - 7cc461e6-7931-4e53-8a79-98b28f6974ad
     status:
       code: 200
       message: OK
@@ -38,22 +37,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":52}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":65}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:07 GMT
+      - Thu, 14 May 2020 11:44:17 GMT
       x-amzn-RequestId:
-      - abfded1d-f37f-465d-bdb0-04e5db2200f9
+      - e5dabe6b-cf05-467d-9e94-868ffbd67e64
     status:
       code: 200
       message: OK
@@ -67,9 +65,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: GET
-    uri: https://localhost:8834/editor/policy/templates
+    uri: https://localhost/editor/policy/templates
   response:
     body:
       string: '{"templates":[{"unsupported":false,"license_fulfilled":1,"desc":"Approved
@@ -125,7 +123,7 @@ interactions:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
@@ -134,7 +132,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:34:08 GMT
+      - Thu, 14 May 2020 11:44:17 GMT
       Expect-CT:
       - max-age=0
       Expires:

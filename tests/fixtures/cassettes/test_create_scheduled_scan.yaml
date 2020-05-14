@@ -9,9 +9,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: GET
-    uri: https://localhost:8834/nessus6.js
+    uri: https://localhost/nessus6.js
   response:
     body:
       string: AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE
@@ -19,7 +19,7 @@ interactions:
       Cache-Control:
       - must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
@@ -28,7 +28,7 @@ interactions:
       Content-Type:
       - application/javascript
       Date:
-      - Wed, 13 May 2020 00:34:44 GMT
+      - Thu, 14 May 2020 11:44:34 GMT
       ETag:
       - f4eb641586fb37d28341e010a5ca2d89
       Expect-CT:
@@ -60,8 +60,7 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
@@ -73,9 +72,9 @@ interactions:
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:52 GMT
+      - Thu, 14 May 2020 11:44:48 GMT
       x-amzn-RequestId:
-      - 96e8ea30-3e27-4daa-bafb-cb2bc1894eaf
+      - ddf8cbd7-479d-4a8b-b39e-7ceb4a766d57
     status:
       code: 200
       message: OK
@@ -89,8 +88,7 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
@@ -102,9 +100,9 @@ interactions:
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:52 GMT
+      - Thu, 14 May 2020 11:44:48 GMT
       x-amzn-RequestId:
-      - c9a4b23a-3b2b-49c8-b34a-95e3ddf0f555
+      - 3ad9baad-6021-4b37-ae56-1c419ad2ad14
     status:
       code: 200
       message: OK
@@ -122,9 +120,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: POST
-    uri: https://localhost:8834/session
+    uri: https://localhost/session
   response:
     body:
       string: '{"token":"token"}'
@@ -132,7 +130,7 @@ interactions:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '17'
       Content-Security-Policy:
@@ -143,7 +141,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:34:54 GMT
+      - Thu, 14 May 2020 11:44:50 GMT
       Expect-CT:
       - max-age=0
       Expires:
@@ -178,18 +176,18 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: POST
-    uri: https://localhost:8834/scans
+    uri: https://localhost/scans
   response:
     body:
-      string: '{"scan":{"container_id":0,"uuid":"template-ac0b1ff3-2e04-84be-5827-aa203b94b8319656581e665e3ecf","name":"weekly
-        scan","description":null,"policy_id":5,"scanner_id":1,"emails":null,"attach_report":0,"attached_report_maximum_size":26214400,"attached_report_type":null,"sms":null,"enabled":1,"use_dashboard":0,"dashboard_file":null,"live_results":0,"scan_time_window":null,"custom_targets":"localhost","migrated":0,"starttime":"20200428T133000","rrules":"FREQ=WEEKLY;INTERVAL=3;BYDAY=MO","timezone":"Europe/London","notification_filters":null,"shared":0,"user_permissions":128,"default_permisssions":0,"owner":"bodofraggins","owner_id":1,"last_modification_date":1589330094,"creation_date":1589330094,"type":"public","id":34}}'
+      string: '{"scan":{"container_id":0,"uuid":"template-d75049a4-d9e6-c69c-7154-cacbe7bcf75b7151962afa63eeb3","name":"weekly
+        scan","description":null,"policy_id":5,"scanner_id":1,"emails":null,"attach_report":0,"attached_report_maximum_size":26214400,"attached_report_type":null,"sms":null,"enabled":1,"use_dashboard":0,"dashboard_file":null,"live_results":0,"scan_time_window":null,"custom_targets":"localhost","migrated":0,"starttime":"20200428T133000","rrules":"FREQ=WEEKLY;INTERVAL=3;BYDAY=MO","timezone":"Europe/London","notification_filters":null,"shared":0,"user_permissions":128,"default_permisssions":0,"owner":"bodofraggins","owner_id":1,"last_modification_date":1589456690,"creation_date":1589456690,"type":"public","id":57}}'
     headers:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '723'
       Content-Security-Policy:
@@ -200,7 +198,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:34:54 GMT
+      - Thu, 14 May 2020 11:44:50 GMT
       Expect-CT:
       - max-age=0
       Expires:
@@ -217,62 +215,6 @@ interactions:
       - DENY
       X-XSS-Protection:
       - 1; mode=block
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"Name":"/nessus/access_key","WithDecryption":true}'
-    headers:
-      Content-Length:
-      - '54'
-      Content-Type:
-      - !!binary |
-        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
-      User-Agent:
-      - !!binary |
-        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
-    method: POST
-    uri: https://ssm.eu-west-2.amazonaws.com/
-  response:
-    body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":60}}'
-    headers:
-      Content-Length:
-      - '217'
-      Content-Type:
-      - application/x-amz-json-1.1
-      Date:
-      - Wed, 13 May 2020 10:42:27 GMT
-      x-amzn-RequestId:
-      - 6cd6bb04-05ba-4b9f-999c-422f64fe45f6
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"Name":"/nessus/secret_key","WithDecryption":true}'
-    headers:
-      Content-Length:
-      - '54'
-      Content-Type:
-      - !!binary |
-        YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
-      User-Agent:
-      - !!binary |
-        Qm90bzMvMS4xMy4xIFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuMQ==
-    method: POST
-    uri: https://ssm.eu-west-2.amazonaws.com/
-  response:
-    body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":56}}'
-    headers:
-      Content-Length:
-      - '217'
-      Content-Type:
-      - application/x-amz-json-1.1
-      Date:
-      - Wed, 13 May 2020 10:42:27 GMT
-      x-amzn-RequestId:
-      - 357c1f9d-cf3a-4dcb-8217-68d9ea129e04
     status:
       code: 200
       message: OK

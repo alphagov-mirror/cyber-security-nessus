@@ -9,22 +9,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost:8834","Version":125}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/public_base_url","Type":"SecureString","Value":"https://localhost","Version":139}}'
     headers:
       Content-Length:
-      - '227'
+      - '222'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:33:35 GMT
+      - Thu, 14 May 2020 11:45:39 GMT
       x-amzn-RequestId:
-      - e5dac02e-2024-435d-8658-556d72689b1a
+      - c3581b9e-eb19-46cb-a77a-79b0f718e5de
     status:
       code: 200
       message: OK

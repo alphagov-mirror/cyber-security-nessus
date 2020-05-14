@@ -93,9 +93,9 @@ def nessus_ready():
         server_status_url = "/server/status"
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
-        return True
+        return status["status"] == "ready"
 
-    except (ConnectionError, requests.exceptions.ConnectionError) as e:
+    except (ConnectionError, requests.exceptions.ConnectionError):
         print("connection error")
         return False
 
@@ -115,10 +115,11 @@ def main():
         if time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break
-        print(f"Nessus is still loading.\n Progess: {status['progress']}")
+        print(f"Nessus is still loading.")
         time.sleep(300)
 
     put_keys()
+
 
 if __name__ == "__main__":
     print("generating api keys...")

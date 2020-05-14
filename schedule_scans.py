@@ -100,8 +100,8 @@ def check_remaining_rules(nessus_scan, toml_scan):
     return all(nessus_scan[key] == toml_scan[key] for key in keys)
 
 
-def compare_targets(toml_scan, id):
-    scan = ness_func.describe_scan(id)
+def compare_targets(toml_scan, scan_id):
+    scan = ness_func.describe_scan(scan_id)
     try:
         scan_targets = scan["info"]["targets"].split(",")
         toml_targets = toml_scan["text_targets"].split(",")

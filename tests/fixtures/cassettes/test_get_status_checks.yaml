@@ -9,14 +9,13 @@ interactions:
         YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ec2.eu-west-2.amazonaws.com/
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstancesResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>9cfbdf58-8a17-46ac-b50e-02a7c72b0c45</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>902efecc-feee-47d2-a0de-37607ba44ad4</requestId>\n
         \   <reservationSet>\n        <item>\n            <reservationId>r-01a51dbef9df23d9b</reservationId>\n
         \           <ownerId>676218256630</ownerId>\n            <groupSet/>\n            <instancesSet>\n
         \               <item>\n                    <instanceId>i-095f4f4ca74d136d8</instanceId>\n
@@ -94,13 +93,13 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 14 May 2020 09:42:45 GMT
+      - Thu, 14 May 2020 11:43:28 GMT
       Server:
       - AmazonEC2
       vary:
       - accept-encoding
       x-amzn-requestid:
-      - 9cfbdf58-8a17-46ac-b50e-02a7c72b0c45
+      - 902efecc-feee-47d2-a0de-37607ba44ad4
     status:
       code: 200
       message: OK
@@ -114,14 +113,13 @@ interactions:
         YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ec2.eu-west-2.amazonaws.com/
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstanceStatusResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>0583760d-eda0-4154-98a8-767f69964dd5</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>ec39a207-65b6-4174-8c66-6aa0b54abea5</requestId>\n
         \   <instanceStatusSet>\n        <item>\n            <instanceId>i-095f4f4ca74d136d8</instanceId>\n
         \           <availabilityZone>eu-west-2a</availabilityZone>\n            <instanceState>\n
         \               <code>16</code>\n                <name>running</name>\n            </instanceState>\n
@@ -139,11 +137,11 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 14 May 2020 09:42:45 GMT
+      - Thu, 14 May 2020 11:43:28 GMT
       Server:
       - AmazonEC2
       x-amzn-requestid:
-      - 0583760d-eda0-4154-98a8-767f69964dd5
+      - ec39a207-65b6-4174-8c66-6aa0b54abea5
     status:
       code: 200
       message: OK

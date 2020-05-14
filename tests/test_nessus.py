@@ -34,7 +34,6 @@ def test_api_credentials():
 def test_base_url():
     result = n.base_url()
     assert "https://" in result
-    assert "8834" in result
 
 
 # @vcr.use_cassette
@@ -89,7 +88,7 @@ def test_list_scans():
     assert "scans" in result
 
 
-@pytest.fixture
+""" @pytest.fixture
 def policy():
     return {
         "is_scap": 0,
@@ -108,7 +107,7 @@ def policy():
         "owner_id": 1,
         "id": 5,
     }
-
+ """
 
 @vcr.use_cassette
 def test_policy_details(policy):

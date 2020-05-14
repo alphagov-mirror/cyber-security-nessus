@@ -7,8 +7,6 @@ import sys
 import re
 
 import pytest
-import logging
-import requests
 import vcr
 from urllib.parse import urlparse, urlunparse
 
@@ -23,8 +21,6 @@ sys.path.insert(0, parentdir)
 import nessus as ness_func
 import schedule_scans as schedule
 
-import traceback
-
 
 # TODO: CLEAN ME
 def scrub_response(response):
@@ -34,7 +30,7 @@ def scrub_response(response):
         response["body"]["string"] = json.dumps(
             scrub_json(data), separators=(",", ":")
         ).encode()
-    except Exception as e:
+    except Exception:
         pass
 
     body = response["body"]["string"].decode()
@@ -63,7 +59,7 @@ def scrub_request(request):
 
     try:
         data = json.loads(request.body)
-    except Exception as e:
+    except Exception:
         data = None
 
     if data:
@@ -71,8 +67,8 @@ def scrub_request(request):
 
     url = urlparse(request.uri)
 
-    if url.port == 8834:
-        url = url._replace(netloc="localhost:8834")
+    if 'nessus' in url.netloc:
+        url = url._replace(netloc="localhost")
         request.uri = urlunparse(url)
 
     return request
@@ -85,7 +81,7 @@ def scrub_json(data):
         ("/nessus/access_key",),
         ("/nessus/username",),
         ("/nessus/password",),
-        ("/nessus/public_base_url", "https://localhost:8834"),
+        ("/nessus/public_base_url", "https://localhost"),
     ]
     if "Parameter" in data:
         data["Parameter"][
@@ -113,9 +109,10 @@ def scrub_json(data):
 
 
 # VCR debugging
-# logging.basicConfig()  # you need to initialize logging, otherwise you will not see anything from vcrpy
-# vcr_log = logging.getLogger("vcr")
-# vcr_log.setLevel(logging.DEBUG)
+import logging
+logging.basicConfig()  # you need to initialize logging, otherwise you will not see anything from vcrpy
+vcr_log = logging.getLogger("vcr")
+vcr_log.setLevel(logging.DEBUG)
 
 # Standardise vcr config
 vcr.default_vcr = vcr.VCR(
@@ -170,6 +167,7 @@ def scan_id():
 
 
 @pytest.fixture
+@vcr.use_cassette
 def policy():
     """ID of testing policy
     The data formats returned by `find` and `create` are different.

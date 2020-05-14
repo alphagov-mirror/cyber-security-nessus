@@ -9,22 +9,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":54}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/access_key","Type":"SecureString","Value":"/nessus/access_key","Version":69}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:08 GMT
+      - Thu, 14 May 2020 11:44:17 GMT
       x-amzn-RequestId:
-      - de3635eb-01f9-43ce-b7bb-ce201bca23a2
+      - 709d4026-56c2-45a2-bad9-5f5e37434bc6
     status:
       code: 200
       message: OK
@@ -38,22 +37,21 @@ interactions:
         YXBwbGljYXRpb24veC1hbXotanNvbi0xLjE=
       User-Agent:
       - !!binary |
-        Qm90bzMvMS4xMi4zOSBQeXRob24vMy44LjIgTGludXgvNS40LjAtMjktZ2VuZXJpYyBCb3RvY29y
-        ZS8xLjE1LjM3
+        Qm90bzMvMS4xMy44IFB5dGhvbi8zLjcuNCBEYXJ3aW4vMTguNy4wIEJvdG9jb3JlLzEuMTYuOA==
     method: POST
     uri: https://ssm.eu-west-2.amazonaws.com/
   response:
     body:
-      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":52}}'
+      string: '{"Parameter":{"ARN":"arn:aws:ssm:us-east-1:000000000000:parameter/nessus/access_key","DataType":"text","LastModifiedDate":0,"Name":"/nessus/secret_key","Type":"SecureString","Value":"/nessus/secret_key","Version":65}}'
     headers:
       Content-Length:
       - '217'
       Content-Type:
       - application/x-amz-json-1.1
       Date:
-      - Wed, 13 May 2020 00:34:08 GMT
+      - Thu, 14 May 2020 11:44:17 GMT
       x-amzn-RequestId:
-      - 680316fd-36f9-46b6-b68e-fa599adc81b1
+      - c8e49da2-0214-44f6-9402-ac6982f6809d
     status:
       code: 200
       message: OK
@@ -67,9 +65,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: GET
-    uri: https://localhost:8834/editor/policy/templates
+    uri: https://localhost/editor/policy/templates
   response:
     body:
       string: '{"templates":[{"unsupported":false,"license_fulfilled":1,"desc":"Approved
@@ -125,7 +123,7 @@ interactions:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Security-Policy:
       - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
         'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
@@ -134,7 +132,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:34:09 GMT
+      - Thu, 14 May 2020 11:44:18 GMT
       Expect-CT:
       - max-age=0
       Expires:
@@ -200,17 +198,17 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - python-requests/2.22.0
+      - python-requests/2.23.0
     method: POST
-    uri: https://localhost:8834/policies
+    uri: https://localhost/policies
   response:
     body:
-      string: '{"policy_id":31,"policy_name":"testing_scan_06"}'
+      string: '{"policy_id":54,"policy_name":"testing_scan_10"}'
     headers:
       Cache-Control:
       - no-cache, no-store, must-revalidate
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '48'
       Content-Security-Policy:
@@ -221,7 +219,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 13 May 2020 00:34:10 GMT
+      - Thu, 14 May 2020 11:44:19 GMT
       Expect-CT:
       - max-age=0
       Expires:
