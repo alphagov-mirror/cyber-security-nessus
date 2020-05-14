@@ -28,7 +28,6 @@ def get_ec2_param(param):
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
-
 def get_fqdn():
     tf_fqdn = os.environ.get("fqdn")
     if tf_fqdn:
@@ -56,14 +55,6 @@ def instance_ready():
         return False
 
     return True
-
-
-def get_fqdn():
-    tf_fqdn = os.environ.get("fqdn")
-    if tf_fqdn:
-        return f"https://{tf_fqdn}"
-    else:
-        return base_url()
 
 
 def update_ssm_base_url():
