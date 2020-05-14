@@ -1,9 +1,9 @@
 interactions:
 - request:
-    body: Action=DescribeInstances&Version=2016-11-15&Filter.1.Name=instance-state-name&Filter.1.Value.1=running
+    body: Action=DescribeInstances&Version=2016-11-15&Filter.1.Name=tag%3AName&Filter.1.Value.1=Nessus+Scanning+Instance&Filter.2.Name=instance-state-name&Filter.2.Value.1=running
     headers:
       Content-Length:
-      - '102'
+      - '169'
       Content-Type:
       - !!binary |
         YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
@@ -16,7 +16,7 @@ interactions:
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstancesResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>ac52a7d5-7b4b-453d-9f7f-557ab875d71c</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>9cfbdf58-8a17-46ac-b50e-02a7c72b0c45</requestId>\n
         \   <reservationSet>\n        <item>\n            <reservationId>r-01a51dbef9df23d9b</reservationId>\n
         \           <ownerId>676218256630</ownerId>\n            <groupSet/>\n            <instancesSet>\n
         \               <item>\n                    <instanceId>i-095f4f4ca74d136d8</instanceId>\n
@@ -94,13 +94,13 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Wed, 13 May 2020 00:33:34 GMT
+      - Thu, 14 May 2020 09:42:45 GMT
       Server:
       - AmazonEC2
       vary:
       - accept-encoding
       x-amzn-requestid:
-      - ac52a7d5-7b4b-453d-9f7f-557ab875d71c
+      - 9cfbdf58-8a17-46ac-b50e-02a7c72b0c45
     status:
       code: 200
       message: OK
@@ -121,7 +121,7 @@ interactions:
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstanceStatusResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>2199ff42-6e9c-42a4-a5bc-2012ba687af3</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>0583760d-eda0-4154-98a8-767f69964dd5</requestId>\n
         \   <instanceStatusSet>\n        <item>\n            <instanceId>i-095f4f4ca74d136d8</instanceId>\n
         \           <availabilityZone>eu-west-2a</availabilityZone>\n            <instanceState>\n
         \               <code>16</code>\n                <name>running</name>\n            </instanceState>\n
@@ -139,11 +139,11 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Wed, 13 May 2020 00:33:34 GMT
+      - Thu, 14 May 2020 09:42:45 GMT
       Server:
       - AmazonEC2
       x-amzn-requestid:
-      - 2199ff42-6e9c-42a4-a5bc-2012ba687af3
+      - 0583760d-eda0-4154-98a8-767f69964dd5
     status:
       code: 200
       message: OK

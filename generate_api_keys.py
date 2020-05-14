@@ -24,6 +24,8 @@ def get_ec2_param(param):
             {
                 "Name": "tag:Name",
                 "Values": ["Nessus Scanning Instance"],
+            },
+            {
                 "Name": "instance-state-name",
                 "Values": ["running"],
             }
@@ -31,7 +33,7 @@ def get_ec2_param(param):
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
-def get_status_checks():
+def instance_ready():
     nessus_status_checks = ec2_client().describe_instance_status(
         InstanceIds=[get_ec2_param("InstanceId")]
     )
@@ -86,44 +88,37 @@ def put_param(value, name):
     )
 
 
-def get_nessus_status():
+def nessus_ready():
     try:
         server_status_url = "/server/status"
         response = requests.get(base_url() + server_status_url, verify=False)
         status = json.loads(response.text)
-        return status
+        return True
 
     except (ConnectionError, requests.exceptions.ConnectionError) as e:
         print("connection error")
-        return {"status": "loading", "progress": "0"}
+        return False
 
 
 def main():
     ec2_timeout = time.time() + 60 * 10
-    while True:
-        if get_status_checks():
+    while not instance_ready():
+        if time.time() > ec2_timeout:
+            print("Timed out, instance has not passed AWS EC2 status checks.")
             break
-        elif time.time() > ec2_timeout:
-            print("Timed out, failed to connect to ec2.")
-            break
-        else:
-            time.sleep(60)
+        time.sleep(60)
+
+    update_ssm_base_url()
 
     nessus_timeout = time.time() + 60 * 60
-    while True:
-        update_ssm_base_url()
-        status = get_nessus_status()
-        if status["status"] == "ready":
-            put_keys()
-
-            break
-        elif time.time() > nessus_timeout:
+    while nessus_ready():
+        if time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break
-        elif status["status"] != "ready":
-            print(f"Nessus is still loading.\n Progess: {status['progress']}")
-            time.sleep(300)
+        print(f"Nessus is still loading.\n Progess: {status['progress']}")
+        time.sleep(300)
 
+    put_keys()
 
 if __name__ == "__main__":
     print("generating api keys...")

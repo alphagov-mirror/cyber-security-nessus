@@ -1,9 +1,9 @@
 interactions:
 - request:
-    body: Action=DescribeInstances&Version=2016-11-15&Filter.1.Name=instance-state-name&Filter.1.Value.1=running
+    body: Action=DescribeInstances&Version=2016-11-15&Filter.1.Name=tag%3AName&Filter.1.Value.1=Nessus+Scanning+Instance&Filter.2.Name=instance-state-name&Filter.2.Value.1=running
     headers:
       Content-Length:
-      - '102'
+      - '169'
       Content-Type:
       - !!binary |
         YXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkOyBjaGFyc2V0PXV0Zi04
@@ -16,7 +16,7 @@ interactions:
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DescribeInstancesResponse
-        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>97c0e674-20b9-448d-aa80-cc8d5b0efce7</requestId>\n
+        xmlns=\"http://ec2.amazonaws.com/doc/2016-11-15/\">\n    <requestId>41143fb6-b36d-44f2-84a9-b6b40b57cd08</requestId>\n
         \   <reservationSet>\n        <item>\n            <reservationId>r-01a51dbef9df23d9b</reservationId>\n
         \           <ownerId>676218256630</ownerId>\n            <groupSet/>\n            <instancesSet>\n
         \               <item>\n                    <instanceId>i-095f4f4ca74d136d8</instanceId>\n
@@ -94,13 +94,13 @@ interactions:
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Wed, 13 May 2020 00:33:34 GMT
+      - Thu, 14 May 2020 09:42:44 GMT
       Server:
       - AmazonEC2
       vary:
       - accept-encoding
       x-amzn-requestid:
-      - 97c0e674-20b9-448d-aa80-cc8d5b0efce7
+      - 41143fb6-b36d-44f2-84a9-b6b40b57cd08
     status:
       code: 200
       message: OK

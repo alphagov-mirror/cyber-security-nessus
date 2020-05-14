@@ -20,7 +20,7 @@ def test_get_ec2_param():
 
 @vcr.use_cassette
 def test_get_status_checks():
-    result = gen_keys.get_status_checks()
+    result = gen_keys.instance_ready()
     expected = True
     assert result == expected
 
