@@ -11,13 +11,12 @@ boto3-stubs = {extras = ["logs"],version = "*"}
 pytest = "*"
 pytest-mock = "*"
 pytest-cov = "*"
+vcrpy = "*"
 
 [packages]
 requests = "*"
 boto3 = "*"
-vcrpy = "*"
 toml = "*"
-black = "*"
 validators = "*"
 
 [requires]

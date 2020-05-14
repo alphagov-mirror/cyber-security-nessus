@@ -136,11 +136,7 @@ jobs:
             args:
               - -c
               - |
-                pip install pipenv
-
                 cd cyber-security-nessus-git
-                pipenv --python 3.7
-                pipenv install
                 make zip
                 source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
                 cd terraform
@@ -181,7 +177,7 @@ jobs:
 
                 cd cyber-security-nessus-git
                 pipenv --python 3.7
-                pipenv install
+                pipenv install --dev
 
                 make zip
                 source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
@@ -227,7 +223,7 @@ jobs:
 
                 cd toml-nessus-git
                 pipenv --python 3.7
-                pipenv install
+                pipenv install --dev
 
                 source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
                 pipenv run python schedule_scans.py
