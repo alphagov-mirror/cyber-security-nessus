@@ -33,9 +33,11 @@ def get_ec2_param(param):
 
 
 def get_fqdn():
-    default_domain = "nessus.gds-cyber-security.digital"
-    fqdn = f"https://{os.environ.get('fqdn', default_domain)}"
-    return fqdn
+    tf_fqdn = os.environ.get("fqdn")
+    if tf_fqdn:
+        return f"https://{tf_fqdn}"
+    else:
+        return base_url()
 
 
 def get_status_checks():
