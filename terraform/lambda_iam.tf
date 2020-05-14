@@ -7,7 +7,7 @@ data "template_file" "nessus_lambda_policy" {
   template = file("${path.module}/json/interface_lambda/policy.json")
   vars = {
     region     = var.region
-    account_id = var.aws_account_id
+    account_id = data.aws_ssm_parameter.account_id.value
   }
 }
 

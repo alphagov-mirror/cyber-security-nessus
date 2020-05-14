@@ -12,10 +12,6 @@ variable "region" {
   default = "eu-west-2"
 }
 
-variable "aws_account_id" {
-  default = data.aws_ssm_parameter.account_id
-}
-
 variable "dependabot_lambda_memory" {
   default = 2048
 }
@@ -25,6 +21,6 @@ variable "dependabot_lambda_timeout" {
 }
 
 variable "fqdn" {
-  type    = string
-  default = data.aws_ssm_parameter.nessus_base_url
+  default = "nessus.gds-cyber-security.digital"
 }
+
