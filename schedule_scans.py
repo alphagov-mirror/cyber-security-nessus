@@ -111,9 +111,9 @@ def compare_targets(toml_scan, scan_id):
     return all(item in scan_targets for item in toml_targets)
 
 
-def update_gds_scans(toml_scan, id):
-    scan = create_scan_config(toml_scan)
-    ness_func.update_scan(scan, id)
+def update_gds_scans(toml_scan, scan_id):
+    scan = create_scan_config(toml_scan, gds_scan_policy_id())
+    ness_func.update_scan(scan, scan_id)
 
 
 def update_scans(config, nessus_scans):
@@ -137,8 +137,8 @@ def update_scans(config, nessus_scans):
         if all(compare_scans):
             print("Scan already exists, skipping...")
         else:
-            id = nessus_scan["id"]
-            update_gds_scans(toml_scan, id)
+            scan_id = nessus_scan["id"]
+            update_gds_scans(toml_scan, scan_id)
 
 
 def check_scan():
