@@ -1,9 +1,9 @@
-data "template_file" "nessus_lambda_trust" {
+data "template_file" "process_scans_trust" {
   template = file("${path.module}/json/interface_lambda/trust.json")
   vars     = {}
 }
 
-data "template_file" "nessus_lambda_policy" {
+data "template_file" "process_scans_policy" {
   template = file("${path.module}/json/interface_lambda/policy.json")
   vars = {
     region     = var.region
@@ -11,9 +11,9 @@ data "template_file" "nessus_lambda_policy" {
   }
 }
 
-resource "aws_iam_role" "nessus_lambda_exec_role" {
-  name               = "nessus_lambda_exec_role"
-  assume_role_policy = data.template_file.nessus_lambda_trust.rendered
+resource "aws_iam_role" "process_scans_exec_role" {
+  name               = "process_scans_exec_role"
+  assume_role_policy = data.template_file.process_scans_trust.rendered
 
   tags = {
     Service       = var.Service
@@ -24,8 +24,8 @@ resource "aws_iam_role" "nessus_lambda_exec_role" {
   }
 }
 
-resource "aws_iam_role_policy" "nessus_lambda_exec_role_policy" {
-  name   = "nessus_lambda_exec_role_policy"
-  role   = aws_iam_role.nessus_lambda_exec_role.id
-  policy = data.template_file.nessus_lambda_policy.rendered
+resource "aws_iam_role_policy" "process_scans_exec_role_policy" {
+  name   = "process_scans_exec_role_policy"
+  role   = aws_iam_role.process_scans_exec_role.id
+  policy = data.template_file.process_scans_policy.rendered
 }

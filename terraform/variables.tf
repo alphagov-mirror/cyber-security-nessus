@@ -1,5 +1,5 @@
 variable "lambda_zip_location" {
-  default = "../nessus_lambda.zip"
+  default = "../process_scans.zip"
 }
 
 variable "runtime" {
@@ -27,4 +27,3 @@ variable "fqdn" {
 output "fqdn" {
   value = var.fqdn
 }
-
