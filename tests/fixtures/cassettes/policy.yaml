@@ -1,0 +1,104 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+    method: GET
+    uri: https://localhost:8834/policies
+  response:
+    body:
+      string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325400,"creation_date":1589325400,"owner_id":1,"id":4},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325427,"creation_date":1589325427,"owner_id":1,"id":5},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_03","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327277,"creation_date":1589327277,"owner_id":1,"id":15},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_01","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327355,"creation_date":1589327355,"owner_id":1,"id":17},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_02","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589328198,"creation_date":1589328198,"owner_id":1,"id":19},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_04","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329651,"creation_date":1589329651,"owner_id":1,"id":23},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_05","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329825,"creation_date":1589329825,"owner_id":1,"id":27},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_06","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589330049,"creation_date":1589330049,"owner_id":1,"id":31},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_07","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589333886,"creation_date":1589333886,"owner_id":1,"id":36},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_08","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589363974,"creation_date":1589363974,"owner_id":1,"id":41}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 13 May 2020 10:07:02 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '3557'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
+    method: GET
+    uri: https://localhost:8834/policies
+  response:
+    body:
+      string: '{"policies":[{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"standard_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325400,"creation_date":1589325400,"owner_id":1,"id":4},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589325427,"creation_date":1589325427,"owner_id":1,"id":5},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_03","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327277,"creation_date":1589327277,"owner_id":1,"id":15},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_01","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589327355,"creation_date":1589327355,"owner_id":1,"id":17},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_02","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589328198,"creation_date":1589328198,"owner_id":1,"id":19},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_04","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329651,"creation_date":1589329651,"owner_id":1,"id":23},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_05","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589329825,"creation_date":1589329825,"owner_id":1,"id":27},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_06","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589330049,"creation_date":1589330049,"owner_id":1,"id":31},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_07","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589333886,"creation_date":1589333886,"owner_id":1,"id":36},{"is_scap":0,"has_credentials":0,"no_target":"false","plugin_filters":null,"template_uuid":"939a2145-95e3-0c3f-f1cc-761db860e4eed37b6eee77f9e101","description":"\n","name":"testing_scan_08","owner":"bodofraggins","visibility":"private","shared":0,"user_permissions":128,"last_modification_date":1589363974,"creation_date":1589363974,"owner_id":1,"id":41}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests; block-all-mixed-content; form-action 'self'; frame-ancestors
+        'none'; frame-src https://store.tenable.com; default-src 'self'; script-src
+        'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src
+        'none'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 13 May 2020 10:07:02 GMT
+      Expect-CT:
+      - max-age=0
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - NessusWWW
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '3557'
+    status:
+      code: 200
+      message: OK
+version: 1
