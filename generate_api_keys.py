@@ -112,7 +112,7 @@ def main():
     update_ssm_base_url()
 
     nessus_timeout = time.time() + 60 * 60
-    while nessus_ready():
+    while not nessus_ready():
         if time.time() > nessus_timeout:
             print("Timed out, check nessus is installed correctly.")
             break

@@ -24,3 +24,7 @@ variable "fqdn" {
   default = "nessus.gds-cyber-security.digital"
 }
 
+output "fqdn" {
+  value = var.fqdn
+}
+
