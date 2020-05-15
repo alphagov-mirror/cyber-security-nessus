@@ -5,7 +5,7 @@ This repo holds the infrastructure to support cyber security's Nessus instance. 
 This infrastructure can broadly be broken down into the following steps:
 - Nessus is set up on an EC2 instance, and scans the specified domains daily. 
 - Each day, a lambda will take the generated scans from Nessus and send them forward to cloudwatch
-- Using the [centralised-security-logging-service](https://github.com/alphagov/centralised-security-logging-service), these cloudwatch logs are then forwarded onto splunk, where they can be queried under index `TODO: add index name`
+- Using the [centralised-security-logging-service](https://github.com/alphagov/centralised-security-logging-service), these cloudwatch logs are then forwarded onto splunk, where they can be queried under index `nessus_scans`
 
 See below for a diagram of the architecture.
 ![Architecture diagram](assets/architecture.jpg?raw=true)
@@ -41,5 +41,5 @@ This change is deployed by the [Concourse](https://cd.gds-reliability.engineerin
 
 ## Resources
 
-- `TODO: link to Nessus api docs when we have hostname`
+- Documentation for the Nessus API can be found on the Nessus server itself: https://nessus.gds-cyber-security.digital/api#/overview (Must connect over VPN)
 - tests are mocked with [vcrpy](https://github.com/kevin1024/vcrpy)
