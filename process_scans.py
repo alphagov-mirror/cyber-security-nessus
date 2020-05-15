@@ -6,15 +6,24 @@ import boto3
 
 from nessus import download_report, list_scans, prepare_export
 
+def debug(text):
+    print(text)
 
 def find_scans():
+    debug("listing scans")
     scans = list_scans()
+
+    debug("for scan in scans")
     for scan in scans["scans"]:
         # This is for testing as we haven't run a full scan yet
         if scan["status"] == "completed":
+            debug("scan['status'] == 'completed'")
             print(f"Preparing export for {scan['name']}")
+            debug("preparing export")
             token = prepare_export(scan["id"])
+            debug("download_report")
             csv_text = download_report(token["token"])
+            debug("process csv")
             process_csv(csv_text, scan)
         elif scan["status"] == "empty":
             print(f"Scan {scan['name']} has not run.")
@@ -27,16 +36,18 @@ def process_csv(csv_text, scan):
     """
     #  Need to use StringIO because csv.reader expects a file object
     with io.StringIO(csv_text) as f:
+        debug("with io string")
         reader = csv.reader(f)
 
         group_name = "/gds/nessus-scans"
         stream_name = f"{scan['last_modification_date']}-{scan['name']}"
+        debug("create log stream")
         token = create_log_stream(group_name, stream_name)
 
         events = []
 
         for row in reader:
-
+            debug("events append")
             events.append(
                 {
                     "timestamp": scan["last_modification_date"] * 1000,
@@ -46,6 +57,7 @@ def process_csv(csv_text, scan):
 
             # Send in batches of 10_000
             if len(events) >= 9999:
+                debug("send batch")
                 token = logs_client().put_log_events(
                     logGroupName=group_name,
                     logStreamName=stream_name,
@@ -56,6 +68,7 @@ def process_csv(csv_text, scan):
                 events = []
 
         # send finial batch
+        debug("send final batch")
         logs_client().put_log_events(
             logGroupName=group_name,
             logStreamName=stream_name,
