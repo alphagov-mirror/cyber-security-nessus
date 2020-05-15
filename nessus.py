@@ -8,7 +8,7 @@ import os
 
 
 def verify_ssl():
-    is_domain = validators.domain(base_url())
+    is_domain = validators.domain(base_url()[8:])
 
     if is_domain:
         return True
