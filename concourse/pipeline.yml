@@ -136,10 +136,19 @@ jobs:
             args:
               - -c
               - |
-                cd cyber-security-nessus-git
-                make zip
                 source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
+
+                pip install pipenv
+
+                cd cyber-security-nessus-git
+
+                pipenv --python 3.7
+                pipenv install
+
+                make
+
                 cd terraform
+
                 terraform init
                 terraform apply --auto-approve
         on_success:
@@ -179,7 +188,6 @@ jobs:
                 pipenv --python 3.7
                 pipenv install
 
-                make zip
                 source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
                 cd terraform
                 terraform init
