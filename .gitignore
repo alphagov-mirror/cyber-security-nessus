@@ -7,3 +7,4 @@ terraform/.terraform
 .vscode/
 .coverage
 htmlcov
+target
