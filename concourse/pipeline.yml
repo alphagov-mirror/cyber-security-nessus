@@ -248,3 +248,41 @@ jobs:
           params:
             message: "Failed to schedule new scans."
             health: unhealthy
+
+  - name: Process Scans
+    serial: false
+    plan:
+      - get: cyber-security-nessus-git
+        passed: [schedule_scans_update]
+        trigger: true
+      - task: process_scans
+        config:
+          inputs:
+          - name: cyber-security-nessus-git
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: gdscyber/cyber-security-concourse-base-image
+          run:
+            path: bash
+            args:
+              - -c
+              - |
+                source /usr/local/bin/sts-assume-role.sh ((role_arn)) 'eu-west-2'
+                pip install pipenv
+                cd cyber-security-nessus-git
+                pipenv --python 3.7
+                pipenv install --dev
+                pipenv run python process_scans.py
+
+        on_success:
+          <<: *health_status_notify
+          params:
+            message: "Nessus processed scans."
+            health: healthy
+        on_failure:
+          <<: *health_status_notify
+          params:
+            message: "Nessus FAILED to process scans"
+            health: unhealthy
