@@ -29,14 +29,59 @@
 "rrules.freq" = "WEEKLY"
 "rrules.interval" = "3"
 "rrules.byday" = "MO"
-"starttime" = "20200428T133000" # 28 April 2020 @ 1:30pm
+"starttime" = "20200501T100000" 
 "text_targets" = "www.gov.uk"
 
-[gov_uk_daily]
-"name" = "govuk daily scan"
+[notify]
+"name" = "notify weekly scan"
 "enabled" = 1
-"rrules.freq" = "DAILY"
-"rrules.interval" = "1"
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
+"rrules.byday" = "TU"
+"starttime" = "20200602T100000"
+"text_targets" = "www.notifications.service.gov.uk"
+
+[misc_paas]
+"name" = "miscellaneous paas weekly scan"
+"enabled" = 1
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
+"rrules.byday" = "WE"
+"starttime" = "20200603T100000"
+"text_targets" = "admin.cloud.service.gov.uk, cloud.service.gov.uk, cybertools.cloudapps.digital, gds-way.cloudapps.digital"
+
+[reg_to_vote]
+"name" = "register to vote weekly scan"
+"enabled" = 1
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
 "rrules.byday" = "TH"
-"starttime" = "20200514T180000"
-"text_targets" = "www.gov.uk"
+"starttime" = "20200528T133000"
+"text_targets" = "www.registertovote.service.gov.uk"
+
+[verify]
+"name" = "verify external weekly scan"
+"enabled" = 1
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
+"rrules.byday" = "FR"
+"starttime" = "20200529T150000"
+"text_targets" = "www.signin.service.gov.uk, www.verify.service.gov.uk"
+
+[govuk_pay]
+"name" = "pay external weekly scan"
+"enabled" = 1
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
+"rrules.byday" = "TH"
+"starttime" = "20200604T100000"
+"text_targets" = "www.payments.service.gov.uk, selfservice.payments.service.gov.uk"
+
+[external_network]
+"name" = "external weekly scan"
+"enabled" = 1
+"rrules.freq" = "WEEKLY"
+"rrules.interval" = "2"
+"rrules.byday" = "FR"
+"starttime" = "20200605T100000"
+"text_targets" = "213.86.153.212, 213.86.153.213, 213.86.153.214, 213.86.153.235, 213.86.153.236, 213.86.153.237, 85.133.67.244"
