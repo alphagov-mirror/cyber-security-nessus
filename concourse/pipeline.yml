@@ -41,6 +41,15 @@ resources:
         build_number: "{BUILD_NAME}"
       service: "Nessus Pipeline"
 
+  - name: every-weekday-resource
+    type: time
+    icon: clock-outline
+    source:
+      start: 10:00 AM
+      stop: 4:00 PM
+      location: Europe/London
+      interval: 24h
+      days: [Monday, Tuesday, Wednesday, Thursday, Friday]
 
 jobs:
   - name: python_validation
@@ -253,7 +262,7 @@ jobs:
     serial: false
     plan:
       - get: cyber-security-nessus-git
-        passed: [schedule_scans_update]
+      - get: every-weekday-resource
         trigger: true
       - task: process_scans
         config:
