@@ -115,7 +115,10 @@ def base_url():
 
 
 def list_policies():
-    return get("/policies")
+    policies = get("/policies")
+    if policies["policies"] is None:
+        policies["policies"] = []
+    return policies
 
 
 def create_policy(policy):

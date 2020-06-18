@@ -10,9 +10,12 @@ import nessus as ness_func
 @lru_cache(maxsize=1)
 def find_scan_policy(name="standard_scan"):
     """Find policy ID from policy Name"""
+    scan_policy = {}
     for policy in ness_func.list_policies()["policies"]:
         if policy["name"] == name:
-            return policy
+            scan_policy = policy
+            break
+    return scan_policy
 
 
 @lru_cache(maxsize=1)
@@ -27,10 +30,7 @@ def create_scan_policy(policy_file="scan_config/standard_scan_template.json"):
 
 def gds_scan_policy_id():
     """Find or Create the GDS scan policy and return it's ID"""
-    if ness_func.list_policies()["policies"]:
-        return find_scan_policy()["id"]
-    else:
-        return create_scan_policy()["policy_id"]
+    return find_scan_policy().get("id") or create_scan_policy()["policy_id"]
 
 
 @lru_cache(maxsize=1)
