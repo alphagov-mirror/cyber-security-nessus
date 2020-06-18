@@ -115,7 +115,15 @@ def base_url():
 
 
 def list_policies():
-    return get("/policies")
+    """
+    The nessus API changed and appeared to return:
+    {'policies': None} instead of {'policies': []},
+    breaking gds_scan_policy_id().
+    """
+    policies = get("/policies")
+    if policies["policies"] is None:
+        policies["policies"] = []
+    return policies
 
 
 def create_policy(policy):
