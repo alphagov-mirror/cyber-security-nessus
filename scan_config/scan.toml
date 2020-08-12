@@ -30,7 +30,7 @@
 "rrules.interval" = "3"
 "rrules.byday" = "MO"
 "starttime" = "20200501T100000" 
-"text_targets" = "www.gov.uk"
+"text_targets" = "www.gov.uk, signon.publishing.service.gov.uk"
 
 [notify]
 "name" = "notify weekly scan"
