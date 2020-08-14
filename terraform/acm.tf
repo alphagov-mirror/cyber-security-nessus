@@ -4,15 +4,21 @@ resource "aws_acm_certificate" "fqdn" {
 }
 
 resource "aws_route53_record" "subdomain_validation" {
-  name    = aws_acm_certificate.fqdn.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.fqdn.domain_validation_options.0.resource_record_type
-  records = [aws_acm_certificate.fqdn.domain_validation_options.0.resource_record_value]
+  for_each = {
+    for dvo in aws_acm_certificate.fqdn.domain_validation_options : dvo.domain_name => {
+      name = dvo.resource_record_name
+      type = dvo.resource_record_type
+    }
+  }
 
+  name    = each.value.name
+  type    = each.value.type
+  records = each.value.record
   zone_id = data.aws_route53_zone.nessus_domain.id
   ttl     = 60
 }
 
 resource "aws_acm_certificate_validation" "subdomain_wildcard" {
   certificate_arn         = aws_acm_certificate.fqdn.arn
-  validation_record_fqdns = [aws_route53_record.subdomain_validation.fqdn]
+  validation_record_fqdns = [for record in aws_route53_record.subdomain_validation : record.fqdn]
 }
