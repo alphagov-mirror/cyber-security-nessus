@@ -5,15 +5,15 @@ resource "aws_acm_certificate" "fqdn" {
 
 resource "aws_route53_record" "subdomain_validation" {
   for_each = {
-    for dvo in aws_acm_certificate.fqdn.domain_validation_options : dvo.domain_name => {
-      name = dvo.resource_record_name
-      type = dvo.resource_record_type
+    for domain_validation_option in aws_acm_certificate.fqdn.domain_validation_options : domain_validation_option.domain_name => {
+      name = domain_validation_option.resource_record_name
+      type = domain_validation_option.resource_record_type
     }
   }
 
   name    = each.value.name
   type    = each.value.type
-  records = each.value.record
+  records = [each.value.record]
   zone_id = data.aws_route53_zone.nessus_domain.id
   ttl     = 60
 }
