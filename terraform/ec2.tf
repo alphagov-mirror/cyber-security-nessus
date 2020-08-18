@@ -44,7 +44,7 @@ resource "aws_instance" "nessus_instance" {
 
   root_block_device {
     volume_type = "gp2"
-    volume_size = 30
+    volume_size = 38
   }
 
   tags = {
