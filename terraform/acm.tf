@@ -6,8 +6,9 @@ resource "aws_acm_certificate" "fqdn" {
 resource "aws_route53_record" "subdomain_validation" {
   for_each = {
     for domain_validation_option in aws_acm_certificate.fqdn.domain_validation_options : domain_validation_option.domain_name => {
-      name = domain_validation_option.resource_record_name
-      type = domain_validation_option.resource_record_type
+      name   = domain_validation_option.resource_record_name
+      record = domain_validation_option.resource_record_value
+      type   = domain_validation_option.resource_record_type
     }
   }
 
