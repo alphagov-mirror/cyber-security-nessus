@@ -1,10 +1,11 @@
+import os
 import re
 from functools import lru_cache
+from typing import List, Dict
 
 import boto3
 import requests
 import validators
-import os
 
 
 def verify_ssl():
@@ -137,7 +138,7 @@ def policy_details(policy_id):
     return get(f"/policies/{policy_id}")
 
 
-def list_scans():
+def list_scans() -> Dict[str, List[Dict]]:
     scans = get("/scans")
     if "scans" not in scans or not scans["scans"]:
         scans["scans"] = []
