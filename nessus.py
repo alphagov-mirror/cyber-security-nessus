@@ -138,7 +138,10 @@ def policy_details(policy_id):
 
 
 def list_scans():
-    return get("/scans")
+    scans = get("/scans")
+    if "scans" not in scans or not scans["scans"]:
+        scans["scans"] = []
+    return scans
 
 
 def create_scan(scan):
