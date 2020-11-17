@@ -1,10 +1,11 @@
+import os
 import re
 from functools import lru_cache
+from typing import List, Dict
 
 import boto3
 import requests
 import validators
-import os
 
 
 def verify_ssl():
@@ -20,11 +21,15 @@ def get(path, text=False):
     """Make a GET request to Nessus"""
     if text:
         return requests.get(
-            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
+            base_url() + path,
+            headers=api_credentials(),
+            verify=verify_ssl(),
         ).text
     else:
         return requests.get(
-            base_url() + path, headers=api_credentials(), verify=verify_ssl(),
+            base_url() + path,
+            headers=api_credentials(),
+            verify=verify_ssl(),
         ).json()
 
 
@@ -104,12 +109,11 @@ def get_ec2_param(param):
     )["Reservations"][0]["Instances"][0][f"{param}"]
 
 
-
 @lru_cache(maxsize=1)
 def base_url():
     # Hack: See if we're a Lambda and use a different Nessus endpoint
     # to work around Lambda > ALB security groups.
-    if os.getenv('AWS_EXECUTION_ENV'):
+    if os.getenv("AWS_EXECUTION_ENV"):
         return f"https://{get_ec2_param('PrivateIpAddress')}:8834"
     return get_param_from_ssm("public_base_url")
 
@@ -134,8 +138,11 @@ def policy_details(policy_id):
     return get(f"/policies/{policy_id}")
 
 
-def list_scans():
-    return get("/scans")
+def list_scans() -> Dict[str, List[Dict]]:
+    scans = get("/scans")
+    if "scans" not in scans or not scans["scans"]:
+        scans["scans"] = []
+    return scans
 
 
 def create_scan(scan):
