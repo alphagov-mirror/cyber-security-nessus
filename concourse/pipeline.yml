@@ -41,7 +41,7 @@ resources:
         pipeline: "{BUILD_PIPELINE_NAME}"
         job: "{BUILD_JOB_NAME}"
         build_number: "{BUILD_NAME}"
-      service: "Nessus Pipeline"
+      service: "Nessus"
 
   - name: every-weekday-resource
     type: time
