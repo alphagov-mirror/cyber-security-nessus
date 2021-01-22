@@ -85,6 +85,9 @@ def nessus_ready():
     except (ConnectionError, requests.exceptions.ConnectionError):
         print("connection error")
         return False
+    except json.JSONDecodeError as error:
+        print("JSON parse failed: " + str(error))
+        return False
 
 
 def main():
