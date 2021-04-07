@@ -3,6 +3,17 @@ hostname: ${hostname}
 manage_etc_hosts: true
 package_upgrade: true
 locale: en_GB.UTF-8
+write_files:
+  - path: /usr/local/bin/yum-update
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      yum -y update
+  - path: /etc/crontab
+    content: |
+      0 7 * * * /usr/local/bin/yum-update
+    append: true
+
 runcmd:
   - |
     cat>/usr/local/bin/nessus-cloudinit.sh<<EOF
